@@ -7,6 +7,7 @@
 
 import Foundation
 
+@Observable
 class Project {
     var name: String
     var subProjects: [Project] = []

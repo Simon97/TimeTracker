@@ -1,0 +1,46 @@
+//
+//  ProjectDetails.swift
+//  TimeTracker
+//
+//  Created by Simon Svendsgaard Nielsen on 15/01/2024.
+//
+
+import SwiftUI
+
+struct ProjectDetails: View {
+    
+    let project: Project
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            if (!project.tasks.isEmpty) {
+                Text("Tasks:")
+                    .font(.headline)
+            }
+            ForEach(project.tasks, id: \.self.name) { task in
+                HStack() {
+                    // The HStack and Spacer is needed to make the
+                    // text be aligned even when no sub-projects are
+                    // available
+                    Text(task.name)
+                    Spacer()
+                }
+            }
+            Divider()
+            if (!project.subProjects.isEmpty) {
+                Text("Sub-projects:")
+                    .font(.headline)
+            }
+            ForEach(project.subProjects, id: \.self.name) { project in
+                ProjectView(project: project)
+            }
+            
+        }
+        .listStyle(.plain)
+        // .frame(maxWidth: .infinity, alignment: .top)
+    }
+}
+
+#Preview {
+    ProjectDetails(project: previewProject)
+}
