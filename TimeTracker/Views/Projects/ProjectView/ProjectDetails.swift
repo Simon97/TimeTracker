@@ -36,8 +36,6 @@ struct ProjectDetails: View {
             }
             
         }
-        .listStyle(.plain)
-        // .frame(maxWidth: .infinity, alignment: .top)
     }
 }
 

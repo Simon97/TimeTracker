@@ -17,11 +17,10 @@ struct ExpandSwitch: View {
             }
         }, label: {
             Label("Expand",
-                  systemImage: "chevron.right.circle"
+                  systemImage: isExpanded ? "chevron.right.circle.fill" : "chevron.right.circle"
             )
             .imageScale(.large)
             .labelStyle(.iconOnly)
-            //.scaleEffect(isExpanded ? 1.5 : 1)
             .rotationEffect(.degrees(isExpanded ? 90 : 0))
             .padding(2)
         })

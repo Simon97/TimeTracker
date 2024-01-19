@@ -7,7 +7,6 @@
 
 import Foundation
 
-@Observable
 class Task {
     var name: String
     

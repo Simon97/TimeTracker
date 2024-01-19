@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import SwiftData
 
 @Observable
+//@Model
 class Project {
+    // @Attribute(.unique)
     var name: String
     var subProjects: [Project] = []
     var tasks: [Task] = []
