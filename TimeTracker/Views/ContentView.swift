@@ -77,5 +77,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(projects: [previewProject] )
+    ContentView()
 }
