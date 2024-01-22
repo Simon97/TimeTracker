@@ -22,7 +22,6 @@
 		607842E62B5B1F8700A78E8C /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E52B5B1F8700A78E8C /* FavoriteButton.swift */; };
 		607842E92B5B204100A78E8C /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E82B5B204100A78E8C /* ToggleView.swift */; };
 		60BEB1052B5596F000814BF0 /* ProjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BEB1042B5596F000814BF0 /* ProjectDetails.swift */; };
-		60BEB1072B55973B00814BF0 /* PreviewProjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BEB1062B55973B00814BF0 /* PreviewProjects.swift */; };
 		60E9FC842B5D98FF00A681CA /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E9FC832B5D98FF00A681CA /* TaskListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +42,6 @@
 		607842E52B5B1F8700A78E8C /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		607842E82B5B204100A78E8C /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
 		60BEB1042B5596F000814BF0 /* ProjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetails.swift; sourceTree = "<group>"; };
-		60BEB1062B55973B00814BF0 /* PreviewProjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProjects.swift; sourceTree = "<group>"; };
 		60E9FC832B5D98FF00A681CA /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				6052225A2B54737800F603B8 /* Preview Assets.xcassets */,
-				60BEB1062B55973B00814BF0 /* PreviewProjects.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -224,7 +221,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60BEB1072B55973B00814BF0 /* PreviewProjects.swift in Sources */,
 				605222622B5474B500F603B8 /* TimeRegistration.swift in Sources */,
 				60E9FC842B5D98FF00A681CA /* TaskListView.swift in Sources */,
 				605222562B54737600F603B8 /* ProjectList.swift in Sources */,

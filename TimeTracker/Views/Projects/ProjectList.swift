@@ -24,5 +24,55 @@ struct ProjectList: View {
 }
 
 #Preview {
-    ProjectList(projects: [previewProject, previewProject])
+    ProjectList(projects: [Project(
+        "Preview Project",
+        isMainProject: true,
+        subProjects: [
+            Project(
+                "Sub project",
+                isMainProject: false,
+                subProjects: [
+                    Project(
+                        "Sub sub project",
+                        isMainProject: false,
+                        subProjects: [],
+                        tasks: [
+                            Task("sub sub project task 1", isFavorite: false)
+                        ]
+                    )],
+                tasks: [
+                    Task("sub project task 1", isFavorite: false)
+                ]
+            )
+        ],
+        tasks: [
+            Task("task 1", isFavorite: false),
+            Task("task 2", isFavorite: false)
+        ]
+    ), Project(
+        "Preview Project",
+        isMainProject: true,
+        subProjects: [
+            Project(
+                "Sub project",
+                isMainProject: false,
+                subProjects: [
+                    Project(
+                        "Sub sub project",
+                        isMainProject: false,
+                        subProjects: [],
+                        tasks: [
+                            Task("sub sub project task 1", isFavorite: false)
+                        ]
+                    )],
+                tasks: [
+                    Task("sub project task 1", isFavorite: false)
+                ]
+            )
+        ],
+        tasks: [
+            Task("task 1", isFavorite: false),
+            Task("task 2", isFavorite: false)
+        ]
+    )])
 }

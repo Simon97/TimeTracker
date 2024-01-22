@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TaskListView: View {
     
-    @State var tasks: [Task]
+    var tasks: [Task]
     @State private var showFavoritesOnly: Bool = false
     
     var filteredTasks: [Task] {
@@ -27,6 +27,14 @@ struct TaskListView: View {
             
             ForEach(filteredTasks) { task in
                 TaskView(task: .constant(task))
+            }
+            
+            if filteredTasks.isEmpty {
+                if showFavoritesOnly {
+                    Text("No favorites")
+                } else {
+                    Text("No tasks")
+                }
             }
         }
     }

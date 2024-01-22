@@ -40,9 +40,7 @@ class Project {
         var _tasks = [Task]()
         _tasks = tasks
         for subProject in subProjects {
-            print("subproject: " + subProject.name)
             for task in subProject.getAllTasks() {
-                print("task: " + task.name)
                 _tasks.append(task)
             }
         }
