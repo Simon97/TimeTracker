@@ -6,11 +6,18 @@
 //
 
 import Foundation
+import SwiftData
 
+@Model
 class Task {
     var name: String
+    var isFavorite: Bool
     
-    init(_ name: String) {
+    // @Relationship(inverse: \Project.tasks)
+    var project: Project?
+    
+    init(_ name: String, isFavorite: Bool) {
         self.name = name
+        self.isFavorite = isFavorite
     }
 }

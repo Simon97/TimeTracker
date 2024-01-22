@@ -8,21 +8,44 @@
 import Foundation
 import SwiftData
 
-@Observable
-//@Model
+@Model
 class Project {
-    // @Attribute(.unique)
+    @Attribute(.unique)
     var name: String
     var subProjects: [Project] = []
+    
+    @Relationship(deleteRule: .cascade)
     var tasks: [Task] = []
     
-    init(_ name: String) {
+    var isMainProject: Bool
+    
+    // Parental relationship
+    public var parent: Project?
+    @Relationship(deleteRule:.cascade, inverse: \Project.parent) var children: [Project]?
+    
+    
+    init(_ name: String, isMainProject: Bool) {
         self.name = name
+        self.isMainProject = isMainProject
     }
     
-    init(_ name: String, subProjects: [Project], tasks: [Task]) {
+    init(_ name: String, isMainProject: Bool, subProjects: [Project], tasks: [Task]) {
         self.name = name
+        self.isMainProject = isMainProject
         self.subProjects = subProjects
         self.tasks = tasks
+    }
+    
+    func getAllTasks() -> [Task] {
+        var _tasks = [Task]()
+        _tasks = tasks
+        for subProject in subProjects {
+            print("subproject: " + subProject.name)
+            for task in subProject.getAllTasks() {
+                print("task: " + task.name)
+                _tasks.append(task)
+            }
+        }
+        return _tasks
     }
 }

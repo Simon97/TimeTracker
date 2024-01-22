@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ProjectList: View {
+    var projects: [Project]
+    
     var body: some View {
         ScrollView {
             LazyVStack {
-                ProjectView(project: previewProject)
-                    .buttonStyle(.plain)
-                ProjectView(project: previewProject2)
-                    .buttonStyle(.plain)
+                ForEach(projects) { project in
+                    ProjectView(project: project)
+                }
             }
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
@@ -23,5 +24,5 @@ struct ProjectList: View {
 }
 
 #Preview {
-    ProjectList()
+    ProjectList(projects: [previewProject, previewProject])
 }

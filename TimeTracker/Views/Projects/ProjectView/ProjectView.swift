@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProjectView: View {
     
-    let project: Project
+    var project: Project
     
     @State private var showDetails = false
     

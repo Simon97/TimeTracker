@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProjectDetails: View {
     
-    let project: Project
+    var project: Project
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,7 +22,7 @@ struct ProjectDetails: View {
                     // The HStack and Spacer is needed to make the
                     // text be aligned even when no sub-projects are
                     // available
-                    Text(task.name)
+                    TaskView(task: .constant(task))
                     Spacer()
                 }
             }

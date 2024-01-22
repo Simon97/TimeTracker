@@ -6,29 +6,31 @@
 //
 
 import Foundation
+import SwiftData
 
 var previewProject: Project = Project(
     "Preview Project",
-    subProjects: [Project("Another One", subProjects: [], tasks: [Task("Fix stuff")])],
-    tasks: [
-        Task("Make tests"),
-        Task("Make SwiftData models")
-    ]
-)
-
-var previewProject2: Project = Project(
-    "Preview Project 2",
-    subProjects: [Project("Some sub project", subProjects: [
+    isMainProject: true,
+    subProjects: [
         Project(
-            "Preview Project",
-            subProjects: [Project("Another One", subProjects: [], tasks: [Task("Fix stuff")])],
+            "Sub project",
+            isMainProject: false,
+            subProjects: [
+                Project(
+                    "Sub sub project",
+                    isMainProject: false,
+                    subProjects: [],
+                    tasks: [
+                        Task("sub sub project task 1", isFavorite: false)
+                    ]
+                )],
             tasks: [
-                Task("Make tests"),
-                Task("Make SwiftData models")
+                Task("sub project task 1", isFavorite: false)
             ]
-        )], tasks: [Task("Dimse-dut")])],
+        )
+    ],
     tasks: [
-        Task("teste"),
-        Task("testeleste")
+        Task("task 1", isFavorite: false),
+        Task("task 2", isFavorite: false)
     ]
 )
