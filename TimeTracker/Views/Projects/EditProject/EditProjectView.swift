@@ -10,9 +10,56 @@ import SwiftUI
 struct EditProjectView: View {
     
     @Binding var project: Project
+    @FocusState private var nameFocus
     
     var body: some View {
-        Text("Edit \(project.name)")
+        Form {
+            Text("Edit")
+                .font(.title)
+            
+            
+            Section {
+                TextField(
+                    "Project title",
+                    text: Binding(projectedValue:$project.name))
+                .ttTextStyle()
+                .focused($nameFocus)
+            }
+            
+            Section {
+                ForEach($project.tasks) { task in
+                    HStack {
+                        TextField(
+                            "Task name",
+                            text: Binding(projectedValue: task.name)
+                        )
+                        .ttTextStyle()
+                        
+                        Button(action: {
+                            if let index = project.tasks.firstIndex(where: { t in
+                                t.id == task.id
+                            }) {
+                                project.tasks.remove(at: index)
+                            }
+                        }) {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        .labelStyle(.iconOnly)
+                    }
+                }
+                Button(action: {
+                    project.tasks.append(Task("Task", isFavorite: false))
+                    // try? project.modelContext?.save()
+                }) {
+                    Label("Add task", systemImage: "plus")
+                }
+                .labelStyle(.iconOnly)
+            }
+            .onAppear(perform: {
+                nameFocus = true
+            })
+        }
+        .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8 ))
     }
 }
 

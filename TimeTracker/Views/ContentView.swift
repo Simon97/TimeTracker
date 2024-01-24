@@ -61,7 +61,7 @@ struct ContentView: View {
                 }
                 .navigationTitle("All projects")
                 .toolbar {
-                    Button("Add") {
+                    Button("Add Demo") {
                         let project = Project(
                             "Preview Project",
                             isMainProject: true,

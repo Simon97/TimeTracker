@@ -22,6 +22,7 @@
 		607842E62B5B1F8700A78E8C /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E52B5B1F8700A78E8C /* FavoriteButton.swift */; };
 		607842E92B5B204100A78E8C /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E82B5B204100A78E8C /* ToggleView.swift */; };
 		60BEB1052B5596F000814BF0 /* ProjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BEB1042B5596F000814BF0 /* ProjectDetails.swift */; };
+		60D0C9362B61849C0091E6EC /* TTTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D0C9352B61849C0091E6EC /* TTTextFieldStyle.swift */; };
 		60D31DA02B603C8900532D40 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D31D9F2B603C8900532D40 /* EditButton.swift */; };
 		60D31DA62B60EBAA00532D40 /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D31DA52B60EBAA00532D40 /* EditProjectView.swift */; };
 		60E9FC842B5D98FF00A681CA /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E9FC832B5D98FF00A681CA /* TaskListView.swift */; };
@@ -44,6 +45,7 @@
 		607842E52B5B1F8700A78E8C /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		607842E82B5B204100A78E8C /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
 		60BEB1042B5596F000814BF0 /* ProjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetails.swift; sourceTree = "<group>"; };
+		60D0C9352B61849C0091E6EC /* TTTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTTextFieldStyle.swift; sourceTree = "<group>"; };
 		60D31D9F2B603C8900532D40 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		60D31DA52B60EBAA00532D40 /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
 		60E9FC832B5D98FF00A681CA /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		605222522B54737600F603B8 /* TimeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				60D0C9342B6184410091E6EC /* ViewModifiers */,
 				605222682B5481E300F603B8 /* Views */,
 				605222632B54766A00F603B8 /* Models */,
 				605222532B54737600F603B8 /* TimeTrackerApp.swift */,
@@ -146,6 +149,14 @@
 				60BEB1042B5596F000814BF0 /* ProjectDetails.swift */,
 			);
 			path = ProjectView;
+			sourceTree = "<group>";
+		};
+		60D0C9342B6184410091E6EC /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				60D0C9352B61849C0091E6EC /* TTTextFieldStyle.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		60D31DA42B60EB8E00532D40 /* EditProject */ = {
@@ -238,6 +249,7 @@
 				605222622B5474B500F603B8 /* TimeRegistration.swift in Sources */,
 				60E9FC842B5D98FF00A681CA /* TaskListView.swift in Sources */,
 				605222562B54737600F603B8 /* ProjectList.swift in Sources */,
+				60D0C9362B61849C0091E6EC /* TTTextFieldStyle.swift in Sources */,
 				607842E42B5AF8FB00A78E8C /* TaskView.swift in Sources */,
 				605222672B547BF800F603B8 /* Task.swift in Sources */,
 				605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */,

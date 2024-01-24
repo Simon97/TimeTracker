@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "40C4260D-90E5-4BDA-8F79-0AD31BBCB1B9"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../../../var/folders/0d/95v4kjn978q1pt0j2s9f6l680000gn/T/swift-generated-sources/@__swiftmacro_11TimeTracker7ProjectC5tasks18_PersistedPropertyfMa_.swift"
@@ -53,7 +53,7 @@
             <Locations>
                <Location
                   uuid = "ADFE7E40-86C8-4D10-B044-7D33E2398DD8 - a35be536761c29ac"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "TimeTracker.Project.init(Swift.String) -&gt; TimeTracker.Project"

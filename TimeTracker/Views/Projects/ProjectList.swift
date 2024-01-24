@@ -11,6 +11,11 @@ struct ProjectList: View {
     @Binding var projects: [Project]
     
     @State private var editModeEnabled = false
+    @State private var showCreateNewProject = false
+    
+    @Environment(\.modelContext) var modelContext
+    
+    @State private var newProject = Project("New project", isMainProject: true, subProjects: [], tasks: [])
     
     var body: some View {
         ScrollView {
@@ -22,10 +27,17 @@ struct ProjectList: View {
             .frame(maxHeight: .infinity, alignment: .top)
             .padding()
         }
+        .sheet(isPresented: $showCreateNewProject) {
+            EditProjectView(project: $newProject)
+        }
         .toolbar {
-            Button("Edit") {
+            Button(action: {
+                modelContext.insert(newProject)
+                showCreateNewProject.toggle()
+            }, label: {Text("Add")})
+            
+            Button(editModeEnabled ? "Done" : "Edit") {
                 editModeEnabled.toggle()
-                // switch to edit mode
             }
         }
     }

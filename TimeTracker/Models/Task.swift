@@ -15,7 +15,7 @@ class Task {
     var name: String
     var isFavorite: Bool
     
-    // @Relationship(inverse: \Project.tasks)
+    @Relationship(inverse: \Project.tasks)
     var project: Project?
     
     init(_ name: String, isFavorite: Bool) {

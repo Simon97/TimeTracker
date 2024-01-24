@@ -9,14 +9,22 @@ import SwiftUI
 
 struct TaskView: View {
     
+    let showProjectName: Bool
+    
     @Binding var task: Task
     let selected: Bool = true
     
     var body: some View {
         HStack {
             FavoriteButton(isFavourite: $task.isFavorite)
-            HStack {
+            HStack(spacing: 8) {
                 Text(task.name)
+                if (showProjectName) {
+                    Spacer()
+                    Text("(" + (task.project?.name ?? "") + ")")
+                } else {
+                    Spacer()
+                }
             }
             .frame(maxWidth: .infinity)
             // .background(.orange)
@@ -25,8 +33,5 @@ struct TaskView: View {
 }
 
 #Preview {
-    return Group {
-        // Not the same task
-        TaskView(task: .constant( Task("Task name", isFavorite: true)))
-    }
+    TaskView(showProjectName: true, task: .constant( Task("Task name", isFavorite: true)))
 }

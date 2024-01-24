@@ -21,8 +21,8 @@ class Project {
     var isOutermostProject: Bool
     
     // Parental relationship
-    public var parent: Project?
     @Relationship(deleteRule:.cascade, inverse: \Project.parent) var children: [Project]?
+    public var parent: Project?
     
     
     init(_ name: String, isMainProject: Bool) {
