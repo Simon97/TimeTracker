@@ -15,7 +15,7 @@ struct ExpandSwitch: View {
             withAnimation() {
                 isExpanded.toggle()
             }
-        }, label: {
+        }) {
             Label("Expand",
                   systemImage: isExpanded ? "chevron.right.circle.fill" : "chevron.right.circle"
             )
@@ -23,7 +23,7 @@ struct ExpandSwitch: View {
             .labelStyle(.iconOnly)
             .rotationEffect(.degrees(isExpanded ? 90 : 0))
             .padding(2)
-        })
+        }
     }
 }
 

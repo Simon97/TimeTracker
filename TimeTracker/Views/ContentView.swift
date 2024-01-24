@@ -18,7 +18,7 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
         
     @Query(filter: #Predicate<Project> { project in
-        project.isMainProject == true
+        project.isOutermostProject
     }) var projects: [Project]
     
     @State private var selection: Tab = .favorites
@@ -57,7 +57,7 @@ struct ContentView: View {
             
             NavigationStack {
                 VStack {
-                    ProjectList(projects: projects)
+                    ProjectList(projects: .constant(projects))
                 }
                 .navigationTitle("All projects")
                 .toolbar {

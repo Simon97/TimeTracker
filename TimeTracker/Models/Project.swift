@@ -11,13 +11,14 @@ import SwiftData
 @Model
 class Project {
     @Attribute(.unique)
+    var id: UUID
     var name: String
     var subProjects: [Project] = []
     
     @Relationship(deleteRule: .cascade)
     var tasks: [Task] = []
     
-    var isMainProject: Bool
+    var isOutermostProject: Bool
     
     // Parental relationship
     public var parent: Project?
@@ -25,13 +26,15 @@ class Project {
     
     
     init(_ name: String, isMainProject: Bool) {
+        self.id = UUID()
         self.name = name
-        self.isMainProject = isMainProject
+        self.isOutermostProject = isMainProject
     }
     
     init(_ name: String, isMainProject: Bool, subProjects: [Project], tasks: [Task]) {
+        self.id = UUID()
         self.name = name
-        self.isMainProject = isMainProject
+        self.isOutermostProject = isMainProject
         self.subProjects = subProjects
         self.tasks = tasks
     }

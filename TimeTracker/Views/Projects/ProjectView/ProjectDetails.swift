@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProjectDetails: View {
     
-    var project: Project
+    @Binding var project: Project
+    var editModeEnabled: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,8 +32,8 @@ struct ProjectDetails: View {
                 Text("Sub-projects:")
                     .font(.headline)
             }
-            ForEach(project.subProjects, id: \.self.name) { project in
-                ProjectView(project: project)
+            ForEach($project.subProjects, id: \.self.name) { project in
+                ProjectView(project: project, editModeEnabled: editModeEnabled)
             }
             
         }
@@ -40,7 +41,7 @@ struct ProjectDetails: View {
 }
 
 #Preview {
-    ProjectDetails(project: Project(
+    ProjectDetails(project: .constant(Project(
         "Preview Project",
         isMainProject: true,
         subProjects: [
@@ -65,5 +66,5 @@ struct ProjectDetails: View {
             Task("task 1", isFavorite: false),
             Task("task 2", isFavorite: false)
         ]
-    ))
+    )), editModeEnabled: false)
 }

@@ -22,6 +22,8 @@
 		607842E62B5B1F8700A78E8C /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E52B5B1F8700A78E8C /* FavoriteButton.swift */; };
 		607842E92B5B204100A78E8C /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E82B5B204100A78E8C /* ToggleView.swift */; };
 		60BEB1052B5596F000814BF0 /* ProjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BEB1042B5596F000814BF0 /* ProjectDetails.swift */; };
+		60D31DA02B603C8900532D40 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D31D9F2B603C8900532D40 /* EditButton.swift */; };
+		60D31DA62B60EBAA00532D40 /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D31DA52B60EBAA00532D40 /* EditProjectView.swift */; };
 		60E9FC842B5D98FF00A681CA /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E9FC832B5D98FF00A681CA /* TaskListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		607842E52B5B1F8700A78E8C /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		607842E82B5B204100A78E8C /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
 		60BEB1042B5596F000814BF0 /* ProjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetails.swift; sourceTree = "<group>"; };
+		60D31D9F2B603C8900532D40 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
+		60D31DA52B60EBAA00532D40 /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
 		60E9FC832B5D98FF00A681CA /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,6 +63,7 @@
 		6041D7B92B57033100C9668D /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				60D31DA42B60EB8E00532D40 /* EditProject */,
 				60BEB1032B5592E000814BF0 /* ProjectView */,
 				605222552B54737600F603B8 /* ProjectList.swift */,
 			);
@@ -129,6 +134,7 @@
 				6052226B2B54845800F603B8 /* ExpandSwitch.swift */,
 				607842E52B5B1F8700A78E8C /* FavoriteButton.swift */,
 				607842E82B5B204100A78E8C /* ToggleView.swift */,
+				60D31D9F2B603C8900532D40 /* EditButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -140,6 +146,14 @@
 				60BEB1042B5596F000814BF0 /* ProjectDetails.swift */,
 			);
 			path = ProjectView;
+			sourceTree = "<group>";
+		};
+		60D31DA42B60EB8E00532D40 /* EditProject */ = {
+			isa = PBXGroup;
+			children = (
+				60D31DA52B60EBAA00532D40 /* EditProjectView.swift */,
+			);
+			path = EditProject;
 			sourceTree = "<group>";
 		};
 		60E9FC822B5D98E300A681CA /* Tasks */ = {
@@ -229,8 +243,10 @@
 				605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */,
 				60BEB1052B5596F000814BF0 /* ProjectDetails.swift in Sources */,
 				607842E92B5B204100A78E8C /* ToggleView.swift in Sources */,
+				60D31DA62B60EBAA00532D40 /* EditProjectView.swift in Sources */,
 				6041D7BB2B57036200C9668D /* ContentView.swift in Sources */,
 				602B6ED32B5710EE0006614A /* BottomInfo.swift in Sources */,
+				60D31DA02B603C8900532D40 /* EditButton.swift in Sources */,
 				605222652B54769400F603B8 /* Project.swift in Sources */,
 				6052226C2B54845800F603B8 /* ExpandSwitch.swift in Sources */,
 				6052226A2B54820300F603B8 /* ProjectView.swift in Sources */,

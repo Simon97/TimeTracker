@@ -10,6 +10,8 @@ import SwiftData
 
 @Model
 class Task {
+    @Attribute(.unique)
+    var id: UUID
     var name: String
     var isFavorite: Bool
     
@@ -17,6 +19,7 @@ class Task {
     var project: Project?
     
     init(_ name: String, isFavorite: Bool) {
+        self.id = UUID()
         self.name = name
         self.isFavorite = isFavorite
     }

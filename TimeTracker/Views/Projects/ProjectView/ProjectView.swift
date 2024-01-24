@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ProjectView: View {
     
-    var project: Project
+    @Binding var project: Project
+    
+    var editModeEnabled: Bool
+    @State private var showEditingView = false
     
     @State private var showDetails = false
     
@@ -18,11 +21,22 @@ struct ProjectView: View {
             HStack {
                 Text(project.name)
                     .font(.title)
+                
                 Spacer()
-                ExpandSwitch(isExpanded: $showDetails)
+                
+                if editModeEnabled {
+                    EditButton(action: {
+                        showEditingView.toggle()
+                    })
+                    .sheet(isPresented: $showEditingView) {
+                        EditProjectView(project: $project)
+                    }
+                } else {
+                    ExpandSwitch(isExpanded: $showDetails)
+                }
             }
             if showDetails {
-                ProjectDetails(project: project)
+                ProjectDetails(project: $project, editModeEnabled: editModeEnabled)
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
@@ -31,7 +45,7 @@ struct ProjectView: View {
 
 #Preview {
     ProjectView(
-        project: Project(
+        project: .constant(Project(
             "Preview Project",
             isMainProject: true,
             subProjects: [
@@ -57,5 +71,5 @@ struct ProjectView: View {
                 Task("task 2", isFavorite: false)
             ]
         )
-    )
+        ), editModeEnabled: false)
 }

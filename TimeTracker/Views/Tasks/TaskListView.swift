@@ -20,26 +20,37 @@ struct TaskListView: View {
     }
     
     var body: some View {
-        List {
-            Toggle(isOn: $showFavoritesOnly) {
-                Text("Favorites only")
-            }
-            
-            ForEach(filteredTasks) { task in
-                TaskView(task: .constant(task))
-            }
-            
-            if filteredTasks.isEmpty {
-                if showFavoritesOnly {
-                    Text("No favorites")
-                } else {
-                    Text("No tasks")
+        ScrollView {
+            VStack {
+                Toggle(isOn: $showFavoritesOnly) {
+                    Text("Favorites only")
+                }
+                
+                ForEach(filteredTasks) { task in
+                    TaskView(task: .constant(task))
+                    if filteredTasks.last != task {
+                        Divider()
+                            .padding(4)
+                    }
                 }
             }
+            .padding()
         }
+        
+        if filteredTasks.isEmpty {
+            if showFavoritesOnly {
+                Text("No favorites")
+            } else {
+                Text("No tasks")
+            }
+        }
+        
     }
 }
 
 #Preview {
-    TaskListView(tasks: [Task("Task", isFavorite: true)])
+    TaskListView(tasks: [
+        Task("Task", isFavorite: true),
+        Task("Task", isFavorite: true),
+    ])
 }
