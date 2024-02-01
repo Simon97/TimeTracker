@@ -29,7 +29,7 @@ struct ProjectView: View {
                         showEditingView.toggle()
                     })
                     .sheet(isPresented: $showEditingView) {
-                        EditProjectView(project: $project)
+                        EditProjectView(project: project, type: .exsitingProject)
                     }
                 } else {
                     ExpandSwitch(isExpanded: $showDetails)

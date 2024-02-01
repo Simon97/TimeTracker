@@ -84,5 +84,68 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DF0F9AC2-FDC5-4AE9-816C-02240E010E86"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeTracker/Views/Projects/EditProject/EditProjectView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "DF0F9AC2-FDC5-4AE9-816C-02240E010E86 - 3ecf531dafd61757"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 (SwiftUI.Binding&lt;TimeTracker.Task&gt;) -&gt; SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;TimeTracker.Task&gt;&gt;, Foundation.UUID, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt; in closure #2 () -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;TimeTracker.Task&gt;&gt;, Foundation.UUID, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Section&lt;SwiftUI.EmptyView, &lt;&lt;opaque return type of SwiftUI.View.focused(SwiftUI.FocusState&lt;Swift.Bool&gt;.Binding) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;TimeTracker.Task&gt;&gt;, Foundation.UUID, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI.Button&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.EmptyView&gt;)&gt; in TimeTracker.EditProjectView.body.getter : some"
+                  moduleName = "TimeTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ssni/Developer/private/TimeTracker/TimeTracker/Views/Projects/EditProject/EditProjectView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "180">
+               </Location>
+               <Location
+                  uuid = "DF0F9AC2-FDC5-4AE9-816C-02240E010E86 - a7ca8c065811c069"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TimeTracker.Task) -&gt; Swift.Bool in closure #1 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 (SwiftUI.Binding&lt;TimeTracker.Task&gt;) -&gt; SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;TimeTracker.Task&gt;&gt;, Foundation.UUID, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt; in closure #2 () -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;TimeTracker.Task&gt;&gt;, Foundation.UUID, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Section&lt;SwiftUI.EmptyView, &lt;&lt;opaque return type of SwiftUI.View.focused(SwiftUI.FocusState&lt;Swift.Bool&gt;.Binding) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;TimeTracker.Task&gt;&gt;, Foundation.UUID, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI.Button&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.EmptyView&gt;)&gt; in TimeTracker.EditProjectView.body.getter : some"
+                  moduleName = "TimeTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ssni/Developer/private/TimeTracker/TimeTracker/Views/Projects/EditProject/EditProjectView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  uuid = "DF0F9AC2-FDC5-4AE9-816C-02240E010E86 - 3ecf531dafd61757"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in closure #1 (SwiftUI.Binding&lt;TimeTracker.Task&gt;) -&gt; SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;TimeTracker.Task&gt;&gt;, Foundation.UUID, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt; in closure #2 () -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;TimeTracker.Task&gt;&gt;, Foundation.UUID, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Section&lt;SwiftUI.EmptyView, &lt;&lt;opaque return type of SwiftUI.View.focused(SwiftUI.FocusState&lt;Swift.Bool&gt;.Binding) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;TimeTracker.Task&gt;&gt;, Foundation.UUID, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ttTextStyle() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.labelStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.LabelStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI.Button&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.EmptyView&gt;)&gt; in TimeTracker.EditProjectView.body.getter : some"
+                  moduleName = "TimeTracker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ssni/Developer/private/TimeTracker/TimeTracker/Views/Projects/EditProject/EditProjectView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "244">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

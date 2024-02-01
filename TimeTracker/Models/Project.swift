@@ -14,14 +14,13 @@ class Project {
     var id: UUID
     var name: String
     var subProjects: [Project] = []
-    
-    @Relationship(deleteRule: .cascade)
-    var tasks: [Task] = []
+    @Relationship(deleteRule: .cascade) var tasks: [Task] = []
     
     var isOutermostProject: Bool
     
     // Parental relationship
-    @Relationship(deleteRule:.cascade, inverse: \Project.parent) var children: [Project]?
+    //@Relationship(deleteRule:.cascade, inverse: \Project.parent)
+    var children: [Project]?
     public var parent: Project?
     
     

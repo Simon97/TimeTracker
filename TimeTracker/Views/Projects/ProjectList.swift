@@ -28,7 +28,7 @@ struct ProjectList: View {
             .padding()
         }
         .sheet(isPresented: $showCreateNewProject) {
-            EditProjectView(project: $newProject)
+            EditProjectView(project: newProject, type: .newProject)
         }
         .toolbar {
             Button(action: {

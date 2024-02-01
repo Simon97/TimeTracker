@@ -11,13 +11,12 @@ import SwiftUI
 @main
 struct TimeTrackerApp: App {
     
-    let modelContainer: ModelContainer
+    let projectContainer: ModelContainer
     
-    // For some reason initializing this first makes the previews work (the TaskView preview
-    // did not work previously)
+    // For some reason initializing this first makes the previews work (the TaskView preview did not work previously)
     init() {
         do {
-            modelContainer = try ModelContainer(for: Project.self)
+            projectContainer = try ModelContainer(for: Project.self)
         } catch {
             fatalError("Could not initialize ModelContainer")
         }
@@ -27,6 +26,6 @@ struct TimeTrackerApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(modelContainer)
+        .modelContainer(projectContainer)
     }
 }

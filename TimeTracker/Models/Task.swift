@@ -10,12 +10,9 @@ import SwiftData
 
 @Model
 class Task {
-    @Attribute(.unique)
     var id: UUID
     var name: String
     var isFavorite: Bool
-    
-    @Relationship(inverse: \Project.tasks)
     var project: Project?
     
     init(_ name: String, isFavorite: Bool) {
