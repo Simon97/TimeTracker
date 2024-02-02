@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProjectDetails: View {
     
-    @Binding var project: Project
+    @Bindable var project: Project
     var editModeEnabled: Bool
     
     var body: some View {
@@ -23,7 +23,7 @@ struct ProjectDetails: View {
                     // The HStack and Spacer is needed to make the
                     // text be aligned even when no sub-projects are
                     // available
-                    TaskView(showProjectName: false, task: .constant(task))
+                    TaskView(task: task, showProjectName: false)
                     Spacer()
                 }
             }
@@ -32,7 +32,7 @@ struct ProjectDetails: View {
                 Text("Sub-projects:")
                     .font(.headline)
             }
-            ForEach($project.subProjects, id: \.self.name) { project in
+            ForEach(project.subProjects, id: \.self.name) { project in
                 ProjectView(project: project, editModeEnabled: editModeEnabled)
             }
             
@@ -41,7 +41,7 @@ struct ProjectDetails: View {
 }
 
 #Preview {
-    ProjectDetails(project: .constant(Project(
+    ProjectDetails(project: Project(
         "Preview Project",
         isMainProject: true,
         subProjects: [
@@ -66,5 +66,5 @@ struct ProjectDetails: View {
             Task("task 1", isFavorite: false),
             Task("task 2", isFavorite: false)
         ]
-    )), editModeEnabled: false)
+    ), editModeEnabled: false)
 }

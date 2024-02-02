@@ -9,9 +9,8 @@ import SwiftUI
 
 struct TaskView: View {
     
+    @Bindable var task: Task
     let showProjectName: Bool
-    
-    @Binding var task: Task
     let selected: Bool = true
     
     var body: some View {
@@ -33,5 +32,5 @@ struct TaskView: View {
 }
 
 #Preview {
-    TaskView(showProjectName: true, task: .constant( Task("Task name", isFavorite: true)))
+    TaskView(task: Task("Task name", isFavorite: true), showProjectName: true)
 }

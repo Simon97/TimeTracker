@@ -9,14 +9,14 @@ import Foundation
 import SwiftData
 
 @Model
-class Task {
-    var id: UUID
+class Task: Equatable {
+    @Attribute(.unique) var uuid: UUID
     var name: String
     var isFavorite: Bool
     var project: Project?
     
     init(_ name: String, isFavorite: Bool) {
-        self.id = UUID()
+        self.uuid = UUID()
         self.name = name
         self.isFavorite = isFavorite
     }

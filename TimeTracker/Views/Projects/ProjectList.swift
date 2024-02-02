@@ -20,7 +20,7 @@ struct ProjectList: View {
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach($projects) { project in
+                ForEach(projects) { project in
                     ProjectView(project: project, editModeEnabled: editModeEnabled)
                 }
             }
@@ -32,6 +32,7 @@ struct ProjectList: View {
         }
         .toolbar {
             Button(action: {
+                newProject = Project("New project", isMainProject: true, subProjects: [], tasks: [])
                 modelContext.insert(newProject)
                 showCreateNewProject.toggle()
             }, label: {Text("Add")})

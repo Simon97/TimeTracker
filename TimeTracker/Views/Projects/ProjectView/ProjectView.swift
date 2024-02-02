@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ProjectView: View {
     
-    @Binding var project: Project
+    @Bindable var project: Project
     
     var editModeEnabled: Bool
     @State private var showEditingView = false
-    
     @State private var showDetails = false
     
     var body: some View {
@@ -36,7 +35,7 @@ struct ProjectView: View {
                 }
             }
             if showDetails {
-                ProjectDetails(project: $project, editModeEnabled: editModeEnabled)
+                ProjectDetails(project: project, editModeEnabled: editModeEnabled)
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
@@ -45,7 +44,7 @@ struct ProjectView: View {
 
 #Preview {
     ProjectView(
-        project: .constant(Project(
+        project: Project(
             "Preview Project",
             isMainProject: true,
             subProjects: [
@@ -70,6 +69,5 @@ struct ProjectView: View {
                 Task("task 1", isFavorite: false),
                 Task("task 2", isFavorite: false)
             ]
-        )
         ), editModeEnabled: false)
 }

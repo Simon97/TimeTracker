@@ -27,7 +27,7 @@ struct TaskListView: View {
                 }
                 
                 ForEach(filteredTasks) { task in
-                    TaskView(showProjectName: true, task: .constant(task))
+                    TaskView(task: task, showProjectName: true)
                     if filteredTasks.last != task {
                         Divider()
                             .padding(4)

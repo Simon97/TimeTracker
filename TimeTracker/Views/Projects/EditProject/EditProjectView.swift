@@ -12,11 +12,13 @@ enum EditProjectViewType {
     case exsitingProject
 }
 
+// TODO: Make this an editView in the sense that it only keeps the changes if some save button is pressed ...
 struct EditProjectView: View {
     
     @Bindable var project: Project
-    @FocusState private var nameFocus
+
     
+    @FocusState private var nameFocus
     @Environment(\.dismiss) var dismiss
     
     var type: EditProjectViewType
@@ -29,28 +31,39 @@ struct EditProjectView: View {
             Section {
                 TextField(
                     "Project title",
-                    text: Binding(projectedValue:$project.name))
+                    text: $project.name
+                )
                 .ttTextStyle()
                 .focused($nameFocus)
             }
             
             Section("Tasks") {
                 VStack {
-                    ForEach($project.tasks) { task in
+                    ForEach(project.tasks) { task in
+                        @Bindable var task = task
                         HStack {
                             TextField(
                                 "Task name",
-                                text: Binding(projectedValue: task.name)
+                                text: $task.name
                             )
                             .ttTextStyle()
                             
                             Button(action: {
-                                print(project.tasks)
-                                if let index = project.tasks.firstIndex(where: { t in
-                                    t.id == task.id
-                                }) {
+                                print("Running button action")
+                                
+                                /*
+                                var indexToRemove: Int? {
+                                    project.tasks.firstIndex(where: { t in
+                                        t.uuid == task.uuid
+                                    })
+                                }
+                                if let index = indexToRemove {
+                                    print("Deleting task with uuid: \(project.tasks[index].uuid)")
+                                    print("Deleting index \(index)")
                                     project.tasks.remove(at: index)
                                 }
+                                */
+                                
                             }) {
                                 Label("Delete", systemImage: "trash")
                             }
@@ -65,8 +78,7 @@ struct EditProjectView: View {
             
             Section {
                 Button(action: {
-                    let newTask = Task("Task", isFavorite: false)
-                    project.tasks.append(newTask)
+                    project.tasks.append(Task("Task", isFavorite: false))
                 }) {
                     Label("Add task", systemImage: "plus")
                 }
