@@ -12,11 +12,9 @@ enum EditProjectViewType {
     case exsitingProject
 }
 
-// TODO: Make this an editView in the sense that it only keeps the changes if some save button is pressed ...
 struct EditProjectView: View {
     
     @Bindable var project: Project
-
     
     @FocusState private var nameFocus
     @Environment(\.dismiss) var dismiss
@@ -24,21 +22,38 @@ struct EditProjectView: View {
     var type: EditProjectViewType
     
     var body: some View {
-        Form {
-            Text("\(type == .exsitingProject ? "Edit" : "Create") project")
-                .font(.title)
-            
-            Section {
-                TextField(
-                    "Project title",
-                    text: $project.name
-                )
-                .ttTextStyle()
-                .focused($nameFocus)
-            }
-            
-            Section("Tasks") {
+        NavigationStack {
+            ScrollView {
+                HStack {
+                    Text("Project name:")
+                        .font(.headline)
+                    
+                    TextField(
+                        "Project title",
+                        text: $project.name
+                    )
+                    .ttTextStyle()
+                    .focused($nameFocus)
+                    .textFieldStyle(.roundedBorder)
+                }
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 24, trailing: 0))
+                
                 VStack {
+                    HStack {
+                        Text("Tasks")
+                            .font(.headline)
+                        
+                        Button(action: {
+                            // Making sure that the tasks are named differently
+                            project.tasks.append(Task("Task \(project.tasks.count + 1)", isFavorite: false))
+                        }) {
+                            Label("Add task", systemImage: "plus.circle")
+                                .labelStyle(.iconOnly)
+                        }
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                    
                     ForEach(project.tasks) { task in
                         @Bindable var task = task
                         HStack {
@@ -49,9 +64,6 @@ struct EditProjectView: View {
                             .ttTextStyle()
                             
                             Button(action: {
-                                print("Running button action")
-                                
-                                /*
                                 var indexToRemove: Int? {
                                     project.tasks.firstIndex(where: { t in
                                         t.uuid == task.uuid
@@ -62,7 +74,7 @@ struct EditProjectView: View {
                                     print("Deleting index \(index)")
                                     project.tasks.remove(at: index)
                                 }
-                                */
+                                
                                 
                             }) {
                                 Label("Delete", systemImage: "trash")
@@ -74,28 +86,22 @@ struct EditProjectView: View {
                         Text("No tasks in this project")
                     }
                 }
-            }
-            
-            Section {
-                Button(action: {
-                    project.tasks.append(Task("Task", isFavorite: false))
-                }) {
-                    Label("Add task", systemImage: "plus")
-                }
-            }
-            
-            Section {
+                
+                Spacer()
+                
                 Button(action: {
                     dismiss()
                 }) {
                     Text("Close")
                 }
+                .buttonStyle(.bordered)
             }
+            .navigationTitle("\(type == .exsitingProject ? "Edit" : "Create") project")
+            .onAppear(perform: {
+                nameFocus = true
+            })
+            .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8 ))
         }
-        .onAppear(perform: {
-            nameFocus = true
-        })
-        .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8 ))
     }
 }
 

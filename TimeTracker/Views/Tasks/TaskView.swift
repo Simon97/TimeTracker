@@ -26,7 +26,6 @@ struct TaskView: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            // .background(.orange)
         }
     }
 }
