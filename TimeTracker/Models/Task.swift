@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 class Task {
-    @Attribute(.unique) var uuid: UUID
+    var uuid: UUID
     var name: String
     var isFavorite: Bool
     var project: Project?

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProjectView: View {
     
+    @Environment(\.modelContext) var modelContext
     @Bindable var project: Project
     
     var editModeEnabled: Bool
@@ -24,9 +25,16 @@ struct ProjectView: View {
                 Spacer()
                 
                 if editModeEnabled {
-                    EditButton(action: {
-                        showEditingView.toggle()
-                    })
+                    HStack(spacing: 12) {
+                        EditButton(action: {
+                            showEditingView.toggle()
+                        })
+                        DeleteButton(action: {
+                            // Show a confirm dialog since a lot of stuff will be deleted by this operation
+                            modelContext.delete(project)
+                            try? modelContext.save()
+                        })
+                    }
                     .sheet(isPresented: $showEditingView) {
                         EditProjectView(project: project, type: .exsitingProject)
                     }

@@ -62,8 +62,8 @@ struct EditProjectView: View {
                                 text: $task.name
                             )
                             .ttTextStyle()
-                            
-                            Button(action: {
+
+                            DeleteButton(action: {
                                 var indexToRemove: Int? {
                                     project.tasks.firstIndex(where: { t in
                                         t.uuid == task.uuid
@@ -74,12 +74,8 @@ struct EditProjectView: View {
                                     print("Deleting index \(index)")
                                     project.tasks.remove(at: index)
                                 }
-                                
-                                
-                            }) {
-                                Label("Delete", systemImage: "trash")
                             }
-                            .labelStyle(.iconOnly)
+                            )
                         }
                     }
                     if (project.tasks.isEmpty) {
