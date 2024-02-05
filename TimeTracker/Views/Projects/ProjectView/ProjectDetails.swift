@@ -12,6 +12,12 @@ struct ProjectDetails: View {
     @Bindable var project: Project
     var editModeEnabled: Bool
     
+    @State private var showCreateNewProject = false
+    
+    @Environment(\.modelContext) var modelContext
+    
+    @State private var newProject = Project("New project", isMainProject: true, subProjects: [], tasks: [])
+    
     var body: some View {
         VStack(alignment: .leading) {
             if (!project.tasks.isEmpty) {
@@ -35,6 +41,16 @@ struct ProjectDetails: View {
             ForEach(project.subProjects, id: \.self.name) { project in
                 ProjectView(project: project, projects: $project.subProjects, editModeEnabled: editModeEnabled)
             }
+            Button(action: {
+                newProject = Project("New project", isMainProject: false, subProjects: [], tasks: [])
+                project.subProjects.append(newProject)
+                showCreateNewProject.toggle()
+            }){
+                Text("Add Subproject")
+            }
+        }
+        .sheet(isPresented: $showCreateNewProject) {
+            EditProjectView(project: newProject, type: .newProject)
         }
     }
 }
