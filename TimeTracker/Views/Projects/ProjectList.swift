@@ -21,7 +21,7 @@ struct ProjectList: View {
         ScrollView {
             LazyVStack {
                 ForEach(projects) { project in
-                    ProjectView(project: project, editModeEnabled: editModeEnabled)
+                    ProjectView(project: project, projects: $projects, editModeEnabled: editModeEnabled)
                 }
             }
             .frame(maxHeight: .infinity, alignment: .top)

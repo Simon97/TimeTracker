@@ -11,6 +11,7 @@ struct ProjectView: View {
     
     @Environment(\.modelContext) var modelContext
     @Bindable var project: Project
+    @Binding var projects: [Project]
     
     var editModeEnabled: Bool
     @State private var showEditingView = false
@@ -31,8 +32,21 @@ struct ProjectView: View {
                         })
                         DeleteButton(action: {
                             // Show a confirm dialog since a lot of stuff will be deleted by this operation
-                            modelContext.delete(project)
-                            try? modelContext.save()
+                            
+                            if project.isOutermostProject {
+                                modelContext.delete(project)
+                                // TODO: Do proper error handling ...
+                                try? modelContext.save()
+                            } else {
+                                var indexToRemove: Int? {
+                                    projects.firstIndex(where: { p in
+                                        p.id == project.id
+                                    })
+                                }
+                                if let index = indexToRemove {
+                                    projects.remove(at: index)
+                                }
+                            }
                         })
                     }
                     .sheet(isPresented: $showEditingView) {
@@ -77,5 +91,5 @@ struct ProjectView: View {
                 Task("task 1", isFavorite: false),
                 Task("task 2", isFavorite: false)
             ]
-        ), editModeEnabled: false)
+        ), projects: .constant([]), editModeEnabled: false)
 }

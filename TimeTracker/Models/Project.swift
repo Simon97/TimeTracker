@@ -15,7 +15,9 @@ class Project {
     
     var name: String
     
-    @Relationship(deleteRule: .cascade)
+    var parent: Project?
+    
+    @Relationship(deleteRule: .cascade, inverse: \Project.parent)
     var subProjects: [Project] = []
     
     @Relationship(deleteRule: .cascade)

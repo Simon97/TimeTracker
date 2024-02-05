@@ -33,9 +33,8 @@ struct ProjectDetails: View {
                     .font(.headline)
             }
             ForEach(project.subProjects, id: \.self.name) { project in
-                ProjectView(project: project, editModeEnabled: editModeEnabled)
+                ProjectView(project: project, projects: $project.subProjects, editModeEnabled: editModeEnabled)
             }
-            
         }
     }
 }
