@@ -33,21 +33,24 @@ struct ProjectDetails: View {
                     Spacer()
                 }
             }
-            Divider()
-            if (!project.subProjects.isEmpty) {
+            
+            HStack {
                 Text("Sub-projects:")
                     .font(.headline)
+                
+                Button(action: {
+                    newProject = Project("New project", isMainProject: false, subProjects: [], tasks: [])
+                    project.subProjects.append(newProject)
+                    showCreateNewProject.toggle()
+                }){
+                    Text("Add Subproject")
+                }
             }
             ForEach(project.subProjects, id: \.self.name) { project in
                 ProjectView(project: project, projects: $project.subProjects, editModeEnabled: editModeEnabled)
             }
-            Button(action: {
-                newProject = Project("New project", isMainProject: false, subProjects: [], tasks: [])
-                project.subProjects.append(newProject)
-                showCreateNewProject.toggle()
-            }){
-                Text("Add Subproject")
-            }
+            
+            Divider()
         }
         .sheet(isPresented: $showCreateNewProject) {
             EditProjectView(project: newProject, type: .newProject)
