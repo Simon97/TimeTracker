@@ -51,3 +51,21 @@ class Project {
         return _tasks
     }
 }
+
+extension Project {
+    public static func projectWithGeneralTask(isMainProject: Bool) -> Project {
+        let generalTask = Task("General", isFavorite: false)
+        return Project(
+            "New project",
+            isMainProject: isMainProject,
+            subProjects: [],
+            tasks: [generalTask]
+        )
+    }
+}
+
+extension Project {
+    public static func addProjectWithDefaultTask(modelContext: ModelContext, name: String, isMainProject: Bool) {
+        modelContext.insert(Project(name, isMainProject: isMainProject))
+    }
+}

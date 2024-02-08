@@ -59,7 +59,7 @@ struct ContentView: View {
                 VStack {
                     ProjectList(projects: .constant(projects))
                 }
-                .navigationTitle("All projects")
+                .navigationTitle("Projects")
                 .toolbar {
                     Button("Add Demo") {
                         let project = Project(
@@ -93,7 +93,7 @@ struct ContentView: View {
                 }
             }
             .tabItem {
-                Label("All Projects", systemImage: "list.bullet")
+                Label("Projects", systemImage: "list.bullet")
             }
             .tag(Tab.allProjects)
             

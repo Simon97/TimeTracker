@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ProjectList: View {
+    
+    @Environment(\.modelContext) var modelContext
+    
     @Binding var projects: [Project]
     
     @State private var editModeEnabled = false
     @State private var showCreateNewProject = false
-    
-    @Environment(\.modelContext) var modelContext
-    
-    @State private var newProject = Project("New project", isMainProject: true, subProjects: [], tasks: [])
+    @State private var newProject = Project.projectWithGeneralTask(isMainProject: true)
     
     var body: some View {
         ScrollView {
@@ -32,7 +32,7 @@ struct ProjectList: View {
         }
         .toolbar {
             Button(action: {
-                newProject = Project("New project", isMainProject: true, subProjects: [], tasks: [])
+                newProject = Project.projectWithGeneralTask(isMainProject: true)
                 modelContext.insert(newProject)
                 showCreateNewProject.toggle()
             }, label: {Text("Add")})

@@ -16,7 +16,7 @@ struct ProjectDetails: View {
     
     @Environment(\.modelContext) var modelContext
     
-    @State private var newProject = Project("New project", isMainProject: true, subProjects: [], tasks: [])
+    @State private var newProject = Project.projectWithGeneralTask(isMainProject: false)
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -39,7 +39,7 @@ struct ProjectDetails: View {
                     .font(.headline)
                 
                 Button(action: {
-                    newProject = Project("New project", isMainProject: false, subProjects: [], tasks: [])
+                    newProject = Project.projectWithGeneralTask(isMainProject: false)
                     project.subProjects.append(newProject)
                     showCreateNewProject.toggle()
                 }){
@@ -50,7 +50,9 @@ struct ProjectDetails: View {
                 ProjectView(project: project, projects: $project.subProjects, editModeEnabled: editModeEnabled)
             }
             
-            Divider()
+            if project.isOutermostProject {
+                Divider()
+            }
         }
         .sheet(isPresented: $showCreateNewProject) {
             EditProjectView(project: newProject, type: .newProject)
