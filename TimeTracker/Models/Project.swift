@@ -14,8 +14,8 @@ class Project {
     var id: UUID
     
     var name: String
-    
     var parent: Project?
+    var isOutermostProject: Bool
     
     @Relationship(deleteRule: .cascade, inverse: \Project.parent)
     var subProjects: [Project] = []
@@ -23,21 +23,23 @@ class Project {
     @Relationship(deleteRule: .cascade)
     var tasks: [Task] = []
     
-    var isOutermostProject: Bool
+    var presentationDetails: ProjectPresentationDetails
     
     
-    init(_ name: String, isMainProject: Bool) {
+    init(_ name: String, isMainProject: Bool, isCollapsed: Bool?) {
         self.id = UUID()
         self.name = name
         self.isOutermostProject = isMainProject
+        self.presentationDetails = ProjectPresentationDetails(isCollapsed: isCollapsed ?? false)
     }
     
-    init(_ name: String, isMainProject: Bool, subProjects: [Project], tasks: [Task]) {
+    init(_ name: String, isMainProject: Bool, isCollapsed: Bool?, subProjects: [Project], tasks: [Task]) {
         self.id = UUID()
         self.name = name
         self.isOutermostProject = isMainProject
         self.subProjects = subProjects
         self.tasks = tasks
+        self.presentationDetails = ProjectPresentationDetails(isCollapsed: isCollapsed ?? false)
     }
     
     func getAllTasks() -> [Task] {
@@ -58,6 +60,7 @@ extension Project {
         return Project(
             "New project",
             isMainProject: isMainProject,
+            isCollapsed: false,
             subProjects: [],
             tasks: [generalTask]
         )
@@ -66,6 +69,6 @@ extension Project {
 
 extension Project {
     public static func addProjectWithDefaultTask(modelContext: ModelContext, name: String, isMainProject: Bool) {
-        modelContext.insert(Project(name, isMainProject: isMainProject))
+        modelContext.insert(Project(name, isMainProject: isMainProject, isCollapsed: false))
     }
 }

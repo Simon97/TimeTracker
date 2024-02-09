@@ -15,7 +15,9 @@ struct ProjectView: View {
     
     var editModeEnabled: Bool
     @State private var showEditingView = false
-    @State private var showDetails = false
+    // @State private var showDetails = false
+    
+    // Can I make a binding to the retrived value instead ??
     
     var body: some View {
         VStack {
@@ -53,10 +55,11 @@ struct ProjectView: View {
                         EditProjectView(project: project, type: .exsitingProject)
                     }
                 } else {
-                    ExpandSwitch(isExpanded: $showDetails)
+                    @Bindable var isCollapsedBinding = project.presentationDetails
+                    ExpandSwitch(isExpanded: $isCollapsedBinding.isCollapsed)
                 }
             }
-            if showDetails {
+            if project.presentationDetails.isCollapsed {
                 ProjectDetails(project: project, editModeEnabled: editModeEnabled)
             }
         }
@@ -68,15 +71,15 @@ struct ProjectView: View {
     ProjectView(
         project: Project(
             "Preview Project",
-            isMainProject: true,
+            isMainProject: true, isCollapsed: false,
             subProjects: [
                 Project(
                     "Sub project",
-                    isMainProject: false,
+                    isMainProject: false, isCollapsed: false,
                     subProjects: [
                         Project(
                             "Sub sub project",
-                            isMainProject: false,
+                            isMainProject: false, isCollapsed: false,
                             subProjects: [],
                             tasks: [
                                 Task("sub sub project task 1", isFavorite: false)

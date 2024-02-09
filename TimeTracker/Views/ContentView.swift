@@ -64,15 +64,15 @@ struct ContentView: View {
                     Button("Add Demo") {
                         let project = Project(
                             "Preview Project",
-                            isMainProject: true,
+                            isMainProject: true, isCollapsed: false,
                             subProjects: [
                                 Project(
                                     "Sub project",
-                                    isMainProject: false,
+                                    isMainProject: false, isCollapsed: false,
                                     subProjects: [
                                         Project(
                                             "Sub sub project",
-                                            isMainProject: false,
+                                            isMainProject: false, isCollapsed: false,
                                             subProjects: [],
                                             tasks: [
                                                 Task("sub sub project task 1", isFavorite: false)

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6000404C2B6E25680080FD2F /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6000404B2B6E25680080FD2F /* DeleteButton.swift */; };
+		602212372B74B35E00764678 /* ProjectPresentationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602212362B74B35E00764678 /* ProjectPresentationDetails.swift */; };
 		602B6ED32B5710EE0006614A /* BottomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B6ED22B5710EE0006614A /* BottomInfo.swift */; };
 		6041D7BB2B57036200C9668D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6041D7BA2B57036200C9668D /* ContentView.swift */; };
 		605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222532B54737600F603B8 /* TimeTrackerApp.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		6000404B2B6E25680080FD2F /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		602212362B74B35E00764678 /* ProjectPresentationDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresentationDetails.swift; sourceTree = "<group>"; };
 		602B6ED22B5710EE0006614A /* BottomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomInfo.swift; sourceTree = "<group>"; };
 		6041D7BA2B57036200C9668D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		605222502B54737600F603B8 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 				605222612B5474B500F603B8 /* TimeRegistration.swift */,
 				605222642B54769400F603B8 /* Project.swift */,
 				605222662B547BF800F603B8 /* Task.swift */,
+				602212362B74B35E00764678 /* ProjectPresentationDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				60D0C9362B61849C0091E6EC /* TTTextFieldStyle.swift in Sources */,
 				607842E42B5AF8FB00A78E8C /* TaskView.swift in Sources */,
 				605222672B547BF800F603B8 /* Task.swift in Sources */,
+				602212372B74B35E00764678 /* ProjectPresentationDetails.swift in Sources */,
 				605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */,
 				60BEB1052B5596F000814BF0 /* ProjectDetails.swift in Sources */,
 				607842E92B5B204100A78E8C /* ToggleView.swift in Sources */,
