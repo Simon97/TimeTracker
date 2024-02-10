@@ -17,11 +17,11 @@ struct CollapseSwitch: View {
             }
         }) {
             Label("Expand",
-                  systemImage: isCollapsed ? "chevron.right.circle.fill" : "chevron.right.circle"
+                  systemImage: isCollapsed ? "chevron.right.circle" : "chevron.right.circle.fill"
             )
             .imageScale(.large)
             .labelStyle(.iconOnly)
-            .rotationEffect(.degrees(isCollapsed ? 90 : 0))
+            .rotationEffect(.degrees(isCollapsed ? 0 : 90))
             .padding(2)
         }
     }
