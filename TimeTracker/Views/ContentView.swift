@@ -101,7 +101,7 @@ struct ContentView: View {
                             isCollapsed: false,
                             subProjects: [],
                             tasks: [
-                                Task("sub sub project task 1", isFavorite: false)
+                                Task("sub sub project task 1", isFavorite: true)
                             ]
                         )],
                     tasks: [
@@ -110,7 +110,7 @@ struct ContentView: View {
                 )
             ],
             tasks: [
-                Task("task 1", isFavorite: false),
+                Task("task 1", isFavorite: true),
                 Task("task 2", isFavorite: false)
             ]
         )
