@@ -15,9 +15,6 @@ struct ProjectView: View {
     
     var editModeEnabled: Bool
     @State private var showEditingView = false
-    // @State private var showDetails = false
-    
-    // Can I make a binding to the retrived value instead ??
     
     var body: some View {
         VStack {
@@ -35,6 +32,8 @@ struct ProjectView: View {
                         DeleteButton(action: {
                             // Show a confirm dialog since a lot of stuff will be deleted by this operation
                             
+                            print("Number of projects in list we look at:", projects.count)
+                            
                             if project.isOutermostProject {
                                 modelContext.delete(project)
                                 // TODO: Do proper error handling ...
@@ -42,7 +41,7 @@ struct ProjectView: View {
                             } else {
                                 var indexToRemove: Int? {
                                     projects.firstIndex(where: { p in
-                                        p.id == project.id
+                                        p.uuid == project.uuid
                                     })
                                 }
                                 if let index = indexToRemove {

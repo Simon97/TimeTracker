@@ -11,7 +11,7 @@ import SwiftData
 @Model
 class Project {
     @Attribute(.unique)
-    var id: UUID
+    var uuid: UUID
     
     var name: String
     var parent: Project?
@@ -27,14 +27,14 @@ class Project {
     
     
     init(_ name: String, isMainProject: Bool, isCollapsed: Bool?) {
-        self.id = UUID()
+        self.uuid = UUID()
         self.name = name
         self.isOutermostProject = isMainProject
         self.presentationDetails = ProjectPresentationDetails(isCollapsed: isCollapsed ?? false)
     }
     
     init(_ name: String, isMainProject: Bool, isCollapsed: Bool?, subProjects: [Project], tasks: [Task]) {
-        self.id = UUID()
+        self.uuid = UUID()
         self.name = name
         self.isOutermostProject = isMainProject
         self.subProjects = subProjects
