@@ -34,7 +34,6 @@ struct ProjectView: View {
                             showEditingView.toggle()
                         })
                         DeleteButton(action: {
-                            // TODO: Show a confirm dialog since a lot of stuff will be deleted by this operation
                             showDeleteAlert = true
                         })
                     }
@@ -61,10 +60,10 @@ struct ProjectView: View {
                                EditProjectView(project: project, type: .exsitingProject)
                            }
                 } else {
-                    ExpandSwitch(isExpanded: $isCollapsedBinding.isCollapsed)
+                    CollapseSwitch(isCollapsed: $isCollapsedBinding.isCollapsed)
                 }
             }
-            if isCollapsedBinding.isCollapsed {
+            if !isCollapsedBinding.isCollapsed {
                 ProjectDetails(project: project, editModeEnabled: editModeEnabled)
             }
             

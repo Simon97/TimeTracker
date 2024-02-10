@@ -1,5 +1,5 @@
 //
-//  ExpandSwitch.swift
+//  CollapseSwitch.swift
 //  TimeTracker
 //
 //  Created by Simon Svendsgaard Nielsen on 14/01/2024.
@@ -7,33 +7,33 @@
 
 import SwiftUI
 
-struct ExpandSwitch: View {
-    @Binding var isExpanded: Bool
+struct CollapseSwitch: View {
+    @Binding var isCollapsed: Bool
     
     var body: some View {
         Button(action: {
             withAnimation() {
-                isExpanded.toggle()
+                isCollapsed.toggle()
             }
         }) {
             Label("Expand",
-                  systemImage: isExpanded ? "chevron.right.circle.fill" : "chevron.right.circle"
+                  systemImage: isCollapsed ? "chevron.right.circle.fill" : "chevron.right.circle"
             )
             .imageScale(.large)
             .labelStyle(.iconOnly)
-            .rotationEffect(.degrees(isExpanded ? 90 : 0))
+            .rotationEffect(.degrees(isCollapsed ? 90 : 0))
             .padding(2)
         }
     }
 }
 
 struct ExpandSwitchPreview: View {
-    @State private var isExpanded = false
+    @State private var isCollapsed = false
     
     var body: some View {
         VStack {
-            ExpandSwitch(isExpanded: $isExpanded)
-            Text("Value: " + (isExpanded ? "Open" : "Closed"))
+            CollapseSwitch(isCollapsed: $isCollapsed)
+            Text("Value: " + (isCollapsed ? "Open" : "Closed"))
         }
     }
 }
