@@ -11,13 +11,17 @@ struct ProjectView: View {
     
     @Environment(\.modelContext) var modelContext
     @Bindable var project: Project
-    @Binding var projects: [Project]
+    @Binding var subProjects: [Project]
     
     var editModeEnabled: Bool
     @State private var showEditingView = false
+    @State private var showDeleteAlert = false
     
     var body: some View {
         VStack {
+            @Bindable var isCollapsedBinding =
+            (project.presentationDetails ?? ProjectPresentationDetails(isCollapsed: false))
+            
             HStack {
                 Text(project.name)
                     .font(.title)
@@ -30,40 +34,36 @@ struct ProjectView: View {
                             showEditingView.toggle()
                         })
                         DeleteButton(action: {
-                            // Show a confirm dialog since a lot of stuff will be deleted by this operation
-                            
-                            
+                            // TODO: Show a confirm dialog since a lot of stuff will be deleted by this operation
+                            showDeleteAlert = true
+                        })
+                    }
+                    .alert("This will delete the project and all associated tasks and sub-projects",
+                           isPresented: $showDeleteAlert) {
+                        Button("Delete", role: .destructive) {
                             if project.isOutermostProject {
                                 modelContext.delete(project)
                                 // TODO: Do proper error handling ...
                                 try? modelContext.save()
                             } else {
                                 var indexToRemove: Int? {
-                                    projects.firstIndex(where: { p in
+                                    subProjects.firstIndex(where: { p in
                                         p.uuid == project.uuid
                                     })
                                 }
                                 if let index = indexToRemove {
-                                    projects.remove(at: index)
+                                    subProjects.remove(at: index)
                                 }
                             }
-                        })
+                        }
                     }
-                    .sheet(isPresented: $showEditingView) {
-                        EditProjectView(project: project, type: .exsitingProject)
-                    }
+                           .sheet(isPresented: $showEditingView) {
+                               EditProjectView(project: project, type: .exsitingProject)
+                           }
                 } else {
-                    if project.presentationDetails != nil {
-                        @Bindable var isCollapsedBinding = (project.presentationDetails ?? ProjectPresentationDetails(isCollapsed: false))
-                        
-                        ExpandSwitch(isExpanded: $isCollapsedBinding.isCollapsed)
-                    } else {
-                        ExpandSwitch(isExpanded: .constant(false))
-                    }
+                    ExpandSwitch(isExpanded: $isCollapsedBinding.isCollapsed)
                 }
             }
-            
-            @Bindable var isCollapsedBinding = (project.presentationDetails ?? ProjectPresentationDetails(isCollapsed: false))
             if isCollapsedBinding.isCollapsed {
                 ProjectDetails(project: project, editModeEnabled: editModeEnabled)
             }
@@ -100,5 +100,5 @@ struct ProjectView: View {
                 Task("task 1", isFavorite: false),
                 Task("task 2", isFavorite: false)
             ]
-        ), projects: .constant([]), editModeEnabled: false)
+        ), subProjects: .constant([]), editModeEnabled: false)
 }

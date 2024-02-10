@@ -47,7 +47,8 @@ struct ProjectDetails: View {
                 }
             }
             ForEach(project.subProjects, id: \.self.name) { project in
-                ProjectView(project: project, projects: $project.subProjects, editModeEnabled: editModeEnabled)
+                ProjectView(project: project, subProjects: $project.subProjects, editModeEnabled: editModeEnabled)
+                    .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 0))
             }
             
             if project.isOutermostProject {
