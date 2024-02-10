@@ -32,7 +32,6 @@ struct ProjectView: View {
                         DeleteButton(action: {
                             // Show a confirm dialog since a lot of stuff will be deleted by this operation
                             
-                            print("Number of projects in list we look at:", projects.count)
                             
                             if project.isOutermostProject {
                                 modelContext.delete(project)
@@ -54,13 +53,21 @@ struct ProjectView: View {
                         EditProjectView(project: project, type: .exsitingProject)
                     }
                 } else {
-                    @Bindable var isCollapsedBinding = project.presentationDetails
-                    ExpandSwitch(isExpanded: $isCollapsedBinding.isCollapsed)
+                    if project.presentationDetails != nil {
+                        @Bindable var isCollapsedBinding = (project.presentationDetails ?? ProjectPresentationDetails(isCollapsed: false))
+                        
+                        ExpandSwitch(isExpanded: $isCollapsedBinding.isCollapsed)
+                    } else {
+                        ExpandSwitch(isExpanded: .constant(false))
+                    }
                 }
             }
-            if project.presentationDetails.isCollapsed {
+            
+            @Bindable var isCollapsedBinding = (project.presentationDetails ?? ProjectPresentationDetails(isCollapsed: false))
+            if isCollapsedBinding.isCollapsed {
                 ProjectDetails(project: project, editModeEnabled: editModeEnabled)
             }
+            
         }
         .frame(maxHeight: .infinity, alignment: .top)
     }

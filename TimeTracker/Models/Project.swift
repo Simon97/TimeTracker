@@ -23,7 +23,7 @@ class Project {
     @Relationship(deleteRule: .cascade)
     var tasks: [Task] = []
     
-    var presentationDetails: ProjectPresentationDetails
+    var presentationDetails: ProjectPresentationDetails?
     
     
     init(_ name: String, isMainProject: Bool, isCollapsed: Bool?) {
