@@ -11,12 +11,13 @@ import SwiftUI
 enum Tab {
     case favorites
     case projects
+    case timeRegistrations
 }
 
 struct ContentView: View {
     
     @Environment(\.modelContext) var modelContext
-    @AppStorage("firstTimeOpened") private var hasBeenOpenedBefore = false
+    @AppStorage("hasBeenOpenedBefore") private var hasBeenOpenedBefore = false
     
     @Query(filter: #Predicate<Project> { project in
         project.isOutermostProject
@@ -27,9 +28,7 @@ struct ContentView: View {
     private var tasks: [Task] {
         var tasks = [Task]()
         for project in projects {
-            for task in project.getAllTasks() {
-                tasks.append(task)
-            }
+            tasks.append(contentsOf: project.getAllTasks())
         }
         return tasks
     }
@@ -71,6 +70,19 @@ struct ContentView: View {
                 Label("Projects", systemImage: "list.bullet")
             }
             .tag(Tab.projects)
+            
+            // ----
+            
+            NavigationStack {
+                VStack {
+                    Text("Time registrations")
+                }
+                .navigationTitle("Time Registrations")
+            }
+            .tabItem {
+                Label("Time Registrations", systemImage: "stopwatch")
+            }
+            .tag(Tab.timeRegistrations)
             
         }
         .onAppear {

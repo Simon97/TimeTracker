@@ -23,6 +23,9 @@ class Project {
     @Relationship(deleteRule: .cascade)
     var tasks: [Task] = []
     
+    @Relationship(deleteRule: .cascade)
+    var timeRegistrations: [TimeRegistration] = []
+    
     var presentationDetails: ProjectPresentationDetails?
     
     

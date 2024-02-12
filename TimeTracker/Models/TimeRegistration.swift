@@ -6,7 +6,18 @@
 //
 
 import Foundation
+import SwiftData
 
-struct TimeRegistration {
+@Model
+class TimeRegistration {
+    var startTime: Date
+    var endTime: Date
     
+    var project: Project?
+    
+    init(startTime: Date, endTime: Date, project: Project? = nil) {
+        self.startTime = startTime
+        self.endTime = endTime
+        self.project = project
+    }
 }
