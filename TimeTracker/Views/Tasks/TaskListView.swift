@@ -43,6 +43,7 @@ struct TaskListView: View {
             } else {
                 Text("No tasks")
             }
+            
         }
         
     }

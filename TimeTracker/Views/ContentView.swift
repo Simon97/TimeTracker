@@ -19,11 +19,13 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @AppStorage("hasBeenOpenedBefore") private var hasBeenOpenedBefore = false
     
+    @State private var selection: Tab = .favorites
+    
+    @Query var timeRegistrations: [TimeRegistration]
+    
     @Query(filter: #Predicate<Project> { project in
         project.isOutermostProject
     }) var projects: [Project]
-    
-    @State private var selection: Tab = .favorites
     
     private var tasks: [Task] {
         var tasks = [Task]()
@@ -34,56 +36,10 @@ struct ContentView: View {
     }
     
     var body: some View {
-        
         TabView(selection: $selection) {
-            NavigationStack {
-                VStack {
-                    TaskListView(tasks: tasks)
-                    
-                    BottomInfo(
-                        currentProject: "Some project",
-                        secondsSpendTotalToday: 60 * 60 * 2 + 125,
-                        secondsSpendOnCurrentProjectTotalToday: 60 * 60 * 3
-                    )
-                }
-                .navigationTitle("Tasks")
-            }
-            .tabItem {
-                Label("Tasks", systemImage: "star")
-            }
-            .tag(Tab.favorites)
-            
-            // ----
-            
-            NavigationStack {
-                VStack {
-                    ProjectList(projects: .constant(projects))
-                }
-                .navigationTitle("Projects")
-                .toolbar {
-                    Button("Add Demo") {
-                        addDemoProject()
-                    }
-                }
-            }
-            .tabItem {
-                Label("Projects", systemImage: "list.bullet")
-            }
-            .tag(Tab.projects)
-            
-            // ----
-            
-            NavigationStack {
-                VStack {
-                    Text("Time registrations")
-                }
-                .navigationTitle("Time Registrations")
-            }
-            .tabItem {
-                Label("Time Registrations", systemImage: "stopwatch")
-            }
-            .tag(Tab.timeRegistrations)
-            
+            TasksTab(tasks: tasks)
+            ProjectTabView(projects: projects)
+            TimeRegistrationsTab(timeRegistrations: timeRegistrations)
         }
         .onAppear {
             /**

@@ -14,18 +14,28 @@ struct TaskView: View {
     let selected: Bool = true
     
     var body: some View {
-        HStack {
-            FavoriteButton(isFavourite: $task.isFavorite)
-            HStack(spacing: 8) {
-                Text(task.name)
-                if (showProjectName) {
-                    Spacer()
-                    Text("(" + (task.project?.name ?? "") + ")")
-                } else {
-                    Spacer()
+        Button(action: {
+            let timeRegistration = TimeRegistration(
+                startTime: .now,
+                endTime: .now,
+                task: task
+            )
+            task.timeRegistrations.append(timeRegistration)
+            print("Time-registration was added")
+        }) {
+            HStack {
+                FavoriteButton(isFavourite: $task.isFavorite)
+                HStack(spacing: 8) {
+                    Text(task.name)
+                    if (showProjectName) {
+                        Spacer()
+                        Text("(" + (task.project?.name ?? "") + ")")
+                    } else {
+                        Spacer()
+                    }
                 }
+                .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity)
         }
     }
 }

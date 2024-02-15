@@ -15,9 +15,13 @@ class Task {
     var isFavorite: Bool
     var project: Project?
     
+    @Relationship(deleteRule: .cascade)
+    var timeRegistrations: [TimeRegistration]
+    
     init(_ name: String, isFavorite: Bool) {
         self.uuid = UUID()
         self.name = name
         self.isFavorite = isFavorite
+        self.timeRegistrations = []
     }
 }

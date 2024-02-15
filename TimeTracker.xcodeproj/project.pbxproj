@@ -11,6 +11,10 @@
 		602212372B74B35E00764678 /* ProjectPresentationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602212362B74B35E00764678 /* ProjectPresentationDetails.swift */; };
 		602B6ED32B5710EE0006614A /* BottomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B6ED22B5710EE0006614A /* BottomInfo.swift */; };
 		6041D7BB2B57036200C9668D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6041D7BA2B57036200C9668D /* ContentView.swift */; };
+		6051177F2B7D1B700061A736 /* TasksTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051177E2B7D1B700061A736 /* TasksTab.swift */; };
+		605117812B7D1C880061A736 /* ProjectsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605117802B7D1C880061A736 /* ProjectsTabView.swift */; };
+		605117832B7D1D3C0061A736 /* TimeRegistrationsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605117822B7D1D3C0061A736 /* TimeRegistrationsTab.swift */; };
+		605117852B7D3D240061A736 /* TimeRegistrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605117842B7D3D240061A736 /* TimeRegistrations.swift */; };
 		605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222532B54737600F603B8 /* TimeTrackerApp.swift */; };
 		605222562B54737600F603B8 /* ProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222552B54737600F603B8 /* ProjectList.swift */; };
 		605222582B54737800F603B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 605222572B54737800F603B8 /* Assets.xcassets */; };
@@ -35,6 +39,10 @@
 		602212362B74B35E00764678 /* ProjectPresentationDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresentationDetails.swift; sourceTree = "<group>"; };
 		602B6ED22B5710EE0006614A /* BottomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomInfo.swift; sourceTree = "<group>"; };
 		6041D7BA2B57036200C9668D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6051177E2B7D1B700061A736 /* TasksTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTab.swift; sourceTree = "<group>"; };
+		605117802B7D1C880061A736 /* ProjectsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTabView.swift; sourceTree = "<group>"; };
+		605117822B7D1D3C0061A736 /* TimeRegistrationsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRegistrationsTab.swift; sourceTree = "<group>"; };
+		605117842B7D3D240061A736 /* TimeRegistrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimeRegistrations.swift; path = TimeTracker/TimeRegistrations.swift; sourceTree = SOURCE_ROOT; };
 		605222502B54737600F603B8 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		605222532B54737600F603B8 /* TimeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerApp.swift; sourceTree = "<group>"; };
 		605222552B54737600F603B8 /* ProjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectList.swift; sourceTree = "<group>"; };
@@ -74,6 +82,16 @@
 				605222552B54737600F603B8 /* ProjectList.swift */,
 			);
 			path = Projects;
+			sourceTree = "<group>";
+		};
+		6051177D2B7D1B410061A736 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				6051177E2B7D1B700061A736 /* TasksTab.swift */,
+				605117802B7D1C880061A736 /* ProjectsTabView.swift */,
+				605117822B7D1D3C0061A736 /* TimeRegistrationsTab.swift */,
+			);
+			path = Tabs;
 			sourceTree = "<group>";
 		};
 		605222472B54737600F603B8 = {
@@ -127,10 +145,12 @@
 		605222682B5481E300F603B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6051177D2B7D1B410061A736 /* Tabs */,
 				60E9FC822B5D98E300A681CA /* Tasks */,
 				607842E72B5B201F00A78E8C /* Buttons */,
 				6041D7B92B57033100C9668D /* Projects */,
 				6041D7BA2B57036200C9668D /* ContentView.swift */,
+				605117842B7D3D240061A736 /* TimeRegistrations.swift */,
 				602B6ED22B5710EE0006614A /* BottomInfo.swift */,
 			);
 			path = Views;
@@ -252,12 +272,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				605117812B7D1C880061A736 /* ProjectsTabView.swift in Sources */,
 				605222622B5474B500F603B8 /* TimeRegistration.swift in Sources */,
 				60E9FC842B5D98FF00A681CA /* TaskListView.swift in Sources */,
 				605222562B54737600F603B8 /* ProjectList.swift in Sources */,
 				60D0C9362B61849C0091E6EC /* TTTextFieldStyle.swift in Sources */,
 				607842E42B5AF8FB00A78E8C /* TaskView.swift in Sources */,
+				605117852B7D3D240061A736 /* TimeRegistrations.swift in Sources */,
 				605222672B547BF800F603B8 /* Task.swift in Sources */,
+				605117832B7D1D3C0061A736 /* TimeRegistrationsTab.swift in Sources */,
+				6051177F2B7D1B700061A736 /* TasksTab.swift in Sources */,
 				602212372B74B35E00764678 /* ProjectPresentationDetails.swift in Sources */,
 				605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */,
 				60BEB1052B5596F000814BF0 /* ProjectDetails.swift in Sources */,
