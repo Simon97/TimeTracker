@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-@Observable
+@Model
 class TimeRegistrations {
     var timeRegistrations: [TimeRegistration]
     

@@ -21,8 +21,6 @@ struct ContentView: View {
     
     @State private var selection: Tab = .favorites
     
-    @Query var timeRegistrations: [TimeRegistration]
-    
     @Query(filter: #Predicate<Project> { project in
         project.isOutermostProject
     }) var projects: [Project]
@@ -35,11 +33,19 @@ struct ContentView: View {
         return tasks
     }
     
+    private var registrations: [TimeRegistration] {
+        var registrations = [TimeRegistration]()
+        for task in tasks {
+            registrations.append(contentsOf: task.timeRegistrations)
+        }
+        return registrations
+    }
+    
     var body: some View {
         TabView(selection: $selection) {
             TasksTab(tasks: tasks)
             ProjectTabView(projects: projects)
-            TimeRegistrationsTab(timeRegistrations: timeRegistrations)
+            TimeRegistrationsTab(timeRegistrations: registrations)
         }
         .onAppear {
             /**

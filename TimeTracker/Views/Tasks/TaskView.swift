@@ -21,7 +21,6 @@ struct TaskView: View {
                 task: task
             )
             task.timeRegistrations.append(timeRegistration)
-            print("Time-registration was added")
         }) {
             HStack {
                 FavoriteButton(isFavourite: $task.isFavorite)

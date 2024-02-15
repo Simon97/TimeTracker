@@ -35,17 +35,16 @@ struct TaskListView: View {
                 }
             }
             .padding()
-        }
-        
-        if filteredTasks.isEmpty {
-            if showFavoritesOnly {
-                Text("No favorites")
-            } else {
-                Text("No tasks")
+            
+            if filteredTasks.isEmpty {
+                if showFavoritesOnly {
+                    Text("No favorites")
+                } else {
+                    Text("No tasks")
+                }
             }
             
         }
-        
     }
 }
 
