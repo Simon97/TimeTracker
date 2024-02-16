@@ -10,6 +10,7 @@ import SwiftUI
 struct TasksTab: View {
     
     var tasks: [Task]
+    var timeRegistrations: [TimeRegistration]
     
     var body: some View {
         NavigationStack {
@@ -17,7 +18,7 @@ struct TasksTab: View {
                 TaskListView(tasks: tasks)
                 
                 BottomInfo(
-                    currentProject: "Some project",
+                    timeRegistrations: timeRegistrations,
                     secondsSpendTotalToday: 60 * 60 * 2 + 125,
                     secondsSpendOnCurrentProjectTotalToday: 60 * 60 * 3
                 )
@@ -33,5 +34,5 @@ struct TasksTab: View {
 
 #Preview {
     // TODO: Add content to show
-    TasksTab(tasks: [])
+    TasksTab(tasks: [], timeRegistrations: [])
 }

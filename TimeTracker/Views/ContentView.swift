@@ -43,7 +43,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            TasksTab(tasks: tasks)
+            TasksTab(tasks: tasks, timeRegistrations: registrations)
             ProjectTabView(projects: projects)
             TimeRegistrationsTab(timeRegistrations: registrations)
         }

@@ -9,12 +9,28 @@ import SwiftUI
 
 struct BottomInfo: View {
     
-    let currentProject: String
+    var timeRegistrations: [TimeRegistration]
+    
+    var currentTask: Task {
+        var registrationsCopy = timeRegistrations
+        print(registrationsCopy.count)
+        
+        registrationsCopy.sort(by: { a, b in
+            a.startTime.compare(b.startTime) == .orderedDescending
+        })
+        let returnTask = registrationsCopy.first?.task ?? .noTask()
+        print(returnTask.name)
+        return returnTask
+    }
+    
+    var currentProject: Project {
+        return currentTask.project ?? Project("", isMainProject: false, isCollapsed: false)
+    }
     
     // TODO: These should be used to show timer value
     let secondsSpendTotalToday: Int
     let secondsSpendOnCurrentProjectTotalToday: Int
-        
+    
     var timeUsedOnProject: Date {
         getStartDateForTimer(amountOfSeconds: secondsSpendOnCurrentProjectTotalToday)
     }
@@ -25,7 +41,7 @@ struct BottomInfo: View {
     
     var body: some View {
         VStack {
-            Text(currentProject)
+            Text(currentTask.name)
             Text(timeUsedOnProject, style: .timer)
             Text(timeUsedToday, style: .timer)
         }
@@ -46,7 +62,7 @@ struct BottomInfo: View {
 
 #Preview {
     BottomInfo(
-        currentProject: "Current project",
+        timeRegistrations: [],
         secondsSpendTotalToday: 31500,
         secondsSpendOnCurrentProjectTotalToday: 9000
     )

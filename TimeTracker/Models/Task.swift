@@ -24,4 +24,8 @@ class Task {
         self.isFavorite = isFavorite
         self.timeRegistrations = []
     }
+    
+    static public func noTask() -> Task {
+        return Task("No task", isFavorite: false)
+    }
 }
