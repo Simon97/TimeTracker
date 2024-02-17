@@ -38,6 +38,7 @@ struct ContentView: View {
         for task in tasks {
             registrations.append(contentsOf: task.timeRegistrations)
         }
+        TimeRegistrationController().sortByDate(&registrations)
         return registrations
     }
     

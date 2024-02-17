@@ -17,11 +17,7 @@ struct TasksTab: View {
             VStack {
                 TaskListView(tasks: tasks)
                 
-                BottomInfo(
-                    timeRegistrations: timeRegistrations,
-                    secondsSpendTotalToday: 60 * 60 * 2 + 125,
-                    secondsSpendOnCurrentProjectTotalToday: 60 * 60 * 3
-                )
+                BottomInfo(timeRegistrations: timeRegistrations)
             }
             .navigationTitle("Tasks")
         }

@@ -9,34 +9,28 @@ import SwiftUI
 
 struct BottomInfo: View {
     
+    // TODO: Experiment with how to move the logic to another file
+    
     var timeRegistrations: [TimeRegistration]
     
+    var lastTimeRegistration: TimeRegistration {
+        return timeRegistrations.first ?? TimeRegistration(startTime: .now, endTime: .now, task: .noTask())
+    }
+    
     var currentTask: Task {
-        var registrationsCopy = timeRegistrations
-        print(registrationsCopy.count)
-        
-        registrationsCopy.sort(by: { a, b in
-            a.startTime.compare(b.startTime) == .orderedDescending
-        })
-        let returnTask = registrationsCopy.first?.task ?? .noTask()
-        print(returnTask.name)
-        return returnTask
+        return timeRegistrations.first?.task ?? .noTask()
     }
     
     var currentProject: Project {
         return currentTask.project ?? Project("", isMainProject: false, isCollapsed: false)
     }
     
-    // TODO: These should be used to show timer value
-    let secondsSpendTotalToday: Int
-    let secondsSpendOnCurrentProjectTotalToday: Int
-    
     var timeUsedOnProject: Date {
-        getStartDateForTimer(amountOfSeconds: secondsSpendOnCurrentProjectTotalToday)
+        getStartDateForTimer(amountOfSeconds: 0)
     }
     
     var timeUsedToday: Date {
-        getStartDateForTimer(amountOfSeconds: secondsSpendTotalToday)
+        getStartDateForTimer(amountOfSeconds: 0)
     }
     
     var body: some View {
@@ -61,9 +55,5 @@ struct BottomInfo: View {
 }
 
 #Preview {
-    BottomInfo(
-        timeRegistrations: [],
-        secondsSpendTotalToday: 31500,
-        secondsSpendOnCurrentProjectTotalToday: 9000
-    )
+    BottomInfo(timeRegistrations: [])
 }
