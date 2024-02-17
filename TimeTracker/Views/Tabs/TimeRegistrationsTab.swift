@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct TimeRegistrationsTab: View {
-    
-    // @Environment(TimeRegistrations.self) var timeRegistrationsWrapper
-    
-    var timeRegistrations: [TimeRegistration]
+        
+    var timeRegistrations: TimeRegistrationsViewModel
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    ForEach(timeRegistrations) { registration in
+                    ForEach(timeRegistrations.registrations) { registration in
                         HStack {
                             Text(registration.task.name)
                             Text(registration.task.project?.name ?? "")
@@ -40,5 +38,5 @@ struct TimeRegistrationsTab: View {
 }
 
 #Preview {
-    TimeRegistrationsTab(timeRegistrations: [])
+    TimeRegistrationsTab(timeRegistrations: TimeRegistrationsViewModel(registrations: []))
 }

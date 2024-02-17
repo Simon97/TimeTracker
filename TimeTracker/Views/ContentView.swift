@@ -33,13 +33,13 @@ struct ContentView: View {
         return tasks
     }
     
-    private var registrations: [TimeRegistration] {
+    private var registrations: TimeRegistrationsViewModel {
         var registrations = [TimeRegistration]()
         for task in tasks {
             registrations.append(contentsOf: task.timeRegistrations)
         }
         TimeRegistrationController().sortByDate(&registrations)
-        return registrations
+        return TimeRegistrationsViewModel(registrations: registrations)
     }
     
     var body: some View {
@@ -57,6 +57,19 @@ struct ContentView: View {
                 addDemoProject()
                 hasBeenOpenedBefore = true
             }
+            
+            /**
+             This code is from https://www.hackingwithswift.com/forums/ios/tab-bar-transparent/10549
+             Used to make the tabbar not transparent
+             */
+            // correct the transparency bug for Tab bars
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            // correct the transparency bug for Navigation bars
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
         }
     }
     

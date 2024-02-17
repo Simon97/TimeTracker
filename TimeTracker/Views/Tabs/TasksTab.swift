@@ -10,13 +10,12 @@ import SwiftUI
 struct TasksTab: View {
     
     var tasks: [Task]
-    var timeRegistrations: [TimeRegistration]
+    var timeRegistrations: TimeRegistrationsViewModel
     
     var body: some View {
         NavigationStack {
             VStack {
                 TaskListView(tasks: tasks)
-                
                 BottomInfo(timeRegistrations: timeRegistrations)
             }
             .navigationTitle("Tasks")
@@ -30,5 +29,5 @@ struct TasksTab: View {
 
 #Preview {
     // TODO: Add content to show
-    TasksTab(tasks: [], timeRegistrations: [])
+    TasksTab(tasks: [], timeRegistrations: TimeRegistrationsViewModel(registrations: []))
 }

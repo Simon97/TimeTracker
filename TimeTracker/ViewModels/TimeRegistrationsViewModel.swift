@@ -14,10 +14,11 @@ import SwiftData
  to (for example) the BottomInfoView
  */
 
-@Observable
-class TimeRegistrationViewModel {
-    let controller = TimeRegistrationController()
+@Observable // Not sure if this needs to be an Observable, but it would make sense if it is required to make the views update when the list of regisrations is sorted
+class TimeRegistrationsViewModel {
+    
     var registrations: [TimeRegistration]
+    let controller = TimeRegistrationController()
     
     init(registrations: [TimeRegistration]) {
         self.registrations = registrations
@@ -26,4 +27,6 @@ class TimeRegistrationViewModel {
     func sort() {
         controller.sortByDate(&registrations)
     }
+    
+    // private func startTimeForProject
 }

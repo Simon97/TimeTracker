@@ -9,16 +9,15 @@ import SwiftUI
 
 struct BottomInfo: View {
     
-    // TODO: Experiment with how to move the logic to another file
     
-    var timeRegistrations: [TimeRegistration]
+    var timeRegistrations: TimeRegistrationsViewModel
     
     var lastTimeRegistration: TimeRegistration {
-        return timeRegistrations.first ?? TimeRegistration(startTime: .now, endTime: .now, task: .noTask())
+        return timeRegistrations.registrations.first ?? TimeRegistration(startTime: .now, endTime: .now, task: .noTask())
     }
     
     var currentTask: Task {
-        return timeRegistrations.first?.task ?? .noTask()
+        return timeRegistrations.registrations.first?.task ?? .noTask()
     }
     
     var currentProject: Project {
@@ -34,12 +33,25 @@ struct BottomInfo: View {
     }
     
     var body: some View {
-        VStack {
+        HStack {
             Text(currentTask.name)
-            Text(timeUsedOnProject, style: .timer)
-            Text(timeUsedToday, style: .timer)
+                .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
+            Spacer()
+            HStack {
+                VStack {
+                    Text(timeUsedOnProject, style: .timer)
+                    Text(timeUsedToday, style: .timer)
+                }
+            
+                PlayPauseButton(state: .playing, action: {})
+                    .frame(width: 42)
+                    .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+            }
         }
+        .frame(maxWidth: .infinity)
+        .background(.teal)
     }
+    
     
     // TODO: Move this function to another file
     func getStartDateForTimer(amountOfSeconds: Int) -> Date {
@@ -55,5 +67,5 @@ struct BottomInfo: View {
 }
 
 #Preview {
-    BottomInfo(timeRegistrations: [])
+    BottomInfo(timeRegistrations: TimeRegistrationsViewModel(registrations: []))
 }

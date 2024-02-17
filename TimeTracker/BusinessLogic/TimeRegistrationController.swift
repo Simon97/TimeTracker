@@ -12,8 +12,8 @@ import Foundation
 class TimeRegistrationController {
     
     func sortByDate(_ timeRegistrations: inout [TimeRegistration]) {
-        timeRegistrations.sort(by: { a, b in
-            a.startTime.compare(b.startTime) == .orderedDescending
+        timeRegistrations.sort(by: { r1, r2 in
+            r1.startTime.compare(r2.startTime) == .orderedDescending
         })
     }
     
