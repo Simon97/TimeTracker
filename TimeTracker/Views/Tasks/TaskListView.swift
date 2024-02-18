@@ -11,6 +11,8 @@ import SwiftUI
 struct TaskListView: View {
     
     var tasks: [Task]
+    var timeRegistrations: TimeRegistrationsViewModel
+    
     @State private var showFavoritesOnly: Bool = false
     
     var filteredTasks: [Task] {
@@ -27,7 +29,7 @@ struct TaskListView: View {
                 }
                 
                 ForEach(filteredTasks) { task in
-                    TaskView(task: task, showProjectName: true)
+                    TaskView(isTaskSelector: true, task: task, timeRegistrations: timeRegistrations, showProjectName: true)
                     if filteredTasks.last != task {
                         Divider()
                             .padding(4)
@@ -49,8 +51,11 @@ struct TaskListView: View {
 }
 
 #Preview {
-    TaskListView(tasks: [
-        Task("Task", isFavorite: true),
-        Task("Task", isFavorite: true),
-    ])
+    TaskListView(
+        tasks: [
+            Task("Task", isFavorite: true),
+            Task("Task", isFavorite: true)
+        ],
+        timeRegistrations: TimeRegistrationsViewModel(registrations: [])
+    )
 }

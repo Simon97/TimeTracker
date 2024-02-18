@@ -11,13 +11,12 @@ import SwiftData
 @Model
 class TimeRegistration {
     var startTime: Date
-    var endTime: Date
+    var endTime: Date?
     
     var task: Task
     
-    init(startTime: Date, endTime: Date, task: Task) {
+    init(startTime: Date, task: Task) {
         self.startTime = startTime
-        self.endTime = endTime
         self.task = task
     }
 }

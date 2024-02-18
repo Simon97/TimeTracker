@@ -9,36 +9,56 @@ import SwiftUI
 
 struct TaskView: View {
     
+    /**
+     This specifies if the taskview should create new time-registrations or not
+     */
+    var isTaskSelector: Bool
+    
     @Bindable var task: Task
+    var timeRegistrations: TimeRegistrationsViewModel?
+    
     let showProjectName: Bool
     let selected: Bool = true
     
     var body: some View {
-        Button(action: {
-            let timeRegistration = TimeRegistration(
-                startTime: .now,
-                endTime: .now,
-                task: task
-            )
-            task.timeRegistrations.append(timeRegistration)
-        }) {
-            HStack {
-                FavoriteButton(isFavourite: $task.isFavorite)
-                HStack(spacing: 8) {
-                    Text(task.name)
-                    if (showProjectName) {
-                        Spacer()
-                        Text("(" + (task.project?.name ?? "") + ")")
-                    } else {
-                        Spacer()
-                    }
-                }
-                .frame(maxWidth: .infinity)
+        if !isTaskSelector {
+            content
+        } else {
+            Button(action: {
+                let timeRegistration = TimeRegistration(
+                    startTime: .now,
+                    task: task
+                )
+                timeRegistrations?.currentTimeRegistration?.endTime = .now
+                task.timeRegistrations.append(timeRegistration)
+            }) {
+                content
             }
+            .buttonStyle(.plain)
+        }
+    }
+    
+    var content: some View {
+        HStack {
+            FavoriteButton(isFavourite: $task.isFavorite)
+            HStack(spacing: 8) {
+                Text(task.name)
+                if (showProjectName) {
+                    Spacer()
+                    Text("(" + (task.project?.name ?? "") + ")")
+                } else {
+                    Spacer()
+                }
+            }
+            .frame(maxWidth: .infinity)
         }
     }
 }
 
 #Preview {
-    TaskView(task: Task("Task name", isFavorite: true), showProjectName: true)
+    TaskView(
+        isTaskSelector: true, task: Task("Task name", isFavorite: true),
+        timeRegistrations: TimeRegistrationsViewModel(registrations: []),
+        showProjectName: true
+    )
 }

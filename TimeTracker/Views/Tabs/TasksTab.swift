@@ -15,7 +15,8 @@ struct TasksTab: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TaskListView(tasks: tasks)
+                TaskListView(tasks: tasks, timeRegistrations: timeRegistrations)
+                Divider()
                 BottomInfo(timeRegistrations: timeRegistrations)
             }
             .navigationTitle("Tasks")

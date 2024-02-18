@@ -29,7 +29,7 @@ struct ProjectDetails: View {
                     // The HStack and Spacer is needed to make the
                     // text be aligned even when no sub-projects are
                     // available
-                    TaskView(task: task, showProjectName: false)
+                    TaskView(isTaskSelector: false, task: task, showProjectName: false)
                     Spacer()
                 }
             }

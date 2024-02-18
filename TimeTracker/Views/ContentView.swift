@@ -48,6 +48,8 @@ struct ContentView: View {
             ProjectTabView(projects: projects)
             TimeRegistrationsTab(timeRegistrations: registrations)
         }
+        
+        .background(.black)
         .onAppear {
             /**
              The first time the app is opened, we add and show a demo project in the projects tab
@@ -62,6 +64,7 @@ struct ContentView: View {
              This code is from https://www.hackingwithswift.com/forums/ios/tab-bar-transparent/10549
              Used to make the tabbar not transparent
              */
+            /*
             // correct the transparency bug for Tab bars
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithOpaqueBackground()
@@ -70,6 +73,7 @@ struct ContentView: View {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            */
         }
     }
     

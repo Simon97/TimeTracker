@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeRegistrationsTab: View {
-        
+    
     var timeRegistrations: TimeRegistrationsViewModel
     
     var body: some View {
@@ -16,17 +16,11 @@ struct TimeRegistrationsTab: View {
             ScrollView {
                 VStack {
                     ForEach(timeRegistrations.registrations) { registration in
-                        HStack {
-                            Text(registration.task.name)
-                            Text(registration.task.project?.name ?? "")
-                            Text(String(
-                                registration.startTime.timeIntervalSince1970
-                            ))
-                        }
-                        .padding(12)
+                        TimeRegistrationView(timeRegistration: registration)
+                            .padding(EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24))
+                        Divider()
                     }
                 }
-                .padding()
             }
             .navigationTitle("Time Registrations")
         }
