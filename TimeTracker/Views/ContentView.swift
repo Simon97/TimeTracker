@@ -46,7 +46,7 @@ struct ContentView: View {
         TabView(selection: $selection) {
             TasksTab(tasks: tasks, timeRegistrations: registrations)
             ProjectTabView(projects: projects)
-            TimeRegistrationsTab(timeRegistrations: registrations)
+            TimeRegistrationsTab(projects: projects, timeRegistrations: registrations)
         }
         
         .background(.black)

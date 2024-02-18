@@ -28,9 +28,10 @@ struct TaskView: View {
                     startTime: .now,
                     task: task
                 )
-                task.timeRegistrations.first?.endTime = .now
+                timeRegistrations?.currentTimeRegistration?.endTime = .now
                 task.timeRegistrations.append(timeRegistration)
-            }) {content}
+            })
+            {content}
                 .buttonStyle(.plain)
         }
     }
@@ -49,7 +50,9 @@ struct TaskView: View {
             }
             .frame(maxWidth: .infinity)
         }
+        .padding(EdgeInsets(top: 8, leading: 4, bottom: 8, trailing: 4))
         .background(timeRegistrations?.currentTask == task ? Color.orange : Color.clear)
+        .cornerRadius(10)
     }
 }
 

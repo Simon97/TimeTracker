@@ -34,9 +34,13 @@ class TimeRegistrationsViewModel {
     
     var timeSpendOnTaskToday: TimeInterval {
         if let currentTask = currentTask {
-            return controller.timeSpendOnTaskonDate(registrations, task: currentTask, date: .now)
+            return timeSpendOnGivenTaskToday(task: currentTask)
         }
         return 0.0
+    }
+    
+    func timeSpendOnGivenTaskToday(task: Task) -> TimeInterval {
+        return controller.timeSpendOnTaskonDate(registrations, task: task, date: .now)
     }
     
     func isCurrentTask(task: Task) -> Bool? {

@@ -30,7 +30,8 @@ struct EditProjectView: View {
                     
                     TextField(
                         "Project title",
-                        text: $project.name
+                        text: $project.name,
+                        axis: .vertical
                     )
                     .ttTextStyle()
                     .focused($nameFocus)
@@ -59,7 +60,8 @@ struct EditProjectView: View {
                         HStack {
                             TextField(
                                 "Task name",
-                                text: $task.name
+                                text: $task.name,
+                                axis: .vertical
                             )
                             .ttTextStyle()
 

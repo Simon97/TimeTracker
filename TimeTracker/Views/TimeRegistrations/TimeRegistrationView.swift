@@ -13,16 +13,22 @@ struct TimeRegistrationView: View {
     
     var body: some View {
         HStack {
-            VStack {
+            VStack(alignment: .leading) {
                 Text("Task: \(timeRegistration.task.name)")
                 Text("Project: \(timeRegistration.task.project?.name ?? "")")
             }
             Spacer()
             VStack {
+                HStack(alignment: .firstTextBaseline) {
+                Text("Start:")
                 Text(timeRegistration.startTime, style: .time)
+                }
                 if timeRegistration.endTime != nil {
                     let endTime: Date = timeRegistration.endTime!
-                    Text(endTime, style: .time)
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("End:")
+                        Text(endTime, style: .time)
+                    }
                 }
             }
         }

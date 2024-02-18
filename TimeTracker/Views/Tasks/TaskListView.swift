@@ -13,18 +13,18 @@ struct TaskListView: View {
     var tasks: [Task]
     var timeRegistrations: TimeRegistrationsViewModel
     
-    @State private var showFavoritesOnly: Bool = false
-    
+    @AppStorage("onlyFavorites") private var onlyFavorites = false
+        
     var filteredTasks: [Task] {
         tasks.filter { task in
-            (!showFavoritesOnly || task.isFavorite)
+            (!onlyFavorites || task.isFavorite)
         }
     }
     
     var body: some View {
         ScrollView {
             VStack {
-                Toggle(isOn: $showFavoritesOnly) {
+                Toggle(isOn: $onlyFavorites) {
                     Text("Favorites only")
                 }
                 
@@ -39,7 +39,7 @@ struct TaskListView: View {
             .padding()
             
             if filteredTasks.isEmpty {
-                if showFavoritesOnly {
+                if onlyFavorites {
                     Text("No favorites")
                 } else {
                     Text("No tasks")
