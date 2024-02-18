@@ -59,21 +59,6 @@ struct ContentView: View {
                 addDemoProject()
                 hasBeenOpenedBefore = true
             }
-            
-            /**
-             This code is from https://www.hackingwithswift.com/forums/ios/tab-bar-transparent/10549
-             Used to make the tabbar not transparent
-             */
-            /*
-            // correct the transparency bug for Tab bars
-            let tabBarAppearance = UITabBarAppearance()
-            tabBarAppearance.configureWithOpaqueBackground()
-            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-            // correct the transparency bug for Navigation bars
-            let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithOpaqueBackground()
-            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-            */
         }
     }
     

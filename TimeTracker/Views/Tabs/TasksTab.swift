@@ -18,6 +18,7 @@ struct TasksTab: View {
                 TaskListView(tasks: tasks, timeRegistrations: timeRegistrations)
                 Divider()
                 BottomInfo(timeRegistrations: timeRegistrations)
+                Divider()
             }
             .navigationTitle("Tasks")
         }

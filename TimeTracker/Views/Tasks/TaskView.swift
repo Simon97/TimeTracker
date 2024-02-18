@@ -18,7 +18,6 @@ struct TaskView: View {
     var timeRegistrations: TimeRegistrationsViewModel?
     
     let showProjectName: Bool
-    let selected: Bool = true
     
     var body: some View {
         if !isTaskSelector {
@@ -29,12 +28,10 @@ struct TaskView: View {
                     startTime: .now,
                     task: task
                 )
-                timeRegistrations?.currentTimeRegistration?.endTime = .now
+                task.timeRegistrations.first?.endTime = .now
                 task.timeRegistrations.append(timeRegistration)
-            }) {
-                content
-            }
-            .buttonStyle(.plain)
+            }) {content}
+                .buttonStyle(.plain)
         }
     }
     
@@ -52,6 +49,7 @@ struct TaskView: View {
             }
             .frame(maxWidth: .infinity)
         }
+        .background(timeRegistrations?.currentTask == task ? Color.orange : Color.clear)
     }
 }
 
