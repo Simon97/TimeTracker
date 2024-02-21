@@ -14,7 +14,7 @@ struct TaskListView: View {
     var timeRegistrations: TimeRegistrationsViewModel
     
     @AppStorage("onlyFavorites") private var onlyFavorites = false
-        
+    
     var filteredTasks: [Task] {
         tasks.filter { task in
             (!onlyFavorites || task.isFavorite)
@@ -29,7 +29,12 @@ struct TaskListView: View {
                 }
                 
                 ForEach(filteredTasks) { task in
-                    TaskView(isTaskSelector: true, task: task, timeRegistrations: timeRegistrations, showProjectName: true)
+                    TaskView(
+                        isTaskSelector: true,
+                        task: task,
+                        timeRegistrations: timeRegistrations,
+                        showProjectName: true
+                    )
                     if filteredTasks.last != task {
                         Divider()
                             .padding(4)

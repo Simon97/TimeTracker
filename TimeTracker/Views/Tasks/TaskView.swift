@@ -10,7 +10,7 @@ import SwiftUI
 struct TaskView: View {
     
     /**
-     This specifies if the taskview should create new time-registrations or not
+     This specifies if the taskview should create new time-registrations or not, when tapped
      */
     var isTaskSelector: Bool
     
