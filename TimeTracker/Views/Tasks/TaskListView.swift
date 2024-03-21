@@ -59,7 +59,7 @@ struct TaskListView: View {
     TaskListView(
         tasks: [
             Task("Task", isFavorite: true),
-            Task("Task", isFavorite: true)
+            Task("Task", isFavorite: false)
         ],
         timeRegistrations: TimeRegistrationsViewModel(registrations: [])
     )
