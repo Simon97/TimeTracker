@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProjectList: View {
+struct ProjectWithTaskList: View {
     
     @Environment(\.modelContext) var modelContext
     
@@ -21,7 +21,7 @@ struct ProjectList: View {
         ScrollView {
             LazyVStack {
                 ForEach(projects) { project in
-                    ProjectView(project: project, subProjects: $projects, editModeEnabled: editModeEnabled)
+                    ProjectWithTasksView(project: project, subProjects: $projects, editModeEnabled: editModeEnabled)
                 }
             }
             .frame(maxHeight: .infinity, alignment: .top)
@@ -45,7 +45,7 @@ struct ProjectList: View {
 }
 
 #Preview {
-    ProjectList(projects: .constant([
+    ProjectWithTaskList(projects: .constant([
         ProjectWithTasks(
             "Preview Project",
             isMainProject: true, isCollapsed: false,

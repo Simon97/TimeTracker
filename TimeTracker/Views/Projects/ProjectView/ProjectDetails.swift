@@ -51,7 +51,7 @@ struct ProjectDetails: View {
                 }
             }
             ForEach(project.subProjects, id: \.self.name) { project in
-                ProjectView(project: project, subProjects: $project.subProjects, editModeEnabled: editModeEnabled)
+                ProjectWithTasksView(project: project, subProjects: $project.subProjects, editModeEnabled: editModeEnabled)
                     .padding(EdgeInsets(top: 0, leading: 18, bottom: 0, trailing: 0))
             }
             

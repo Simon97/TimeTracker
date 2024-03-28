@@ -14,7 +14,7 @@ struct ProjectTabView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                ProjectList(projects: .constant(projects))
+                ProjectWithTaskList(projects: .constant(projects))
             }
             .navigationTitle("Projects")
         }

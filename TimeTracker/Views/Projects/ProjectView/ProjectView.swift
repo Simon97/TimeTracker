@@ -1,103 +1,74 @@
 //
-//  ProjectList.swift
+//  ProjectTreeView.swift
 //  TimeTracker
 //
-//  Created by Simon Svendsgaard Nielsen on 14/01/2024.
+//  Created by Simon Svendsgaard Nielsen on 28/03/2024.
 //
 
 import SwiftUI
 
 struct ProjectView: View {
     
-    @Environment(\.modelContext) var modelContext
-    @Bindable var project: ProjectWithTasks
-    @Binding var subProjects: [ProjectWithTasks]
-    
-    var editModeEnabled: Bool
-    @State private var showEditingView = false
-    @State private var showDeleteAlert = false
+    @Bindable var project: Project
     
     var body: some View {
-        VStack {
-            @Bindable var isCollapsedBinding =
-            (project.presentationDetails ?? ProjectPresentationDetails(isCollapsed: false))
-            
+        @Bindable var isCollapsedBinding = (
+            project.presentationDetails ??
+            ProjectPresentationDetails(isCollapsed: false)
+        )
+        
+        VStack(alignment: .leading) {
             HStack {
                 Text(project.name)
                     .font(.title)
                 
                 Spacer()
                 
-                if editModeEnabled {
-                    HStack(spacing: 12) {
-                        EditButton(action: {
-                            showEditingView.toggle()
-                        })
-                        DeleteButton(action: {
-                            showDeleteAlert = true
-                        })
-                    }
-                    .alert("This will delete the project and all associated tasks and sub-projects",
-                           isPresented: $showDeleteAlert) {
-                        Button("Delete", role: .destructive) {
-                            if project.isOutermostProject {
-                                modelContext.delete(project)
-                                // TODO: Do proper error handling ...
-                                try? modelContext.save()
-                            } else {
-                                var indexToRemove: Int? {
-                                    subProjects.firstIndex(where: { p in
-                                        p.uuid == project.uuid
-                                    })
-                                }
-                                if let index = indexToRemove {
-                                    subProjects.remove(at: index)
-                                }
-                            }
-                        }
-                    }
-                           .sheet(isPresented: $showEditingView) {
-                               EditProjectView(project: project, type: .exsitingProject)
-                           }
-                } else {
+                if !project.subProjects.isEmpty {
                     CollapseSwitch(isCollapsed: $isCollapsedBinding.isCollapsed)
                 }
             }
+            
             if !isCollapsedBinding.isCollapsed {
-                ProjectDetails(project: project, editModeEnabled: editModeEnabled)
+                ForEach($project.subProjects, id: \.uuid) { $subProject in
+                    ProjectView(project: subProject)
+                        .padding(.leading)
+                }
             }
             
         }
-        .frame(maxHeight: .infinity, alignment: .top)
     }
 }
 
-#Preview {
+#Preview("Collapsed", traits: .sizeThatFitsLayout) {
     ProjectView(
-        project: ProjectWithTasks(
-            "Preview Project",
-            isMainProject: true, isCollapsed: false,
-            subProjects: [
-                ProjectWithTasks(
-                    "Sub project",
-                    isMainProject: false, isCollapsed: false,
-                    subProjects: [
-                        ProjectWithTasks(
-                            "Sub sub project",
-                            isMainProject: false, isCollapsed: false,
-                            subProjects: [],
-                            tasks: [
-                                Task("sub sub project task 1", isFavorite: false)
-                            ]
-                        )],
-                    tasks: [
-                        Task("sub project task 1", isFavorite: false)
-                    ]
-                )
-            ],
-            tasks: [
-                Task("task 1", isFavorite: false),
-                Task("task 2", isFavorite: false)
-            ]
-        ), subProjects: .constant([]), editModeEnabled: false)
+        project:
+            Project("Project 1", parent: nil,
+                    children: [
+                        Project(
+                            "Sub-project",
+                            parent: nil,
+                            children: [],
+                            isCollapsed: true
+                        )
+                    ],
+                    isCollapsed: true)
+    )
+}
+
+
+#Preview("Non-collapsed", traits: .sizeThatFitsLayout) {
+    ProjectView(
+        project:
+            Project("Project 1", parent: nil,
+                    children: [
+                        Project(
+                            "Sub-project",
+                            parent: nil,
+                            children: [],
+                            isCollapsed: false
+                        )
+                    ],
+                    isCollapsed: false)
+    )
 }

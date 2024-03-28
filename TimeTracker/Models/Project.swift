@@ -6,29 +6,29 @@
 //
 
 import Foundation
+import Observation
 import SwiftData
 
-@Model
+@Observable
 class Project {
-    
     @Attribute(.unique)
     var uuid: UUID
     
     var name: String
     
-    var parent: Project
+    var parent: Project?
     
     @Relationship(deleteRule: .cascade, inverse: \ProjectWithTasks.parent)
-    var children: [Project]
+    var subProjects: [Project]
     
     var presentationDetails: ProjectPresentationDetails?
     
-    init(_ name: String, parent: Project, children: [Project], presentationDetails: ProjectPresentationDetails? = nil) {
+    init(_ name: String, parent: Project?, children: [Project], isCollapsed: Bool?) {
         self.uuid = UUID()
         self.name = name
         self.parent = parent
-        self.children = children
-        self.presentationDetails = presentationDetails
+        self.subProjects = children
+        self.presentationDetails = ProjectPresentationDetails(isCollapsed: isCollapsed ?? false)
     }
 }
 

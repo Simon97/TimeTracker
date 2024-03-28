@@ -19,18 +19,20 @@
 		6051178C2B80AEE40061A736 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051178B2B80AEE40061A736 /* PlayPauseButton.swift */; };
 		6051178F2B8109D10061A736 /* TimeRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051178E2B8109D10061A736 /* TimeRegistrationView.swift */; };
 		605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222532B54737600F603B8 /* TimeTrackerApp.swift */; };
-		605222562B54737600F603B8 /* ProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222552B54737600F603B8 /* ProjectList.swift */; };
+		605222562B54737600F603B8 /* ProjectWithTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222552B54737600F603B8 /* ProjectWithTaskList.swift */; };
 		605222582B54737800F603B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 605222572B54737800F603B8 /* Assets.xcassets */; };
 		6052225B2B54737800F603B8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6052225A2B54737800F603B8 /* Preview Assets.xcassets */; };
 		605222622B5474B500F603B8 /* TimeRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222612B5474B500F603B8 /* TimeRegistration.swift */; };
-		605222652B54769400F603B8 /* ProjectWithTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222642B54769400F603B8 /* ProjectWithTasks.swift */; };
+		605222652B54769400F603B8 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222642B54769400F603B8 /* Project.swift */; };
 		605222672B547BF800F603B8 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222662B547BF800F603B8 /* Task.swift */; };
-		6052226A2B54820300F603B8 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222692B54820300F603B8 /* ProjectView.swift */; };
+		6052226A2B54820300F603B8 /* ProjectWithTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222692B54820300F603B8 /* ProjectWithTasksView.swift */; };
 		6052226C2B54845800F603B8 /* CollapseSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6052226B2B54845800F603B8 /* CollapseSwitch.swift */; };
 		607842E42B5AF8FB00A78E8C /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E32B5AF8FB00A78E8C /* TaskView.swift */; };
 		607842E62B5B1F8700A78E8C /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E52B5B1F8700A78E8C /* FavoriteButton.swift */; };
 		607842E92B5B204100A78E8C /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E82B5B204100A78E8C /* ToggleView.swift */; };
 		60BEB1052B5596F000814BF0 /* ProjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BEB1042B5596F000814BF0 /* ProjectDetails.swift */; };
+		60C34D3A2BB5BFDF00ADA95D /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D392BB5BFDF00ADA95D /* ProjectListView.swift */; };
+		60C34D3C2BB5DD2000ADA95D /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D3B2BB5DD2000ADA95D /* ProjectView.swift */; };
 		60D0C9362B61849C0091E6EC /* TTTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D0C9352B61849C0091E6EC /* TTTextFieldStyle.swift */; };
 		60D31DA02B603C8900532D40 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D31D9F2B603C8900532D40 /* EditButton.swift */; };
 		60D31DA62B60EBAA00532D40 /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D31DA52B60EBAA00532D40 /* EditProjectView.swift */; };
@@ -52,18 +54,20 @@
 		6051178E2B8109D10061A736 /* TimeRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRegistrationView.swift; sourceTree = "<group>"; };
 		605222502B54737600F603B8 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		605222532B54737600F603B8 /* TimeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerApp.swift; sourceTree = "<group>"; };
-		605222552B54737600F603B8 /* ProjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectList.swift; sourceTree = "<group>"; };
+		605222552B54737600F603B8 /* ProjectWithTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWithTaskList.swift; sourceTree = "<group>"; };
 		605222572B54737800F603B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6052225A2B54737800F603B8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		605222612B5474B500F603B8 /* TimeRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRegistration.swift; sourceTree = "<group>"; };
-		605222642B54769400F603B8 /* ProjectWithTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWithTasks.swift; sourceTree = "<group>"; };
+		605222642B54769400F603B8 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		605222662B547BF800F603B8 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		605222692B54820300F603B8 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		605222692B54820300F603B8 /* ProjectWithTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWithTasksView.swift; sourceTree = "<group>"; };
 		6052226B2B54845800F603B8 /* CollapseSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseSwitch.swift; sourceTree = "<group>"; };
 		607842E32B5AF8FB00A78E8C /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		607842E52B5B1F8700A78E8C /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		607842E82B5B204100A78E8C /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
 		60BEB1042B5596F000814BF0 /* ProjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetails.swift; sourceTree = "<group>"; };
+		60C34D392BB5BFDF00ADA95D /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
+		60C34D3B2BB5DD2000ADA95D /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		60D0C9352B61849C0091E6EC /* TTTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTTextFieldStyle.swift; sourceTree = "<group>"; };
 		60D31D9F2B603C8900532D40 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		60D31DA52B60EBAA00532D40 /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
@@ -86,7 +90,8 @@
 			children = (
 				60D31DA42B60EB8E00532D40 /* EditProject */,
 				60BEB1032B5592E000814BF0 /* ProjectView */,
-				605222552B54737600F603B8 /* ProjectList.swift */,
+				605222552B54737600F603B8 /* ProjectWithTaskList.swift */,
+				60C34D392BB5BFDF00ADA95D /* ProjectListView.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -168,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				605222612B5474B500F603B8 /* TimeRegistration.swift */,
-				605222642B54769400F603B8 /* ProjectWithTasks.swift */,
+				605222642B54769400F603B8 /* Project.swift */,
 				605222662B547BF800F603B8 /* Task.swift */,
 				602212362B74B35E00764678 /* ProjectPresentationDetails.swift */,
 				6051178A2B8099DA0061A736 /* README.md */,
@@ -206,8 +211,9 @@
 		60BEB1032B5592E000814BF0 /* ProjectView */ = {
 			isa = PBXGroup;
 			children = (
-				605222692B54820300F603B8 /* ProjectView.swift */,
+				605222692B54820300F603B8 /* ProjectWithTasksView.swift */,
 				60BEB1042B5596F000814BF0 /* ProjectDetails.swift */,
+				60C34D3B2BB5DD2000ADA95D /* ProjectView.swift */,
 			);
 			path = ProjectView;
 			sourceTree = "<group>";
@@ -310,13 +316,14 @@
 				605117812B7D1C880061A736 /* ProjectsTabView.swift in Sources */,
 				605222622B5474B500F603B8 /* TimeRegistration.swift in Sources */,
 				60E9FC842B5D98FF00A681CA /* TaskListView.swift in Sources */,
-				605222562B54737600F603B8 /* ProjectList.swift in Sources */,
+				605222562B54737600F603B8 /* ProjectWithTaskList.swift in Sources */,
 				60D0C9362B61849C0091E6EC /* TTTextFieldStyle.swift in Sources */,
 				607842E42B5AF8FB00A78E8C /* TaskView.swift in Sources */,
 				605117882B8098CB0061A736 /* TimeRegistrationController.swift in Sources */,
 				605117852B7D3D240061A736 /* TimeRegistrationsViewModel.swift in Sources */,
 				605222672B547BF800F603B8 /* Task.swift in Sources */,
 				605117832B7D1D3C0061A736 /* TimeRegistrationsTab.swift in Sources */,
+				60C34D3A2BB5BFDF00ADA95D /* ProjectListView.swift in Sources */,
 				6051177F2B7D1B700061A736 /* TasksTab.swift in Sources */,
 				602212372B74B35E00764678 /* ProjectPresentationDetails.swift in Sources */,
 				605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */,
@@ -324,13 +331,14 @@
 				60BEB1052B5596F000814BF0 /* ProjectDetails.swift in Sources */,
 				607842E92B5B204100A78E8C /* ToggleView.swift in Sources */,
 				60D31DA62B60EBAA00532D40 /* EditProjectView.swift in Sources */,
+				60C34D3C2BB5DD2000ADA95D /* ProjectView.swift in Sources */,
 				6041D7BB2B57036200C9668D /* ContentView.swift in Sources */,
 				602B6ED32B5710EE0006614A /* BottomInfo.swift in Sources */,
 				60D31DA02B603C8900532D40 /* EditButton.swift in Sources */,
-				605222652B54769400F603B8 /* ProjectWithTasks.swift in Sources */,
+				605222652B54769400F603B8 /* Project.swift in Sources */,
 				6000404C2B6E25680080FD2F /* DeleteButton.swift in Sources */,
 				6052226C2B54845800F603B8 /* CollapseSwitch.swift in Sources */,
-				6052226A2B54820300F603B8 /* ProjectView.swift in Sources */,
+				6052226A2B54820300F603B8 /* ProjectWithTasksView.swift in Sources */,
 				6051178F2B8109D10061A736 /* TimeRegistrationView.swift in Sources */,
 				607842E62B5B1F8700A78E8C /* FavoriteButton.swift in Sources */,
 			);
