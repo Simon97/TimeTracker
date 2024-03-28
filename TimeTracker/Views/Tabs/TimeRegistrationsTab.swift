@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TimeRegistrationsTab: View {
     
-    var projects: [Project]
+    var projects: [ProjectWithTasks]
     var timeRegistrations: TimeRegistrationsViewModel
     
     var body: some View {

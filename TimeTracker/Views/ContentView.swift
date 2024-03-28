@@ -21,9 +21,9 @@ struct ContentView: View {
     
     @State private var selection: Tab = .favorites
     
-    @Query(filter: #Predicate<Project> { project in
+    @Query(filter: #Predicate<ProjectWithTasks> { project in
         project.isOutermostProject
-    }) var projects: [Project]
+    }) var projects: [ProjectWithTasks]
     
     private var tasks: [Task] {
         var tasks = [Task]()
@@ -63,16 +63,16 @@ struct ContentView: View {
     }
     
     func addDemoProject() {
-        let project = Project(
+        let project = ProjectWithTasks(
             "Preview Project",
             isMainProject: true, isCollapsed: false,
             subProjects: [
-                Project(
+                ProjectWithTasks(
                     "Sub project",
                     isMainProject: false,
                     isCollapsed: false,
                     subProjects: [
-                        Project(
+                        ProjectWithTasks(
                             "Sub sub project",
                             isMainProject: false,
                             isCollapsed: false,

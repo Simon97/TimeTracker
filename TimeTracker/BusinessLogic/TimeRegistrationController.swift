@@ -24,7 +24,7 @@ class TimeRegistrationController {
         currentTimeRegistration(&timeRegistrations)?.task
     }
     
-    func currentProject(_ timeRegistrations: inout [TimeRegistration]) -> Project? {
+    func currentProject(_ timeRegistrations: inout [TimeRegistration]) -> ProjectWithTasks? {
         currentTimeRegistration(&timeRegistrations)?.task.project
     }
     

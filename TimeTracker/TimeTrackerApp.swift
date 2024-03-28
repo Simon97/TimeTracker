@@ -16,7 +16,7 @@ struct TimeTrackerApp: App {
     // For some reason initializing this first makes the previews work (the TaskView preview did not work previously)
     init() {
         do {
-            projectContainer = try ModelContainer(for: Project.self, TimeRegistration.self)
+            projectContainer = try ModelContainer(for: ProjectWithTasks.self, TimeRegistration.self)
         } catch {
             fatalError("Could not initialize ModelContainer")
         }

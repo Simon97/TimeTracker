@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProjectTabView: View {
     
-    var projects: [Project]
+    var projects: [ProjectWithTasks]
     
     var body: some View {
         NavigationStack {

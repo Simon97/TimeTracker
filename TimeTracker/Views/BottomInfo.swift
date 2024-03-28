@@ -19,7 +19,7 @@ struct BottomInfo: View {
         timeRegistrations.currentTask
     }
     
-    var currentProject: Project? {
+    var currentProject: ProjectWithTasks? {
         return currentTask?.project
     }
     

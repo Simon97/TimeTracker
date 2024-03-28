@@ -16,7 +16,7 @@ import SwiftData
 @Model
 class ProjectPresentationDetails {
     var isCollapsed: Bool
-    var project: Project?
+    var project: ProjectWithTasks?
     
     init(isCollapsed: Bool) {
         self.isCollapsed = isCollapsed

@@ -10,8 +10,8 @@ import SwiftUI
 struct ProjectView: View {
     
     @Environment(\.modelContext) var modelContext
-    @Bindable var project: Project
-    @Binding var subProjects: [Project]
+    @Bindable var project: ProjectWithTasks
+    @Binding var subProjects: [ProjectWithTasks]
     
     var editModeEnabled: Bool
     @State private var showEditingView = false
@@ -74,15 +74,15 @@ struct ProjectView: View {
 
 #Preview {
     ProjectView(
-        project: Project(
+        project: ProjectWithTasks(
             "Preview Project",
             isMainProject: true, isCollapsed: false,
             subProjects: [
-                Project(
+                ProjectWithTasks(
                     "Sub project",
                     isMainProject: false, isCollapsed: false,
                     subProjects: [
-                        Project(
+                        ProjectWithTasks(
                             "Sub sub project",
                             isMainProject: false, isCollapsed: false,
                             subProjects: [],

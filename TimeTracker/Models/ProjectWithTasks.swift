@@ -10,15 +10,42 @@ import SwiftData
 
 @Model
 class Project {
+    
     @Attribute(.unique)
     var uuid: UUID
     
     var name: String
-    var parent: Project?
+    
+    var parent: Project
+    
+    @Relationship(deleteRule: .cascade, inverse: \ProjectWithTasks.parent)
+    var children: [Project]
+    
+    var presentationDetails: ProjectPresentationDetails?
+    
+    init(_ name: String, parent: Project, children: [Project], presentationDetails: ProjectPresentationDetails? = nil) {
+        self.uuid = UUID()
+        self.name = name
+        self.parent = parent
+        self.children = children
+        self.presentationDetails = presentationDetails
+    }
+}
+
+/**
+ This is the old Project data structure, which is supposed to be replaced by a new data model without tasks ...
+*/
+@Model
+class ProjectWithTasks {
+    @Attribute(.unique)
+    var uuid: UUID
+    
+    var name: String
+    var parent: ProjectWithTasks?
     var isOutermostProject: Bool
     
-    @Relationship(deleteRule: .cascade, inverse: \Project.parent)
-    var subProjects: [Project] = []
+    @Relationship(deleteRule: .cascade, inverse: \ProjectWithTasks.parent)
+    var subProjects: [ProjectWithTasks] = []
     
     @Relationship(deleteRule: .cascade)
     var tasks: [Task] = []
@@ -33,7 +60,7 @@ class Project {
         self.presentationDetails = ProjectPresentationDetails(isCollapsed: isCollapsed ?? false)
     }
     
-    init(_ name: String, isMainProject: Bool, isCollapsed: Bool?, subProjects: [Project], tasks: [Task]) {
+    init(_ name: String, isMainProject: Bool, isCollapsed: Bool?, subProjects: [ProjectWithTasks], tasks: [Task]) {
         self.uuid = UUID()
         self.name = name
         self.isOutermostProject = isMainProject
@@ -54,10 +81,10 @@ class Project {
     }
 }
 
-extension Project {
-    public static func projectWithGeneralTask(isMainProject: Bool) -> Project {
+extension ProjectWithTasks {
+    public static func projectWithGeneralTask(isMainProject: Bool) -> ProjectWithTasks {
         let generalTask = Task("General", isFavorite: false)
-        return Project(
+        return ProjectWithTasks(
             "New project",
             isMainProject: isMainProject,
             isCollapsed: false,
@@ -67,8 +94,8 @@ extension Project {
     }
 }
 
-extension Project {
+extension ProjectWithTasks {
     public static func addProjectWithDefaultTask(modelContext: ModelContext, name: String, isMainProject: Bool) {
-        modelContext.insert(Project(name, isMainProject: isMainProject, isCollapsed: false))
+        modelContext.insert(ProjectWithTasks(name, isMainProject: isMainProject, isCollapsed: false))
     }
 }

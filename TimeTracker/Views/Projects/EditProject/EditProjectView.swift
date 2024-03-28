@@ -14,7 +14,7 @@ enum EditProjectViewType {
 
 struct EditProjectView: View {
     
-    @Bindable var project: Project
+    @Bindable var project: ProjectWithTasks
     
     @FocusState private var nameFocus
     @Environment(\.dismiss) var dismiss
@@ -105,15 +105,15 @@ struct EditProjectView: View {
 
 #Preview {
     EditProjectView(
-        project: Project(
+        project: ProjectWithTasks(
             "Preview Project",
             isMainProject: true, isCollapsed: false,
             subProjects: [
-                Project(
+                ProjectWithTasks(
                     "Sub project",
                     isMainProject: false, isCollapsed: false,
                     subProjects: [
-                        Project(
+                        ProjectWithTasks(
                             "Sub sub project",
                             isMainProject: false, isCollapsed: false,
                             subProjects: [],

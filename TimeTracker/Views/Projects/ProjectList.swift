@@ -11,11 +11,11 @@ struct ProjectList: View {
     
     @Environment(\.modelContext) var modelContext
     
-    @Binding var projects: [Project]
+    @Binding var projects: [ProjectWithTasks]
     
     @State private var editModeEnabled = false
     @State private var showCreateNewProject = false
-    @State private var newProject = Project.projectWithGeneralTask(isMainProject: true)
+    @State private var newProject = ProjectWithTasks.projectWithGeneralTask(isMainProject: true)
     
     var body: some View {
         ScrollView {
@@ -32,7 +32,7 @@ struct ProjectList: View {
         }
         .toolbar {
             Button(action: {
-                newProject = Project.projectWithGeneralTask(isMainProject: true)
+                newProject = ProjectWithTasks.projectWithGeneralTask(isMainProject: true)
                 modelContext.insert(newProject)
                 showCreateNewProject.toggle()
             }, label: {Text("Add")})
@@ -46,15 +46,15 @@ struct ProjectList: View {
 
 #Preview {
     ProjectList(projects: .constant([
-        Project(
+        ProjectWithTasks(
             "Preview Project",
             isMainProject: true, isCollapsed: false,
             subProjects: [
-                Project(
+                ProjectWithTasks(
                     "Sub project",
                     isMainProject: false, isCollapsed: false,
                     subProjects: [
-                        Project(
+                        ProjectWithTasks(
                             "Sub sub project",
                             isMainProject: false, isCollapsed: false,
                             subProjects: [],

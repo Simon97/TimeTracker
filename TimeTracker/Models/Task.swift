@@ -13,7 +13,7 @@ class Task {
     var uuid: UUID
     var name: String
     var isFavorite: Bool
-    var project: Project?
+    var project: ProjectWithTasks?
     
     @Relationship(deleteRule: .cascade)
     var timeRegistrations: [TimeRegistration]

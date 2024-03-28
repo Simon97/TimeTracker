@@ -23,7 +23,7 @@
 		605222582B54737800F603B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 605222572B54737800F603B8 /* Assets.xcassets */; };
 		6052225B2B54737800F603B8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6052225A2B54737800F603B8 /* Preview Assets.xcassets */; };
 		605222622B5474B500F603B8 /* TimeRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222612B5474B500F603B8 /* TimeRegistration.swift */; };
-		605222652B54769400F603B8 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222642B54769400F603B8 /* Project.swift */; };
+		605222652B54769400F603B8 /* ProjectWithTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222642B54769400F603B8 /* ProjectWithTasks.swift */; };
 		605222672B547BF800F603B8 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222662B547BF800F603B8 /* Task.swift */; };
 		6052226A2B54820300F603B8 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605222692B54820300F603B8 /* ProjectView.swift */; };
 		6052226C2B54845800F603B8 /* CollapseSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6052226B2B54845800F603B8 /* CollapseSwitch.swift */; };
@@ -56,7 +56,7 @@
 		605222572B54737800F603B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6052225A2B54737800F603B8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		605222612B5474B500F603B8 /* TimeRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeRegistration.swift; sourceTree = "<group>"; };
-		605222642B54769400F603B8 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		605222642B54769400F603B8 /* ProjectWithTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWithTasks.swift; sourceTree = "<group>"; };
 		605222662B547BF800F603B8 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		605222692B54820300F603B8 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		6052226B2B54845800F603B8 /* CollapseSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseSwitch.swift; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				605222612B5474B500F603B8 /* TimeRegistration.swift */,
-				605222642B54769400F603B8 /* Project.swift */,
+				605222642B54769400F603B8 /* ProjectWithTasks.swift */,
 				605222662B547BF800F603B8 /* Task.swift */,
 				602212362B74B35E00764678 /* ProjectPresentationDetails.swift */,
 				6051178A2B8099DA0061A736 /* README.md */,
@@ -327,7 +327,7 @@
 				6041D7BB2B57036200C9668D /* ContentView.swift in Sources */,
 				602B6ED32B5710EE0006614A /* BottomInfo.swift in Sources */,
 				60D31DA02B603C8900532D40 /* EditButton.swift in Sources */,
-				605222652B54769400F603B8 /* Project.swift in Sources */,
+				605222652B54769400F603B8 /* ProjectWithTasks.swift in Sources */,
 				6000404C2B6E25680080FD2F /* DeleteButton.swift in Sources */,
 				6052226C2B54845800F603B8 /* CollapseSwitch.swift in Sources */,
 				6052226A2B54820300F603B8 /* ProjectView.swift in Sources */,

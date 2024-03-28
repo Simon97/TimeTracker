@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ProjectDetails: View {
     
-    @Bindable var project: Project
+    @Bindable var project: ProjectWithTasks
     var editModeEnabled: Bool
     
     @State private var showCreateNewProject = false
     
     @Environment(\.modelContext) var modelContext
     
-    @State private var newProject = Project.projectWithGeneralTask(isMainProject: false)
+    @State private var newProject = ProjectWithTasks.projectWithGeneralTask(isMainProject: false)
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -43,7 +43,7 @@ struct ProjectDetails: View {
                     .font(.headline)
                 
                 Button(action: {
-                    newProject = Project.projectWithGeneralTask(isMainProject: false)
+                    newProject = ProjectWithTasks.projectWithGeneralTask(isMainProject: false)
                     project.subProjects.append(newProject)
                     showCreateNewProject.toggle()
                 }){
@@ -66,15 +66,15 @@ struct ProjectDetails: View {
 }
 
 #Preview {
-    ProjectDetails(project: Project(
+    ProjectDetails(project: ProjectWithTasks(
         "Preview Project",
         isMainProject: true, isCollapsed: false,
         subProjects: [
-            Project(
+            ProjectWithTasks(
                 "Sub project",
                 isMainProject: false, isCollapsed: false,
                 subProjects: [
-                    Project(
+                    ProjectWithTasks(
                         "Sub sub project",
                         isMainProject: false, isCollapsed: false,
                         subProjects: [],
