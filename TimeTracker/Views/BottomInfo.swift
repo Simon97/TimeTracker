@@ -47,7 +47,8 @@ struct BottomInfo: View {
                                 if isPlaying {
                                     Text(startTimeForTimerTaskTimeToday, style: .timer)
                                 } else {
-                                    /* TODO: Show the paused time ...
+                                    // TODO: Show the paused time ...
+                                    /*
                                     Text(startTimeForTimerTaskTimeToday.compare(timeRegistrations.currentTimeRegistration?.endTime))
                                      */
                                 }
@@ -99,6 +100,6 @@ struct BottomInfo: View {
     }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     BottomInfo(timeRegistrations: TimeRegistrationsViewModel(registrations: []))
 }

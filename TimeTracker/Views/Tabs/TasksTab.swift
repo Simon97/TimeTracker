@@ -31,5 +31,11 @@ struct TasksTab: View {
 
 #Preview {
     // TODO: Add content to show
-    TasksTab(tasks: [], timeRegistrations: TimeRegistrationsViewModel(registrations: []))
+    TasksTab(
+        tasks: [
+            Task("Test task", isFavorite: false),
+            Task("Test task 2", isFavorite: true)
+        ],
+        timeRegistrations: TimeRegistrationsViewModel(registrations: [])
+    )
 }
