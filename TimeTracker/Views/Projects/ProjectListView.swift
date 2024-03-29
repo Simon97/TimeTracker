@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ProjectListView: View {
     
-    @Binding var projects: [Project]
+    @Binding var projects: [RootProject]
     
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading) {
                 ForEach(projects, id: \.uuid) { project in
                     ProjectView(project: project)
+                    Divider()
                 }
             }
             .frame(maxHeight: .infinity, alignment: .top)
@@ -26,12 +27,15 @@ struct ProjectListView: View {
 #Preview {
     ProjectListView(
         projects: .constant([
-            Project("Project 1", parent: nil, children: [
-                Project("sub1", parent: nil, children: [], isCollapsed: true),
-                Project("sub2", parent: nil, children: [], isCollapsed: true)
+            RootProject("Project 1", isOutermostProject: true, children: [
+                RootProject("sub1", isOutermostProject: false, children: [], isCollapsed: true),
+                RootProject("sub2", isOutermostProject: false, children: [
+                    RootProject("subsub1", isOutermostProject: false, children: [], isCollapsed: true),
+                    RootProject("subsub2", isOutermostProject: false, children: [], isCollapsed: true)
+                ], isCollapsed: true)
             ], isCollapsed: true),
-            Project("Project 2", parent: nil, children: [], isCollapsed: true),
-            Project("Project 3", parent: nil, children: [], isCollapsed: true)
+            RootProject("Project 2", isOutermostProject: true, children: [], isFavorite: true),
+            RootProject("Project 3", isOutermostProject: true, children: [])
         ])
     )
 }

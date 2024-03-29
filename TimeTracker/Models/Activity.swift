@@ -1,5 +1,5 @@
 //
-//  Project.swift
+//  Activity.swift
 //  TimeTracker
 //
 //  Created by Simon Svendsgaard Nielsen on 14/01/2024.
@@ -10,27 +10,57 @@ import Observation
 import SwiftData
 
 @Observable
-class Project {
+class Activity {
+    
+    @Attribute(.unique)
+    var uuid: UUID
+
+    var name: String
+    
+    var isFavorite: Bool
+    
+    init(uuid: UUID, name: String, isFavorite: Bool) {
+        self.uuid = uuid
+        self.name = name
+        self.isFavorite = isFavorite
+    }
+}
+
+
+/**
+ This is the root of a project tree, containing instances of Subproject
+ */
+@Observable
+class RootProject {
     @Attribute(.unique)
     var uuid: UUID
     
     var name: String
     
-    var parent: Project?
+    var isFavorite: Bool
     
-    @Relationship(deleteRule: .cascade, inverse: \ProjectWithTasks.parent)
-    var subProjects: [Project]
+    var parent: RootProject?
+    
+    var isOutermostProject: Bool
+    
+    @Relationship(deleteRule: .cascade, inverse: \RootProject.parent)
+    var subProjects: [RootProject]
     
     var presentationDetails: ProjectPresentationDetails?
     
-    init(_ name: String, parent: Project?, children: [Project], isCollapsed: Bool?) {
+    init(_ name: String, isOutermostProject: Bool, children: [RootProject], isCollapsed: Bool? = nil, isFavorite: Bool? = nil) {
         self.uuid = UUID()
         self.name = name
-        self.parent = parent
         self.subProjects = children
+        self.isOutermostProject = isOutermostProject
         self.presentationDetails = ProjectPresentationDetails(isCollapsed: isCollapsed ?? false)
+        self.isFavorite = isFavorite ?? false
     }
 }
+
+
+
+
 
 /**
  This is the old Project data structure, which is supposed to be replaced by a new data model without tasks ...

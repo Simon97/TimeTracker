@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProjectView: View {
     
-    @Bindable var project: Project
+    @Bindable var project: RootProject
     
     var body: some View {
         @Bindable var isCollapsedBinding = (
@@ -20,7 +20,9 @@ struct ProjectView: View {
         VStack(alignment: .leading) {
             HStack {
                 Text(project.name)
-                    .font(.title)
+                    .font(.title2)
+                
+                FavoriteButton(isFavourite: $project.isFavorite)
                 
                 Spacer()
                 
@@ -43,11 +45,10 @@ struct ProjectView: View {
 #Preview("Collapsed", traits: .sizeThatFitsLayout) {
     ProjectView(
         project:
-            Project("Project 1", parent: nil,
+            RootProject("Project 1", isOutermostProject: true,
                     children: [
-                        Project(
-                            "Sub-project",
-                            parent: nil,
+                        RootProject(
+                            "Sub-project", isOutermostProject: false,
                             children: [],
                             isCollapsed: true
                         )
@@ -58,17 +59,13 @@ struct ProjectView: View {
 
 
 #Preview("Non-collapsed", traits: .sizeThatFitsLayout) {
-    ProjectView(
-        project:
-            Project("Project 1", parent: nil,
-                    children: [
-                        Project(
-                            "Sub-project",
-                            parent: nil,
-                            children: [],
-                            isCollapsed: false
-                        )
-                    ],
-                    isCollapsed: false)
-    )
+    ProjectView(project:
+                    RootProject("Project 1", isOutermostProject: true,
+                            children: [
+                                RootProject(
+                                    "Sub-project", isOutermostProject: false,
+                                    children: [],
+                                    isCollapsed: false
+                                )
+                            ], isFavorite: true))
 }
