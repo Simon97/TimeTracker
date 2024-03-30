@@ -11,15 +11,20 @@ import SwiftUI
 @main
 struct TimeTrackerApp: App {
     
-    let projectContainer: ModelContainer
+    let container: ModelContainer
+    
+    @AppStorage("hasBeenOpenedBefore") private var hasBeenOpenedBefore = false
     
     init() {
         do {
-            projectContainer = try ModelContainer(for: Activity.self, Board.self, TimeRegistration.self)
+            container = try ModelContainer(for: Board.self)
             
-            // Creates the default/general board
-            projectContainer.mainContext.insert(Board(activities: []))
-            try! projectContainer.mainContext.save()
+            if !hasBeenOpenedBefore {
+                // Creates the default/general board
+                container.mainContext.insert(Board(activities: []))
+                try! container.mainContext.save()
+                print("Default board created ...")
+            }
             
         } catch {
             fatalError("Could not initialize ModelContainer")
@@ -30,6 +35,6 @@ struct TimeTrackerApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(projectContainer)
+        .modelContainer(container)
     }
 }

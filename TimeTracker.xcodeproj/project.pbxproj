@@ -24,10 +24,10 @@
 		6052226C2B54845800F603B8 /* CollapseSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6052226B2B54845800F603B8 /* CollapseSwitch.swift */; };
 		607842E62B5B1F8700A78E8C /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E52B5B1F8700A78E8C /* FavoriteButton.swift */; };
 		607842E92B5B204100A78E8C /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E82B5B204100A78E8C /* ToggleView.swift */; };
+		60941D792BB8B605001E1B6E /* CreateEditActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60941D782BB8B605001E1B6E /* CreateEditActivityView.swift */; };
 		60C34D3E2BB732D600ADA95D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D3D2BB732D600ADA95D /* Board.swift */; };
 		60C34D422BB7382400ADA95D /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D412BB7382400ADA95D /* BoardView.swift */; };
 		60C34D442BB7386200ADA95D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D432BB7386200ADA95D /* ActivityView.swift */; };
-		60C34D482BB830EA00ADA95D /* ActivitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D472BB830EA00ADA95D /* ActivitiesViewModel.swift */; };
 		60D0C9362B61849C0091E6EC /* TTTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D0C9352B61849C0091E6EC /* TTTextFieldStyle.swift */; };
 		60D31DA02B603C8900532D40 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D31D9F2B603C8900532D40 /* EditButton.swift */; };
 /* End PBXBuildFile section */
@@ -52,10 +52,10 @@
 		6052226B2B54845800F603B8 /* CollapseSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseSwitch.swift; sourceTree = "<group>"; };
 		607842E52B5B1F8700A78E8C /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		607842E82B5B204100A78E8C /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
+		60941D782BB8B605001E1B6E /* CreateEditActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditActivityView.swift; sourceTree = "<group>"; };
 		60C34D3D2BB732D600ADA95D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		60C34D412BB7382400ADA95D /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		60C34D432BB7386200ADA95D /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		60C34D472BB830EA00ADA95D /* ActivitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewModel.swift; sourceTree = "<group>"; };
 		60D0C9352B61849C0091E6EC /* TTTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTTextFieldStyle.swift; sourceTree = "<group>"; };
 		60D31D9F2B603C8900532D40 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				605117842B7D3D240061A736 /* TimeRegistrationsViewModel.swift */,
-				60C34D472BB830EA00ADA95D /* ActivitiesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -186,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				60C34D432BB7386200ADA95D /* ActivityView.swift */,
+				60941D782BB8B605001E1B6E /* CreateEditActivityView.swift */,
 			);
 			path = ActivityViews;
 			sourceTree = "<group>";
@@ -285,7 +285,7 @@
 				605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */,
 				6051178C2B80AEE40061A736 /* PlayPauseButton.swift in Sources */,
 				607842E92B5B204100A78E8C /* ToggleView.swift in Sources */,
-				60C34D482BB830EA00ADA95D /* ActivitiesViewModel.swift in Sources */,
+				60941D792BB8B605001E1B6E /* CreateEditActivityView.swift in Sources */,
 				60C34D3E2BB732D600ADA95D /* Board.swift in Sources */,
 				6041D7BB2B57036200C9668D /* ContentView.swift in Sources */,
 				602B6ED32B5710EE0006614A /* BottomInfo.swift in Sources */,

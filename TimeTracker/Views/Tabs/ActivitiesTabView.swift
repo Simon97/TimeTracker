@@ -13,12 +13,12 @@ import SwiftUI
 
 struct ActivitiesTabView: View {
     
-    @Bindable var activitiesViewModel: ActivitiesViewModel
+    @Bindable var board: Board // It might make more sense not to depend on a Board here in Activities tab ...
     
     var body: some View {
         NavigationStack {
             VStack {
-                BoardView(activitiesViewModel: activitiesViewModel)
+                BoardView(board: board)
             }
             .navigationTitle("Activities")
         }
@@ -30,5 +30,12 @@ struct ActivitiesTabView: View {
 }
 
 #Preview {
-    ActivitiesTabView(activitiesViewModel: ActivitiesViewModel(activities: []))
+    ActivitiesTabView(
+        board: Board(activities: [
+            Activity("Activity 1", isFavorite: false),
+            Activity("Activity 2", isFavorite: true),
+            Activity("Activity 3", isFavorite: false),
+            Activity("Activity with a very long an interesting name", isFavorite: false),
+        ])
+    )
 }
