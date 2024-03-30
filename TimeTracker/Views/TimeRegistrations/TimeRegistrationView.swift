@@ -9,32 +9,11 @@ import SwiftUI
 
 struct TimeRegistrationView: View {
     
-    var timeRegistration: TimeRegistration
+    var activity: Activity
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading) {
-                Text("Task: \(timeRegistration.task.name)")
-                Text("Project: \(timeRegistration.task.project?.name ?? "")")
-            }
-            Spacer()
-            VStack {
-                HStack(alignment: .firstTextBaseline) {
-                Text("Start:")
-                Text(timeRegistration.startTime, style: .time)
-                }
-                if timeRegistration.endTime != nil {
-                    let endTime: Date = timeRegistration.endTime!
-                    HStack(alignment: .firstTextBaseline) {
-                        Text("End:")
-                        Text(endTime, style: .time)
-                    }
-                }
-            }
+            Text("To be fixed")
         }
     }
-}
-
-#Preview {
-    TimeRegistrationView(timeRegistration: TimeRegistration(startTime: .now, task: .noTask()))
 }

@@ -6,14 +6,18 @@
 //
 
 import Foundation
-import Observation
 import SwiftData
 
-@Observable
+@Model
 class Board {
+    
+    @Attribute(.unique)
+    var uuid: UUID
+    
     var activities: [Activity]
     
     init(activities: [Activity]) {
+        self.uuid = UUID()
         self.activities = activities
     }
 }

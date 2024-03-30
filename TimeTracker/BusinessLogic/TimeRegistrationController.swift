@@ -9,6 +9,7 @@ import Foundation
 
 class TimeRegistrationController {
     
+    /*
     func sortByDate(_ timeRegistrations: inout [TimeRegistration]) {
         timeRegistrations.sort(by: { r1, r2 in
             r1.startTime.compare(r2.startTime) == .orderedDescending
@@ -22,10 +23,6 @@ class TimeRegistrationController {
     
     func currentTask(_ timeRegistrations: inout [TimeRegistration]) -> Task? {
         currentTimeRegistration(&timeRegistrations)?.task
-    }
-    
-    func currentProject(_ timeRegistrations: inout [TimeRegistration]) -> ProjectWithTasks? {
-        currentTimeRegistration(&timeRegistrations)?.task.project
     }
     
     /**
@@ -68,6 +65,6 @@ class TimeRegistrationController {
         })
         return timeRegistrationsForGivenTask
     }
-    
+    */
     
 }

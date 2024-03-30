@@ -24,36 +24,24 @@ class TimeRegistrationsViewModel {
         self.registrations = registrations
     }
     
-    var currentTask: Task? {
-        controller.currentTask(&registrations)
-    }
-    
+    /*
     var currentTimeRegistration: TimeRegistration? {
-        controller.currentTimeRegistration(&registrations)
+        //controller.currentTimeRegistration(&registrations)
     }
+    */
     
     var timeSpendOnTaskToday: TimeInterval {
-        if let currentTask = currentTask {
-            return timeSpendOnGivenTaskToday(task: currentTask)
-        }
         return 0.0
     }
     
-    func timeSpendOnGivenTaskToday(task: Task) -> TimeInterval {
-        return controller.timeSpendOnTaskonDate(registrations, task: task, date: .now)
-    }
-    
-    func isCurrentTask(task: Task) -> Bool? {
-        return currentTask == task
-    }
-    
+    /*
     func sort() {
         controller.sortByDate(&registrations)
     }
+    */
     
+    /*
     func appendRegistration(_ registration: TimeRegistration) {
-        currentTask?.timeRegistrations.append(registration)
-        
         // TODO: What if there is no previous registration?
         // This only works because this function is not used to begin with
         // We can make this register the first one as well by looking at the
@@ -61,4 +49,5 @@ class TimeRegistrationsViewModel {
         
         controller.sortByDate(&registrations)
     }
+    */
 }

@@ -13,10 +13,10 @@ class TimeRegistration {
     var startTime: Date
     var endTime: Date?
     
-    var task: Task
+    var activity: Activity
     
-    init(startTime: Date, task: Task) {
+    init(startTime: Date, activity: Activity) {
         self.startTime = startTime
-        self.task = task
+        self.activity = activity
     }
 }

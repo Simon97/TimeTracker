@@ -13,10 +13,14 @@ struct TimeTrackerApp: App {
     
     let projectContainer: ModelContainer
     
-    // For some reason initializing this first makes the previews work (the TaskView preview did not work previously)
     init() {
         do {
-            projectContainer = try ModelContainer(for: ProjectWithTasks.self, TimeRegistration.self)
+            projectContainer = try ModelContainer(for: Activity.self, Board.self, TimeRegistration.self)
+            
+            // Creates the default/general board
+            projectContainer.mainContext.insert(Board(activities: []))
+            try! projectContainer.mainContext.save()
+            
         } catch {
             fatalError("Could not initialize ModelContainer")
         }

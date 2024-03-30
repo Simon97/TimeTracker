@@ -11,77 +11,9 @@ struct BottomInfo: View {
     
     var timeRegistrations: TimeRegistrationsViewModel
     
-    var lastTimeRegistration: TimeRegistration {
-        return timeRegistrations.registrations.first ?? TimeRegistration(startTime: .now, task: .noTask())
-    }
-    
-    var currentTask: Task? {
-        timeRegistrations.currentTask
-    }
-    
-    var currentProject: ProjectWithTasks? {
-        return currentTask?.project
-    }
-    
-    var startTimeForTimerTaskTimeToday: Date {
-        getStartDateForTimer(amountOfSeconds: timeRegistrations.timeSpendOnTaskToday)
-    }
-        
-    var isPlaying: Bool {
-        timeRegistrations.currentTimeRegistration?.endTime == nil
-    }
     
     var body: some View {
-        HStack {
-            if let currentTask = currentTask {
-                VStack {
-                    Text(currentTask.name)
-                        .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
-                    // Spacer()
-                    HStack {
-                        VStack {
-                            HStack() {
-                                Text("On task today: ")
-                                Spacer()
-                                
-                                if isPlaying {
-                                    Text(startTimeForTimerTaskTimeToday, style: .timer)
-                                } else {
-                                    // TODO: Show the paused time ...
-                                    /*
-                                    Text(startTimeForTimerTaskTimeToday.compare(timeRegistrations.currentTimeRegistration?.endTime))
-                                     */
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                PlayPauseButton(
-                    isPlaying: isPlaying,
-                    action: {
-                        // TODO: This should be fixed ...
-                        if isPlaying {
-                            timeRegistrations.currentTimeRegistration?.endTime = .now
-                        } else {
-                            let newReg = TimeRegistration(
-                                startTime: .now,
-                                task: timeRegistrations.currentTimeRegistration?.task ??
-                                Task("Gamer task", isFavorite: false) // TODO: fix ..
-                            )
-                            timeRegistrations.appendRegistration(newReg)
-                        }
-                    }
-                )
-                .frame(width: 42)
-                .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
-                
-            } else {
-                Text("Pick a task to start time tracking...")
-            }
-        }
-        .frame(height: 50)
-        .frame(maxWidth: .infinity)
+        Text("Wait")
     }
     
     

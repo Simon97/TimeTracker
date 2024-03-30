@@ -10,7 +10,7 @@ import SwiftUI
 
 enum Tab {
     case favorites
-    case projects
+    case activities
     case timeRegistrations
 }
 
@@ -19,20 +19,11 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @AppStorage("hasBeenOpenedBefore") private var hasBeenOpenedBefore = false
     
-    @State private var selection: Tab = .favorites
+    @State private var selection: Tab = .activities
     
-    @Query(filter: #Predicate<ProjectWithTasks> { project in
-        project.isOutermostProject
-    }) var projects: [ProjectWithTasks]
-    
-    private var tasks: [Task] {
-        var tasks = [Task]()
-        for project in projects {
-            tasks.append(contentsOf: project.getAllTasks())
-        }
-        return tasks
-    }
-    
+    @Query private var boards: [Board]
+
+    /*
     private var registrations: TimeRegistrationsViewModel {
         var registrations = [TimeRegistration]()
         for task in tasks {
@@ -41,57 +32,22 @@ struct ContentView: View {
         TimeRegistrationController().sortByDate(&registrations)
         return TimeRegistrationsViewModel(registrations: registrations)
     }
+    */
     
     var body: some View {
         TabView(selection: $selection) {
-            TasksTab(tasks: tasks, timeRegistrations: registrations)
-            ProjectTabView(projects: projects)
-            TimeRegistrationsTab(projects: projects, timeRegistrations: registrations)
+            ActivitiesTabView(activitiesViewModel: ActivitiesViewModel(activities: boards[0].activities))
+            // TimeRegistrationsTab(projects: projects, timeRegistrations: registrations)
         }
         
         .background(.black)
         .onAppear {
-            /**
-             The first time the app is opened, we add and show a demo project in the projects tab
-             */
             if !hasBeenOpenedBefore {
-                selection = .projects
-                addDemoProject()
+                selection = .activities
+                // addDemoProject()
                 hasBeenOpenedBefore = true
             }
         }
-    }
-    
-    func addDemoProject() {
-        let project = ProjectWithTasks(
-            "Preview Project",
-            isMainProject: true, isCollapsed: false,
-            subProjects: [
-                ProjectWithTasks(
-                    "Sub project",
-                    isMainProject: false,
-                    isCollapsed: false,
-                    subProjects: [
-                        ProjectWithTasks(
-                            "Sub sub project",
-                            isMainProject: false,
-                            isCollapsed: false,
-                            subProjects: [],
-                            tasks: [
-                                Task("sub sub project task 1", isFavorite: true)
-                            ]
-                        )],
-                    tasks: [
-                        Task("sub project task 1", isFavorite: false)
-                    ]
-                )
-            ],
-            tasks: [
-                Task("task 1", isFavorite: true),
-                Task("task 2", isFavorite: false)
-            ]
-        )
-        modelContext.insert(project)
     }
 }
 

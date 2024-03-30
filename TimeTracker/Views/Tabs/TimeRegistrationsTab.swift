@@ -9,12 +9,12 @@ import SwiftUI
 
 struct TimeRegistrationsTab: View {
     
-    var projects: [ProjectWithTasks]
     var timeRegistrations: TimeRegistrationsViewModel
     
     var body: some View {
         NavigationStack {
             List {
+                /*
                 Section("Time spend on:") {
                     
                     // TODO: Make all this work for sub-projects as well ...
@@ -22,7 +22,7 @@ struct TimeRegistrationsTab: View {
                     ForEach(projects) { project in
                         VStack(alignment: .leading) {
                             Text(project.name)
-                            ForEach(project.tasks) { task in
+                            ForEach(project.tasks, id: \.uuid) { task in
                                 HStack() {
                                     Text("\(task.name):")
                                     // TODO: This should be cleaned up
@@ -37,11 +37,14 @@ struct TimeRegistrationsTab: View {
                         }
                     }
                 }
+                */
                 
                 Section("Registrations") {
+                    /*
                     ForEach(timeRegistrations.registrations) { registration in
                         TimeRegistrationView(timeRegistration: registration)
                     }
+                    */
                 }
             }
             .listStyle(.plain)
@@ -56,5 +59,5 @@ struct TimeRegistrationsTab: View {
 }
 
 #Preview {
-    TimeRegistrationsTab(projects: [], timeRegistrations: TimeRegistrationsViewModel(registrations: []))
+    TimeRegistrationsTab(timeRegistrations: TimeRegistrationsViewModel(registrations: []))
 }
