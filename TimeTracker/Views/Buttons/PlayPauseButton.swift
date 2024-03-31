@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PlayPauseButton: View {
+    
     var isPlaying: Bool
     let action: () -> Void
     

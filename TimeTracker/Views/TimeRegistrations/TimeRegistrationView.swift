@@ -9,11 +9,15 @@ import SwiftUI
 
 struct TimeRegistrationView: View {
     
-    var activity: Activity
+    var timeRegistration: TimeRegistration
     
     var body: some View {
         HStack {
-            Text("To be fixed")
+            Text(timeRegistration.activity.name)
+            Text(timeRegistration.startTime.formatted())
+            if timeRegistration.endTime != nil {
+                Text((timeRegistration.endTime)?.formatted() ?? "")
+            }
         }
     }
 }

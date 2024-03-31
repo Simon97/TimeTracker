@@ -9,13 +9,22 @@ import SwiftUI
 
 struct BottomInfo: View {
     
+    @State private var isPlaying = false
+    
     var timeRegistrations: TimeRegistrationsViewModel
     
-    
     var body: some View {
-        Text("Wait")
+        HStack {
+            
+            VStack {
+                Text("Current activity name ...")
+                Text("Time spend on task? Or time in total?")
+            }
+            
+            PlayPauseButton(isPlaying: isPlaying, action: {isPlaying.toggle()})
+                .frame(width: 42)
+        }
     }
-    
     
     
     // TODO: Move this function to another file

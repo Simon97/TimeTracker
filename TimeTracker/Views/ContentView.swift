@@ -22,24 +22,18 @@ struct ContentView: View {
     
     @Query private var boards: [Board]
     
-    /*
-     private var registrations: TimeRegistrationsViewModel {
-     var registrations = [TimeRegistration]()
-     for task in tasks {
-     registrations.append(contentsOf: task.timeRegistrations)
-     }
-     TimeRegistrationController().sortByDate(&registrations)
-     return TimeRegistrationsViewModel(registrations: registrations)
-     }
-     */
+    @Query private var timeRegistrations: [TimeRegistration]
+    
+    private var timeRegistrationViewModel: TimeRegistrationsViewModel {
+        // Maybe do some sorting first ...
+        return TimeRegistrationsViewModel(registrations: timeRegistrations)
+    }
     
     var body: some View {
         TabView(selection: $selection) {
-            
             ActivitiesTabView(board: boards[0])
-            // TimeRegistrationsTab(projects: projects, timeRegistrations: registrations)
+            TimeRegistrationsTab(timeRegistrations: timeRegistrationViewModel)
         }
-        
         .background(.black)
     }
 }

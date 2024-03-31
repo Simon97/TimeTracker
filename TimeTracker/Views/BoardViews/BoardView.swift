@@ -23,27 +23,25 @@ struct BoardView: View {
     }
     
     var body: some View {
-        VStack {
-            // This is temporarily made as a simple list ...
-            List {
-                Toggle(isOn: $showFavoritesOnly) {
-                    Text("Show only favorites")
-                }
-                
-                ForEach(filteredActivities, id: \.uuid) { activity in
-                    ActivityView(activity: activity)
-                }
-            }
-            .buttonStyle(PlainButtonStyle()) // disabling the action when pressing on each cell in the list
-            
+        
+        // This is temporarily made as a simple list ...
+        List {
             Button(action: {
-                // TODO: instead of this, we should open a modal where the user can write the name for the new activity
-                print("Doing something")
                 showCreateEditView = true
             }, label: {
                 Text("Add activity")
             })
+            
+            Toggle(isOn: $showFavoritesOnly) {
+                Text("Show only favorites")
+            }
+            
+            ForEach(filteredActivities, id: \.uuid) { activity in
+                ActivityView(activity: activity)
+            }
         }
+        .buttonStyle(PlainButtonStyle()) // disabling the action when pressing on each cell in the list
+        
         .sheet(isPresented: $showCreateEditView) {
             CreateEditActivityView(activity: newActivity, saveAction: {
                 board.activities.append(newActivity)

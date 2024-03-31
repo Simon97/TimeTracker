@@ -19,6 +19,7 @@ struct ActivitiesTabView: View {
         NavigationStack {
             VStack {
                 BoardView(board: board)
+                BottomInfo(timeRegistrations: TimeRegistrationsViewModel(registrations: []))
             }
             .navigationTitle("Activities")
         }
