@@ -9,7 +9,12 @@ import SwiftUI
 
 struct BoardView: View {
     
-    @Bindable var board: Board
+    // This is just an attempt to use ViewModel instead of Board directly
+    @State private var viewModel: ViewModel
+    init(board: Board) {
+        self.viewModel = ViewModel(board: board)
+    }
+    // @Bindable var board: Board
     
     @Environment(\.dismiss) var dismiss
     
@@ -18,7 +23,7 @@ struct BoardView: View {
     @State private var showCreateEditView = false
     
     var filteredActivities: [Activity] {
-        board.activities.filter { activity in
+        viewModel.board.activities.filter { activity in
             (!showFavoritesOnly || activity.isFavorite)
         }
     }
@@ -48,7 +53,7 @@ struct BoardView: View {
             TextField("Name", text: $newActivity.name)
             
             Button(action: {
-                board.activities.append(newActivity)
+                viewModel.board.activities.append(newActivity)
                 newActivity = Activity("", isFavorite: false) // making a new activity ready ...
                 dismiss()
             }) {Text("Save")}
