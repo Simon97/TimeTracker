@@ -17,44 +17,34 @@ struct BoardView: View {
     // @Bindable var board: Board
     
     @Environment(\.dismiss) var dismiss
-    
-    @State private var showFavoritesOnly = false
-    @State private var newActivity: Activity = Activity("", isFavorite: false)
-    @State private var showCreateEditView = false
-    
-    var filteredActivities: [Activity] {
-        viewModel.board.activities.filter { activity in
-            (!showFavoritesOnly || activity.isFavorite)
-        }
-    }
+        
     
     var body: some View {
         
         // This is temporarily made as a simple list ...
         List {
             Button(action: {
-                showCreateEditView = true
+                viewModel.showCreateEditView = true
             }, label: {
                 Text("Add activity")
             })
             .buttonStyle(BorderedButtonStyle())
             
-            Toggle(isOn: $showFavoritesOnly) {
+            Toggle(isOn: $viewModel.showFavoritesOnly) {
                 Text("Show only favorites")
             }
             
-            ForEach(filteredActivities, id: \.uuid) { activity in
+            ForEach(viewModel.filteredActivities, id: \.uuid) { activity in
                 ActivityView(activity: activity)
             }
         }
         .buttonStyle(PlainButtonStyle()) // disabling the action when pressing on each cell in the list
         
-        .alert("New activity", isPresented: $showCreateEditView) {
-            TextField("Name", text: $newActivity.name)
+        .alert("New activity", isPresented: $viewModel.showCreateEditView) {
+            TextField("Name", text: $viewModel.newActivity.name)
             
             Button(action: {
-                viewModel.board.activities.append(newActivity)
-                newActivity = Activity("", isFavorite: false) // making a new activity ready ...
+                viewModel.saveNewTask()
                 dismiss()
             }) {Text("Save")}
             
@@ -76,4 +66,34 @@ struct BoardView: View {
         Activity("Activity 3", isFavorite: false),
         Activity("Activity with a very long an interesting name", isFavorite: false),
     ]))
+}
+
+extension BoardView {
+    
+    @Observable
+    class ViewModel {
+        
+        var board: Board
+        var showFavoritesOnly = false
+        var showCreateEditView = false
+        var newActivity: Activity = Activity("", isFavorite: false)
+        
+        init(board: Board) {
+            self.board = board
+        }
+        
+        var filteredActivities: [Activity] {
+            board.activities.filter { activity in
+                (!showFavoritesOnly || activity.isFavorite)
+            }
+        }
+        
+        func saveNewTask() {
+            // if we only show favorites, the new activity will be an activity as well
+            newActivity.isFavorite = showFavoritesOnly
+            
+            board.activities.append(newActivity)
+            newActivity = Activity("", isFavorite: false) // making a new activity ready ...
+        }
+    }
 }

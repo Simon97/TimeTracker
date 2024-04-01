@@ -25,7 +25,7 @@ class Board {
         self.uuid = UUID()
         self.activities = activities
     }
-    
+        
     func sortActivities() {
         activities.sort(by: {
             a1, a2 in

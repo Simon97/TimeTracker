@@ -25,7 +25,6 @@
 		607842E62B5B1F8700A78E8C /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E52B5B1F8700A78E8C /* FavoriteButton.swift */; };
 		607842E92B5B204100A78E8C /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E82B5B204100A78E8C /* ToggleView.swift */; };
 		60941D792BB8B605001E1B6E /* CreateEditActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60941D782BB8B605001E1B6E /* CreateEditActivityView.swift */; };
-		60941D7B2BBAC85A001E1B6E /* BoardViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60941D7A2BBAC85A001E1B6E /* BoardViewViewModel.swift */; };
 		60C34D3E2BB732D600ADA95D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D3D2BB732D600ADA95D /* Board.swift */; };
 		60C34D422BB7382400ADA95D /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D412BB7382400ADA95D /* BoardView.swift */; };
 		60C34D442BB7386200ADA95D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D432BB7386200ADA95D /* ActivityView.swift */; };
@@ -54,7 +53,6 @@
 		607842E52B5B1F8700A78E8C /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		607842E82B5B204100A78E8C /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
 		60941D782BB8B605001E1B6E /* CreateEditActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditActivityView.swift; sourceTree = "<group>"; };
-		60941D7A2BBAC85A001E1B6E /* BoardViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewViewModel.swift; sourceTree = "<group>"; };
 		60C34D3D2BB732D600ADA95D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		60C34D412BB7382400ADA95D /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		60C34D432BB7386200ADA95D /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				60C34D412BB7382400ADA95D /* BoardView.swift */,
-				60941D7A2BBAC85A001E1B6E /* BoardViewViewModel.swift */,
 			);
 			path = BoardViews;
 			sourceTree = "<group>";
@@ -295,7 +292,6 @@
 				60D31DA02B603C8900532D40 /* EditButton.swift in Sources */,
 				605222652B54769400F603B8 /* Activity.swift in Sources */,
 				6000404C2B6E25680080FD2F /* DeleteButton.swift in Sources */,
-				60941D7B2BBAC85A001E1B6E /* BoardViewViewModel.swift in Sources */,
 				6052226C2B54845800F603B8 /* CollapseSwitch.swift in Sources */,
 				60C34D442BB7386200ADA95D /* ActivityView.swift in Sources */,
 				60C34D422BB7382400ADA95D /* BoardView.swift in Sources */,

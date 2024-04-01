@@ -9,17 +9,34 @@ import SwiftUI
 
 struct ActivityView: View {
     
-    @Bindable var activity: Activity
+    @State private var viewModel: ViewModel
+    init(activity: Activity) {
+        self.viewModel = ViewModel(activity: activity)
+    }
+    // @Bindable var activity: Activity
+    
     
     var body: some View {
         HStack{
-            Text(activity.name)
+            Text(viewModel.activity.name)
             Spacer()
-            FavoriteButton(isFavourite: $activity.isFavorite)
+            FavoriteButton(isFavourite: $viewModel.activity.isFavorite)
         }
     }
 }
 
 #Preview {
     ActivityView(activity: Activity("a1", isFavorite: false))
+}
+
+extension ActivityView {
+    
+    class ViewModel {
+        var activity: Activity
+        
+        init(activity: Activity) {
+            self.activity = activity
+        }
+    }
+    
 }
