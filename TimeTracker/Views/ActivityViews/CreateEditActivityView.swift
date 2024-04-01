@@ -14,20 +14,17 @@ struct CreateEditActivityView: View {
     var saveAction: () -> Void
     
     var body: some View {
-        VStack {
-            Text("Create activity")
-            
-            TextField(text: $activity.name) {
-                Text("Name")
-            }
-            .padding()
-            
-            Button(action: {
-                saveAction()
-                dismiss()
-            }) {
-                Text("Save")
-            }
+        
+        TextField(text: $activity.name) {
+            Text("Name")
+        }
+        .textFieldStyle(.roundedBorder)
+        
+        Button(action: {
+            saveAction()
+            dismiss()
+        }) {
+            Text("Save")
         }
     }
 }

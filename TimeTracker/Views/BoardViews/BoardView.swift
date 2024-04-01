@@ -9,12 +9,13 @@ import SwiftUI
 
 struct BoardView: View {
     
-    @State private var showFavoritesOnly = false
+    @Bindable var board: Board
     
+    @Environment(\.dismiss) var dismiss
+    
+    @State private var showFavoritesOnly = false
     @State private var newActivity: Activity = Activity("", isFavorite: false)
     @State private var showCreateEditView = false
-    
-    @Bindable var board: Board
     
     var filteredActivities: [Activity] {
         board.activities.filter { activity in
@@ -31,6 +32,7 @@ struct BoardView: View {
             }, label: {
                 Text("Add activity")
             })
+            .buttonStyle(BorderedButtonStyle())
             
             Toggle(isOn: $showFavoritesOnly) {
                 Text("Show only favorites")
@@ -42,10 +44,21 @@ struct BoardView: View {
         }
         .buttonStyle(PlainButtonStyle()) // disabling the action when pressing on each cell in the list
         
-        .sheet(isPresented: $showCreateEditView) {
-            CreateEditActivityView(activity: newActivity, saveAction: {
+        .alert("New activity", isPresented: $showCreateEditView) {
+            TextField("Name", text: $newActivity.name)
+            
+            Button(action: {
                 board.activities.append(newActivity)
-            })
+                newActivity = Activity("", isFavorite: false) // making a new activity ready ...
+                dismiss()
+            }) {Text("Save")}
+            
+            Button(action: {
+                dismiss()
+            }) {Text("Cancel")}
+            
+        } message: {
+            Text("Please the name of the new activity")
         }
     }
     
