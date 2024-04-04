@@ -17,7 +17,7 @@ class Activity {
     var name: String
     
     var isFavorite: Bool
-    
+        
     var timeRegistrations: [TimeRegistration]
     
     init(_ name: String, isFavorite: Bool) {

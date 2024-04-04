@@ -9,20 +9,20 @@ import SwiftUI
 
 struct TimeRegistrationsTab: View {
     
-    var timeRegistrations: TimeRegistrationsViewModel
+    var timeRegistrations = [TimeRegistration]()
     
     var body: some View {
         NavigationStack {
             List {
                 Section("Registrations") {
-                    ForEach(timeRegistrations.registrations) { registration in
+                    ForEach(timeRegistrations) { registration in
                         TimeRegistrationView(timeRegistration: registration)
                     }
                 }
             }
             .listStyle(.plain)
 
-            BottomInfo(timeRegistrations: timeRegistrations)
+            // BottomInfo(timeRegistrations: timeRegistrations.registrations)
             
             .navigationTitle("Time Registrations")
         }
@@ -34,5 +34,5 @@ struct TimeRegistrationsTab: View {
 }
 
 #Preview {
-    TimeRegistrationsTab(timeRegistrations: TimeRegistrationsViewModel(registrations: []))
+    TimeRegistrationsTab(timeRegistrations: [])
 }

@@ -9,21 +9,27 @@ import SwiftUI
 
 struct BottomInfo: View {
     
-    @State private var isPlaying = false
-    
-    var timeRegistrations: TimeRegistrationsViewModel
+    @State private var viewModel: ViewModel
+    init(timeRegistrations: [TimeRegistration]) {
+        self.viewModel = ViewModel(timeRegistrations: timeRegistrations)
+    }
     
     var body: some View {
         HStack {
-            
             VStack {
-                Text("Current activity name ...")
-                Text("Time spend on task? Or time in total?")
+                Text(viewModel.currentActivityName ?? "Pick an activity to start tracking")
+                // Text("Time spend on task? Or time in total?")
             }
+
+            Spacer()
             
-            PlayPauseButton(isPlaying: isPlaying, action: {isPlaying.toggle()})
-                .frame(width: 42)
+            PlayPauseButton(isPlaying: viewModel.isTracking,
+                            action: viewModel.playButtonAction
+            )
+            .frame(width: 42)
+            
         }
+        .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
     }
     
     
@@ -41,6 +47,80 @@ struct BottomInfo: View {
     }
 }
 
+
 #Preview(traits: .sizeThatFitsLayout) {
-    BottomInfo(timeRegistrations: TimeRegistrationsViewModel(registrations: []))
+    BottomInfo(timeRegistrations: [])
+}
+
+
+extension BottomInfo {
+    
+    @Observable
+    class ViewModel {
+        
+        private(set) var timeRegistrations: [TimeRegistration]
+        
+        private let controller = TimeRegistrationController()
+        
+        init(timeRegistrations: [TimeRegistration]) {
+            self.timeRegistrations = timeRegistrations
+            sort()
+        }
+        
+        var currentActivityName: String? {
+            currentTimeRegistration?.activity.name
+        }
+        
+        var isTracking: Bool {
+            currentTimeRegistration?.endTime == nil
+        }
+        
+        func playButtonAction() {
+            // This should end the ongoing registration or create a new one depending
+            // on if the tracking is ongoing or not ...
+            
+            if isTracking {
+                pauseTracking()
+            } else {
+                resumeTracking()
+            }
+        }
+         
+        var currentTimeRegistration: TimeRegistration? {
+            let reg = controller.newestTimeRegistrationInList(timeRegistrations)
+            print(
+                "currentTimeRegistration is found",
+                reg?.uuid ?? "",
+                reg?.activity ?? ""
+            )
+            return reg
+        }
+        
+        var timeSpendOnCurrentTaskToday: TimeInterval {
+            return 0.0
+        }
+        
+        private func sort() {
+            controller.sortByDate(&timeRegistrations)
+        }
+        
+        private func pauseTracking() {
+            print("Pausing")
+            
+            currentTimeRegistration?.endTime = .now
+        }
+        
+        private func resumeTracking() {
+            print("Resuming")
+            
+            let newRegistration = TimeRegistration(
+                startTime: .now,
+                activity: currentTimeRegistration!.activity
+            )
+            timeRegistrations.append(newRegistration)
+            sort()
+        }
+        
+    }
+    
 }

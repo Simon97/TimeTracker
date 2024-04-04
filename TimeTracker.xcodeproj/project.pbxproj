@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6000404C2B6E25680080FD2F /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6000404B2B6E25680080FD2F /* DeleteButton.swift */; };
+		602A21AC2BBBB2D700994FAD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602A21AB2BBBB2D700994FAD /* ViewModel.swift */; };
 		602B6ED32B5710EE0006614A /* BottomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B6ED22B5710EE0006614A /* BottomInfo.swift */; };
 		6041D7BB2B57036200C9668D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6041D7BA2B57036200C9668D /* ContentView.swift */; };
 		605117812B7D1C880061A736 /* ActivitiesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605117802B7D1C880061A736 /* ActivitiesTabView.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		6000404B2B6E25680080FD2F /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		602A21AB2BBBB2D700994FAD /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		602B6ED22B5710EE0006614A /* BottomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomInfo.swift; sourceTree = "<group>"; };
 		6041D7BA2B57036200C9668D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		605117802B7D1C880061A736 /* ActivitiesTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesTabView.swift; sourceTree = "<group>"; };
@@ -71,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		602A21AA2BBBB2B800994FAD /* BoardView */ = {
+			isa = PBXGroup;
+			children = (
+				60C34D412BB7382400ADA95D /* BoardView.swift */,
+				602A21AB2BBBB2D700994FAD /* ViewModel.swift */,
+			);
+			path = BoardView;
+			sourceTree = "<group>";
+		};
 		6051177D2B7D1B410061A736 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,7 +204,7 @@
 		60C34D402BB735E700ADA95D /* BoardViews */ = {
 			isa = PBXGroup;
 			children = (
-				60C34D412BB7382400ADA95D /* BoardView.swift */,
+				602A21AA2BBBB2B800994FAD /* BoardView */,
 			);
 			path = BoardViews;
 			sourceTree = "<group>";
@@ -290,6 +301,7 @@
 				6041D7BB2B57036200C9668D /* ContentView.swift in Sources */,
 				602B6ED32B5710EE0006614A /* BottomInfo.swift in Sources */,
 				60D31DA02B603C8900532D40 /* EditButton.swift in Sources */,
+				602A21AC2BBBB2D700994FAD /* ViewModel.swift in Sources */,
 				605222652B54769400F603B8 /* Activity.swift in Sources */,
 				6000404C2B6E25680080FD2F /* DeleteButton.swift in Sources */,
 				6052226C2B54845800F603B8 /* CollapseSwitch.swift in Sources */,

@@ -14,6 +14,9 @@ import SwiftData
  to (for example) the BottomInfoView
  */
 
+// TODO: This should be deleted at some point as it should be replaced
+
+/*
 class TimeRegistrationsViewModel {
     
     var registrations: [TimeRegistration]
@@ -22,23 +25,20 @@ class TimeRegistrationsViewModel {
     
     init(registrations: [TimeRegistration]) {
         self.registrations = registrations
+        sort()
     }
     
-    /*
     var currentTimeRegistration: TimeRegistration? {
-        //controller.currentTimeRegistration(&registrations)
+        controller.newestTimeRegistrationInList(registrations)
     }
-    */
     
     var timeSpendOnTaskToday: TimeInterval {
         return 0.0
     }
     
-    /*
-    func sort() {
+    private func sort() {
         controller.sortByDate(&registrations)
     }
-    */
     
     /*
     func appendRegistration(_ registration: TimeRegistration) {
@@ -51,3 +51,4 @@ class TimeRegistrationsViewModel {
     }
     */
 }
+*/

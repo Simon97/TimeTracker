@@ -10,12 +10,14 @@ import SwiftData
 
 @Model
 class TimeRegistration {
+    var uuid: UUID
     var startTime: Date
     var endTime: Date?
     
     var activity: Activity
     
     init(startTime: Date, activity: Activity) {
+        self.uuid = UUID()
         self.startTime = startTime
         self.activity = activity
     }

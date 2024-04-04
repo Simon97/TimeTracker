@@ -12,12 +12,15 @@ struct TimeRegistrationView: View {
     var timeRegistration: TimeRegistration
     
     var body: some View {
-        HStack {
-            Text(timeRegistration.activity.name)
-            Text(timeRegistration.startTime.formatted())
-            if timeRegistration.endTime != nil {
-                Text((timeRegistration.endTime)?.formatted() ?? "")
+        VStack {
+            HStack {
+                Text(timeRegistration.activity.name)
+                Text(timeRegistration.startTime.formatted())
+                if timeRegistration.endTime != nil {
+                    Text((timeRegistration.endTime)?.formatted() ?? "")
+                }
             }
+            Text(timeRegistration.uuid.uuidString)
         }
     }
 }

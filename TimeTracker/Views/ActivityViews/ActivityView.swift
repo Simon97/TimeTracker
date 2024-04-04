@@ -22,6 +22,11 @@ struct ActivityView: View {
             Spacer()
             FavoriteButton(isFavourite: $viewModel.activity.isFavorite)
         }
+        .onTapGesture(perform: {
+            viewModel.activity.timeRegistrations.append(
+                TimeRegistration(startTime: .now, activity: viewModel.activity)
+            )
+        })
     }
 }
 
@@ -31,6 +36,7 @@ struct ActivityView: View {
 
 extension ActivityView {
     
+    @Observable
     class ViewModel {
         var activity: Activity
         

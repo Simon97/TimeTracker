@@ -22,17 +22,38 @@ struct ContentView: View {
     
     @Query private var boards: [Board]
     
-    @Query private var timeRegistrations: [TimeRegistration]
     
+    private var timeRegistrations: [TimeRegistration] {
+        var regs: [TimeRegistration] = []
+        
+        for activity in boards[0].activities {
+            for registration in activity.timeRegistrations {
+                regs.append(registration)
+            }
+        }
+        
+        return regs
+    }
+    
+    
+    // @Query private var timeRegistrations: [TimeRegistration]
+
+    /*
     private var timeRegistrationViewModel: TimeRegistrationsViewModel {
         // Maybe do some sorting first ...
         return TimeRegistrationsViewModel(registrations: timeRegistrations)
     }
+    */
     
     var body: some View {
         TabView(selection: $selection) {
-            ActivitiesTabView(board: boards[0])
-            TimeRegistrationsTab(timeRegistrations: timeRegistrationViewModel)
+            
+            ActivitiesTabView(
+                board: boards[0],
+                timeRegistrations: timeRegistrations
+            )
+            
+            TimeRegistrationsTab(timeRegistrations: timeRegistrations)
         }
         .background(.black)
     }

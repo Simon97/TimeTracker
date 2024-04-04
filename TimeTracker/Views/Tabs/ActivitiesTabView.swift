@@ -12,15 +12,17 @@ import SwiftUI
  */
 
 struct ActivitiesTabView: View {
-    
-    @Bindable var board: Board // It might make more sense not to depend on a Board here in Activities tab ...
+        
+    @State private var viewModel: ViewModel
+    init(board: Board, timeRegistrations: [TimeRegistration]) {
+        self.viewModel = ViewModel(board: board, timeRegistrations: timeRegistrations)
+    }
     
     var body: some View {
         NavigationStack {
             VStack {
-                BoardView(board: board)
-                
-                BottomInfo(timeRegistrations: TimeRegistrationsViewModel(registrations: []))
+                BoardView(board: viewModel.board)
+                BottomInfo(timeRegistrations: viewModel.timeRegistrations)
             }
             .navigationTitle("Activities")
         }
@@ -31,6 +33,7 @@ struct ActivitiesTabView: View {
     }
 }
 
+/*
 #Preview {
     ActivitiesTabView(
         board: Board(activities: [
@@ -40,4 +43,21 @@ struct ActivitiesTabView: View {
             Activity("Activity with a very long an interesting name", isFavorite: false),
         ])
     )
+}
+*/
+
+extension ActivitiesTabView {
+    
+    @Observable
+    class ViewModel {
+        
+        var board: Board
+        var timeRegistrations: [TimeRegistration]
+        
+        init(board: Board, timeRegistrations: [TimeRegistration]) {
+            self.board = board
+            self.timeRegistrations = timeRegistrations
+        }
+    }
+    
 }
