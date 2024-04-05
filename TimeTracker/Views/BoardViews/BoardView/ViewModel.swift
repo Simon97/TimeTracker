@@ -14,6 +14,7 @@ extension BoardView {
     class ViewModel {
         
         var board: Board
+        
         var showFavoritesOnly = false
         var showCreateEditView = false
         var newActivity: Activity = Activity("", isFavorite: false)

@@ -20,6 +20,8 @@ class Activity {
         
     var timeRegistrations: [TimeRegistration]
     
+    var board: Board?
+    
     init(_ name: String, isFavorite: Bool) {
         self.uuid = UUID()
         self.name = name

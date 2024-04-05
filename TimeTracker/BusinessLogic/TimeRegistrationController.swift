@@ -20,11 +20,9 @@ class TimeRegistrationController {
      Has the side-effect that the array will become sorted (intended)
      */
     func newestTimeRegistrationInList(_ timeRegistrations: [TimeRegistration]) -> TimeRegistration? {
-        
         var copy = timeRegistrations
         sortByDate(&copy)
         return copy.first
-        
         // return timeRegistrations.first // This will of course not work ...
     }
     

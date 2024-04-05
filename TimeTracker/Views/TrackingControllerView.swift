@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct BottomInfo: View {
+struct TrackingControllerView: View {
     
     @State private var viewModel: ViewModel
-    init(timeRegistrations: [TimeRegistration]) {
+    init(timeRegistrations: ObservedTimeRegistrations) {
         self.viewModel = ViewModel(timeRegistrations: timeRegistrations)
     }
     
@@ -20,12 +20,13 @@ struct BottomInfo: View {
                 Text(viewModel.currentActivityName ?? "Pick an activity to start tracking")
                 // Text("Time spend on task? Or time in total?")
             }
-
+            
             Spacer()
             
             PlayPauseButton(isPlaying: viewModel.isTracking,
                             action: viewModel.playButtonAction
             )
+            .disabled(viewModel.currentTimeRegistration == nil)
             .frame(width: 42)
             
         }
@@ -49,30 +50,34 @@ struct BottomInfo: View {
 
 
 #Preview(traits: .sizeThatFitsLayout) {
-    BottomInfo(timeRegistrations: [])
+    TrackingControllerView(timeRegistrations: ObservedTimeRegistrations(timeRegistrations: []))
 }
 
 
-extension BottomInfo {
+extension TrackingControllerView {
     
     @Observable
     class ViewModel {
         
-        private(set) var timeRegistrations: [TimeRegistration]
+        private(set) var timeRegistrations: ObservedTimeRegistrations
         
         private let controller = TimeRegistrationController()
         
-        init(timeRegistrations: [TimeRegistration]) {
+        init(timeRegistrations: ObservedTimeRegistrations) {
             self.timeRegistrations = timeRegistrations
             sort()
         }
         
         var currentActivityName: String? {
-            currentTimeRegistration?.activity.name
+            currentTimeRegistration?.activity?.name
         }
         
         var isTracking: Bool {
-            currentTimeRegistration?.endTime == nil
+            if let currentTimeRegistration {
+                return currentTimeRegistration.endTime == nil
+            } else {
+                return false
+            }
         }
         
         func playButtonAction() {
@@ -85,9 +90,9 @@ extension BottomInfo {
                 resumeTracking()
             }
         }
-         
+        
         var currentTimeRegistration: TimeRegistration? {
-            let reg = controller.newestTimeRegistrationInList(timeRegistrations)
+            let reg = controller.newestTimeRegistrationInList(timeRegistrations.timeRegistrations)
             print(
                 "currentTimeRegistration is found",
                 reg?.uuid ?? "",
@@ -101,7 +106,7 @@ extension BottomInfo {
         }
         
         private func sort() {
-            controller.sortByDate(&timeRegistrations)
+            controller.sortByDate(&timeRegistrations.timeRegistrations)
         }
         
         private func pauseTracking() {
@@ -113,12 +118,17 @@ extension BottomInfo {
         private func resumeTracking() {
             print("Resuming")
             
-            let newRegistration = TimeRegistration(
-                startTime: .now,
-                activity: currentTimeRegistration!.activity
-            )
-            timeRegistrations.append(newRegistration)
-            sort()
+            
+            if currentTimeRegistration!.activity != nil {
+                let newRegistration = TimeRegistration(
+                    startTime: .now,
+                    activity: currentTimeRegistration!.activity!
+                )
+                
+                timeRegistrations.timeRegistrations.append(newRegistration)
+                sort()
+            }
+            
         }
         
     }

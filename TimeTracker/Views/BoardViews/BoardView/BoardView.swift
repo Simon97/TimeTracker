@@ -18,7 +18,7 @@ struct BoardView: View {
     // @Bindable var board: Board
     
     @Environment(\.dismiss) var dismiss
-        
+    
     var body: some View {
         
         // This is temporarily made as a simple list ...

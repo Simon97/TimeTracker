@@ -13,8 +13,7 @@ class TimeRegistration {
     var uuid: UUID
     var startTime: Date
     var endTime: Date?
-    
-    var activity: Activity
+    var activity: Activity?
     
     init(startTime: Date, activity: Activity) {
         self.uuid = UUID()

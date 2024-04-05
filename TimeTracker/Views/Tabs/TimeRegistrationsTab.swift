@@ -9,19 +9,23 @@ import SwiftUI
 
 struct TimeRegistrationsTab: View {
     
-    var timeRegistrations = [TimeRegistration]()
+    @State private var viewModel: ViewModel
+    init(timeRegistrations: ObservedTimeRegistrations) {
+        self.viewModel = ViewModel(timeRegistrations: timeRegistrations)
+    }
     
     var body: some View {
         NavigationStack {
             List {
-                Section("Registrations") {
-                    ForEach(timeRegistrations) { registration in
+                Section("Registrations (\(viewModel.timeRegistrations.timeRegistrations.count))") {
+                    
+                    ForEach(viewModel.timeRegistrations.timeRegistrations) { registration in
                         TimeRegistrationView(timeRegistration: registration)
                     }
                 }
             }
             .listStyle(.plain)
-
+            
             // BottomInfo(timeRegistrations: timeRegistrations.registrations)
             
             .navigationTitle("Time Registrations")
@@ -33,6 +37,22 @@ struct TimeRegistrationsTab: View {
     }
 }
 
+/*
 #Preview {
     TimeRegistrationsTab(timeRegistrations: [])
+}
+ */
+
+extension TimeRegistrationsTab {
+    
+    @Observable
+    class ViewModel {
+        
+        var timeRegistrations: ObservedTimeRegistrations
+        
+        init(timeRegistrations: ObservedTimeRegistrations) {
+            self.timeRegistrations = timeRegistrations
+        }
+    }
+    
 }

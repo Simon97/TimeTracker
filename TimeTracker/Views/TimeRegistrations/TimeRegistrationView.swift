@@ -13,14 +13,15 @@ struct TimeRegistrationView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text(timeRegistration.activity.name)
+            HStack(alignment: .center) {
+                Text(timeRegistration.activity?.name ?? "")
                 Text(timeRegistration.startTime.formatted())
                 if timeRegistration.endTime != nil {
                     Text((timeRegistration.endTime)?.formatted() ?? "")
                 }
             }
             Text(timeRegistration.uuid.uuidString)
+                .font(.system(size: 10))
         }
     }
 }

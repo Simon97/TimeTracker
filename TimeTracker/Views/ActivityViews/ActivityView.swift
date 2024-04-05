@@ -17,15 +17,22 @@ struct ActivityView: View {
     
     
     var body: some View {
-        HStack{
-            Text(viewModel.activity.name)
-            Spacer()
-            FavoriteButton(isFavourite: $viewModel.activity.isFavorite)
+        VStack {
+            HStack {
+                Text(viewModel.activity.name)
+                Spacer()
+                FavoriteButton(isFavourite: $viewModel.activity.isFavorite)
+            }
+            ForEach(viewModel.activity.timeRegistrations) { reg in
+                TimeRegistrationView(timeRegistration: reg)
+            }
         }
         .onTapGesture(perform: {
-            viewModel.activity.timeRegistrations.append(
-                TimeRegistration(startTime: .now, activity: viewModel.activity)
+            let newReg = TimeRegistration(
+                startTime: .now,
+                activity: viewModel.activity
             )
+            viewModel.addTimeRegistration(newReg)
         })
     }
 }
@@ -42,6 +49,10 @@ extension ActivityView {
         
         init(activity: Activity) {
             self.activity = activity
+        }
+        
+        func addTimeRegistration(_ timeRegistration: TimeRegistration) {
+            activity.timeRegistrations.append(timeRegistration)
         }
     }
     

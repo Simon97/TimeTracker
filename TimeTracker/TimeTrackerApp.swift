@@ -11,13 +11,17 @@ import SwiftUI
 @main
 struct TimeTrackerApp: App {
     
-    let container: ModelContainer
+    var container: ModelContainer
+    var descriptor: FetchDescriptor<Board>
     
     @AppStorage("hasBeenOpenedBefore") private var hasBeenOpenedBefore = false
+    
+    @Environment(\.modelContext) var modelContext
     
     init() {
         do {
             container = try ModelContainer(for: Board.self)
+            descriptor = FetchDescriptor<Board>()
             
             if !hasBeenOpenedBefore {
                 // Creates the default/general board
@@ -33,7 +37,7 @@ struct TimeTrackerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(boards: try! container.mainContext.fetch(descriptor), timeRegistrations: [])
         }
         .modelContainer(container)
     }
