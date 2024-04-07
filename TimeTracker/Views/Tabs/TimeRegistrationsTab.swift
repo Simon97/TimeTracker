@@ -25,9 +25,6 @@ struct TimeRegistrationsTab: View {
                 }
             }
             .listStyle(.plain)
-            
-            // BottomInfo(timeRegistrations: timeRegistrations.registrations)
-            
             .navigationTitle("Time Registrations")
         }
         .tabItem {

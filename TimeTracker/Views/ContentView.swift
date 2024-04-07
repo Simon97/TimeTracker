@@ -16,53 +16,35 @@ enum Tab {
 
 struct ContentView: View {
     
-    @Environment(\.modelContext) var modelContext
+    // @Environment(\.modelContext) var modelContext
     
     @State private var selection: Tab = .activities
     
-    @Query private var boards: [Board]
+    // @Query private var boards: [Board]
     
+    var boards: [Board]
     var timeRegistrations: ObservedTimeRegistrations
     
-    init(boards: [Board], timeRegistrations: [TimeRegistration]) {
-        var regs: [TimeRegistration] = []
-        for activity in boards[0].activities {
-            for registration in activity.timeRegistrations {
-                regs.append(registration)
-            }
-        }
-        self.timeRegistrations = ObservedTimeRegistrations(timeRegistrations: regs)
+    init(boards: [Board], timeRegistrations: ObservedTimeRegistrations) {
+        self.boards = boards
+        self.timeRegistrations = timeRegistrations
     }
     
-    /*
-     @Query private var boards: [Board]
-     private var timeRegistrations: [TimeRegistration] {
-     var regs: [TimeRegistration] = []
-     
-     for activity in boards[0].activities {
-     for registration in activity.timeRegistrations {
-     regs.append(registration)
-     }
-     }
-     return regs
-     }
-     */
-    
-    // @Query private var timeRegistrations: [TimeRegistration]
-    
-    /*
-     private var timeRegistrationViewModel: TimeRegistrationsViewModel {
-     // Maybe do some sorting first ...
-     return TimeRegistrationsViewModel(registrations: timeRegistrations)
-     }
-     */
     
     var body: some View {
+        
+        // Currently, the registrations-tab is not updated when an activity is deleted.
         TabView(selection: $selection) {
-            ActivitiesTabView(board: boards[0], timeRegistrations: timeRegistrations)
+            
+            ActivitiesTabView(
+                board: boards[0],
+                timeRegistrations: timeRegistrations
+            )
+            
             TimeRegistrationsTab(
                 timeRegistrations: timeRegistrations
             )
+            
         }
         .background(.black)
     }
@@ -74,28 +56,19 @@ struct ContentView: View {
  }
  */
 
-/*
- extension ContentView {
- 
- class ViewModel {
- 
- var boards: [Board]
- var timeRegistrations: ObservedTimeRegistrations
- 
- init(boards: [Board]) {
- self.boards = boards
- 
- // TODO: This should be fixed as soon as we have more than a single board
- var regs: [TimeRegistration] = []
- for activity in boards[0].activities {
- for registration in activity.timeRegistrations {
- regs.append(registration)
- }
- }
- self.timeRegistrations = ObservedTimeRegistrations(
- timeRegistrations: regs
- )
- }
- }
- }
- */
+
+extension ContentView {
+    
+    // Currently not in use
+    class ViewModel {
+        
+        var boards: [Board]
+        var timeRegistrations: ObservedTimeRegistrations // TODO: These should be found from boards in the constructor?
+        
+        init(boards: [Board], timeRegistrations: ObservedTimeRegistrations) {
+            self.boards = boards
+            self.timeRegistrations = timeRegistrations
+        }
+    }
+}
+
