@@ -18,6 +18,7 @@ class Activity {
     
     var isFavorite: Bool
         
+    @Relationship(deleteRule: .cascade, inverse: \TimeRegistration.activity)
     var timeRegistrations: [TimeRegistration]
     
     var board: Board?

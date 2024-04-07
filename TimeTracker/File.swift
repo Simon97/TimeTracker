@@ -15,4 +15,8 @@ class ObservedTimeRegistrations {
     init(timeRegistrations: [TimeRegistration]) {
         self.timeRegistrations = timeRegistrations
     }
+    
+    func append(_ timeRegistration: TimeRegistration) {
+        self.timeRegistrations.append(timeRegistration)
+    }
 }

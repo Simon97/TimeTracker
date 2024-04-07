@@ -14,14 +14,17 @@ import SwiftUI
 struct ActivitiesTabView: View {
         
     @State private var viewModel: ViewModel
-    init(board: Board) {
-        self.viewModel = ViewModel(board: board)
+    init(board: Board, timeRegistrations: ObservedTimeRegistrations) {
+        self.viewModel = ViewModel(board: board, timeRegistrations: timeRegistrations)
     }
     
     var body: some View {
         NavigationStack {
             VStack {
-                BoardView(board: viewModel.board)
+                BoardView(
+                    board: viewModel.board,
+                    timeRegistrations: viewModel.timeRegistrations
+                )
             }
             .navigationTitle("Activities")
         }
@@ -51,9 +54,11 @@ extension ActivitiesTabView {
     class ViewModel {
         
         var board: Board
+        var timeRegistrations: ObservedTimeRegistrations
         
-        init(board: Board) {
+        init(board: Board, timeRegistrations: ObservedTimeRegistrations) {
             self.board = board
+            self.timeRegistrations = timeRegistrations
         }
     }
     

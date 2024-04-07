@@ -31,7 +31,6 @@ struct ContentView: View {
                 regs.append(registration)
             }
         }
-        
         self.timeRegistrations = ObservedTimeRegistrations(timeRegistrations: regs)
     }
     
@@ -59,19 +58,13 @@ struct ContentView: View {
      */
     
     var body: some View {
-        VStack {
-            TabView(selection: $selection) {
-                ActivitiesTabView(board: boards[0])
-                TimeRegistrationsTab(
-                    timeRegistrations: timeRegistrations
-                )
-            }
-            .background(.black)
-            
-            TrackingControllerView(
+        TabView(selection: $selection) {
+            ActivitiesTabView(board: boards[0], timeRegistrations: timeRegistrations)
+            TimeRegistrationsTab(
                 timeRegistrations: timeRegistrations
             )
         }
+        .background(.black)
     }
 }
 
@@ -82,27 +75,27 @@ struct ContentView: View {
  */
 
 /*
-extension ContentView {
-    
-    class ViewModel {
-        
-        var boards: [Board]
-        var timeRegistrations: ObservedTimeRegistrations
-        
-        init(boards: [Board]) {
-            self.boards = boards
-            
-            // TODO: This should be fixed as soon as we have more than a single board
-            var regs: [TimeRegistration] = []
-            for activity in boards[0].activities {
-                for registration in activity.timeRegistrations {
-                    regs.append(registration)
-                }
-            }
-            self.timeRegistrations = ObservedTimeRegistrations(
-                timeRegistrations: regs
-            )
-        }
-    }
-}
-*/
+ extension ContentView {
+ 
+ class ViewModel {
+ 
+ var boards: [Board]
+ var timeRegistrations: ObservedTimeRegistrations
+ 
+ init(boards: [Board]) {
+ self.boards = boards
+ 
+ // TODO: This should be fixed as soon as we have more than a single board
+ var regs: [TimeRegistration] = []
+ for activity in boards[0].activities {
+ for registration in activity.timeRegistrations {
+ regs.append(registration)
+ }
+ }
+ self.timeRegistrations = ObservedTimeRegistrations(
+ timeRegistrations: regs
+ )
+ }
+ }
+ }
+ */

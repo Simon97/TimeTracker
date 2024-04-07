@@ -14,6 +14,7 @@ class Board {
     @Attribute(.unique)
     var uuid: UUID
     
+    @Relationship(deleteRule: .cascade, inverse: \Activity.board)
     var activities: [Activity]
     
     var sortedActivities: [Activity] {

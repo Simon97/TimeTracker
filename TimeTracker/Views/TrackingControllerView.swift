@@ -65,7 +65,6 @@ extension TrackingControllerView {
         
         init(timeRegistrations: ObservedTimeRegistrations) {
             self.timeRegistrations = timeRegistrations
-            sort()
         }
         
         var currentActivityName: String? {
