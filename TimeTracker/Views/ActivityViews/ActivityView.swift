@@ -31,9 +31,11 @@ struct ActivityView: View {
                 DeleteButton(action: viewModel.deleteActivity)
             }
             
-            ForEach(viewModel.activity.timeRegistrations) { reg in
-                TimeRegistrationView(timeRegistration: reg)
-            }
+            /*
+             ForEach(viewModel.activity.timeRegistrations) { reg in
+             TimeRegistrationView(timeRegistration: reg)
+             }
+             */
         }
         .onTapGesture(perform: {
             viewModel.addTimeRegistration()
@@ -60,7 +62,7 @@ extension ActivityView {
         
         init(
             activity: Activity,
-            // timeRegistrations: ObservedTimeRegistrations,
+            timeRegistrations: ObservedTimeRegistrations,
             deleteActivity: @escaping () -> Void) {
                 self.activity = activity
                 self.timeRegistrations = timeRegistrations
