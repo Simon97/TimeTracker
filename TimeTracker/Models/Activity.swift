@@ -16,17 +16,20 @@ class Activity {
 
     var name: String
     
-    var isFavorite: Bool
+    var isFavorite = false
         
     @Relationship(deleteRule: .cascade, inverse: \TimeRegistration.activity)
     var timeRegistrations: [TimeRegistration]
     
     var board: Board?
     
-    init(_ name: String, isFavorite: Bool) {
+    init(_ name: String) {
         self.uuid = UUID()
         self.name = name
-        self.isFavorite = isFavorite
         self.timeRegistrations = []
+    }
+    
+    func addTimeRegistration(timeRegistration: TimeRegistration) {
+        timeRegistrations.append(timeRegistration)
     }
 }

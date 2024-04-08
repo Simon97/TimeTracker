@@ -9,7 +9,7 @@ import Foundation
 import Observation
 
 @Observable
-class ObservedTimeRegistrations {
+class TimeRegistrationsList {
     var timeRegistrations: [TimeRegistration]
     
     init(timeRegistrations: [TimeRegistration]) {

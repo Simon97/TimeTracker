@@ -10,7 +10,7 @@ import SwiftUI
 struct TrackingControllerView: View {
     
     @State private var viewModel: ViewModel
-    init(timeRegistrations: ObservedTimeRegistrations) {
+    init(timeRegistrations: [TimeRegistration]) {
         self.viewModel = ViewModel(timeRegistrations: timeRegistrations)
     }
     
@@ -50,7 +50,7 @@ struct TrackingControllerView: View {
 
 
 #Preview(traits: .sizeThatFitsLayout) {
-    TrackingControllerView(timeRegistrations: ObservedTimeRegistrations(timeRegistrations: []))
+    TrackingControllerView(timeRegistrations: [])
 }
 
 
@@ -59,11 +59,11 @@ extension TrackingControllerView {
     @Observable
     class ViewModel {
         
-        private(set) var timeRegistrations: ObservedTimeRegistrations
+        private(set) var timeRegistrations: [TimeRegistration]
         
         private let controller = TimeRegistrationController()
         
-        init(timeRegistrations: ObservedTimeRegistrations) {
+        init(timeRegistrations: [TimeRegistration]) {
             self.timeRegistrations = timeRegistrations
         }
         
@@ -91,7 +91,7 @@ extension TrackingControllerView {
         }
         
         var currentTimeRegistration: TimeRegistration? {
-            let reg = controller.newestTimeRegistrationInList(timeRegistrations.timeRegistrations)
+            let reg = controller.newestTimeRegistrationInList(timeRegistrations)
             print(
                 "currentTimeRegistration is found",
                 reg?.uuid ?? "",
@@ -105,7 +105,7 @@ extension TrackingControllerView {
         }
         
         private func sort() {
-            controller.sortByDate(&timeRegistrations.timeRegistrations)
+            controller.sortByDate(&timeRegistrations)
         }
         
         private func pauseTracking() {
@@ -124,7 +124,7 @@ extension TrackingControllerView {
                     activity: currentTimeRegistration!.activity!
                 )
                 
-                timeRegistrations.timeRegistrations.append(newRegistration)
+                timeRegistrations.append(newRegistration)
                 sort()
             }
             

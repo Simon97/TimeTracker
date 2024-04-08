@@ -31,9 +31,7 @@ struct CreateEditActivityView: View {
 
 #Preview {
     CreateEditActivityView(
-        activity: Activity(
-            "Test",
-            isFavorite: false
-        ), saveAction: {}
+        activity: Activity("Test"),
+        saveAction: {}
     )
 }

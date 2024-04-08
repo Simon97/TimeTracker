@@ -12,7 +12,7 @@ struct ActivityView: View {
     @State private var viewModel: ViewModel
     init(
         activity: Activity,
-        timeRegistrations: ObservedTimeRegistrations,
+        timeRegistrations: [TimeRegistration],
         deleteActivity: @escaping () -> Void) {
             self.viewModel = ViewModel(
                 activity: activity,
@@ -45,8 +45,8 @@ struct ActivityView: View {
 
 #Preview {
     ActivityView(
-        activity: Activity("a1", isFavorite: false),
-        timeRegistrations: ObservedTimeRegistrations(timeRegistrations: []), deleteActivity: {}
+        activity: Activity("a1"),
+        timeRegistrations: [], deleteActivity: {}
     )
 }
 
@@ -55,14 +55,14 @@ extension ActivityView {
     @Observable
     class ViewModel {
         var activity: Activity
-        var timeRegistrations: ObservedTimeRegistrations
+        var timeRegistrations: [TimeRegistration]
         var deleteActivity: () -> Void
         
         var controller = TimeRegistrationController()
         
         init(
             activity: Activity,
-            timeRegistrations: ObservedTimeRegistrations,
+            timeRegistrations: [TimeRegistration],
             deleteActivity: @escaping () -> Void) {
                 self.activity = activity
                 self.timeRegistrations = timeRegistrations
@@ -73,7 +73,7 @@ extension ActivityView {
             let now = Date.now
             
             // If a tracking is ongoing, we end it before adding the new one for the new activity
-            if let ongoingTracking: TimeRegistration = controller.newestTimeRegistrationInList(timeRegistrations.timeRegistrations) {
+            if let ongoingTracking: TimeRegistration = controller.newestTimeRegistrationInList(timeRegistrations) {
                 ongoingTracking.endTime = now
             }
             

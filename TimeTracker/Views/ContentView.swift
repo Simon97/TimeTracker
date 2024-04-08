@@ -20,16 +20,25 @@ struct ContentView: View {
     
     @State private var selection: Tab = .activities
     
+    // @State private var viewModel: ViewModel
+    
     // @Query private var boards: [Board]
     
     var boards: [Board]
-    var timeRegistrations: ObservedTimeRegistrations
     
-    init(boards: [Board], timeRegistrations: ObservedTimeRegistrations) {
-        self.boards = boards
-        self.timeRegistrations = timeRegistrations
+    var timeRegistrations: [TimeRegistration] {
+        var regs = [TimeRegistration]()
+        for activity in boards[0].activities {
+            for registration in activity.timeRegistrations {
+                regs.append(registration)
+            }
+        }
+        return regs
     }
     
+    init(boards: [Board]) {
+        self.boards = boards
+    }
     
     var body: some View {
         
@@ -63,11 +72,19 @@ extension ContentView {
     class ViewModel {
         
         var boards: [Board]
-        var timeRegistrations: ObservedTimeRegistrations // TODO: These should be found from boards in the constructor?
         
-        init(boards: [Board], timeRegistrations: ObservedTimeRegistrations) {
+        var timeRegistrations: TimeRegistrationsList {
+            var regs = [TimeRegistration]()
+            for activity in boards[0].activities {
+                for registration in activity.timeRegistrations {
+                    regs.append(registration)
+                }
+            }
+            return TimeRegistrationsList(timeRegistrations: regs)
+        }
+        
+        init(boards: [Board]) {
             self.boards = boards
-            self.timeRegistrations = timeRegistrations
         }
     }
 }

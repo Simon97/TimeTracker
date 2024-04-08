@@ -19,7 +19,7 @@ struct TimeTrackerApp: App {
     @Environment(\.modelContext) var modelContext
     
     var boards = [Board]()
-    var timeRegistrations = ObservedTimeRegistrations(timeRegistrations: [])
+    var timeRegistrations = TimeRegistrationsList(timeRegistrations: [])
     
     init() {
         do {
@@ -38,20 +38,11 @@ struct TimeTrackerApp: App {
         }
         
         self.boards = try! container.mainContext.fetch(descriptor)
-        
-        var regs: [TimeRegistration] = []
-        for activity in boards[0].activities {
-            for registration in activity.timeRegistrations {
-                regs.append(registration)
-            }
-        }
-        
-        self.timeRegistrations = ObservedTimeRegistrations(timeRegistrations: regs)
     }
     
     var body: some Scene {
         WindowGroup {
-            ContentView(boards: boards, timeRegistrations: timeRegistrations)
+            ContentView(boards: boards)
         }
         .modelContainer(container)
     }

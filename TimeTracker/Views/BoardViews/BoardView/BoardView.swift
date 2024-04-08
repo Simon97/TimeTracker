@@ -9,12 +9,13 @@ import SwiftUI
 import Observation
 
 struct BoardView: View {
-    
-    // This is just an attempt to use ViewModel instead of Board directly
+
     @State private var viewModel: ViewModel
-    init(board: Board, timeRegistrations: ObservedTimeRegistrations) {
+    init(board: Board, timeRegistrations: [TimeRegistration]) {
         self.viewModel = ViewModel(board: board, timeRegistrations: timeRegistrations)
     }
+    
+    
     // @Bindable var board: Board
     
     @Environment(\.dismiss) var dismiss
@@ -39,13 +40,12 @@ struct BoardView: View {
                         activity: activity,
                         timeRegistrations: viewModel.timeRegistrations,
                         deleteActivity: {
-                            viewModel.deleteActivity(with: activity.uuid)
+                            viewModel.deleteActivity(activity)
                         }
                     )
                 }
                 .buttonStyle(PlainButtonStyle()) // disabling the action when pressing on each cell in the list
             }
-            
             .alert("New activity", isPresented: $viewModel.showCreateEditView) {
                 TextField("Name", text: $viewModel.newActivity.name)
                 
@@ -57,7 +57,6 @@ struct BoardView: View {
                 Button(action: {
                     dismiss()
                 }) {Text("Cancel")}
-                
             } message: {
                 Text("Please the name of the new activity")
             }
@@ -73,9 +72,9 @@ struct BoardView: View {
 
 #Preview {
     BoardView(board: Board(activities: [
-        Activity("Activity 1", isFavorite: false),
-        Activity("Activity 2", isFavorite: true),
-        Activity("Activity 3", isFavorite: false),
-        Activity("Activity with a very long an interesting name", isFavorite: false),
-    ]), timeRegistrations: ObservedTimeRegistrations(timeRegistrations: []))
+        Activity("Activity 1"),
+        Activity("Activity 2"),
+        Activity("Activity 3"),
+        Activity("Activity with a very long an interesting name"),
+    ]), timeRegistrations: [])
 }
