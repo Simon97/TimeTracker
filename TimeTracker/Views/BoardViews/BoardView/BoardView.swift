@@ -60,11 +60,6 @@ struct BoardView: View {
             } message: {
                 Text("Please the name of the new activity")
             }
-            
-            TrackingControllerView(
-                timeRegistrations: viewModel.timeRegistrations
-            )
-            
         }
     }
     

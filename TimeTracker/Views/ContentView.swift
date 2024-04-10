@@ -20,38 +20,21 @@ struct ContentView: View {
     
     @State private var selection: Tab = .activities
     
-    // @State private var viewModel: ViewModel
-    
-    // @Query private var boards: [Board]
-    
-    var boards: [Board]
-    
-    var timeRegistrations: [TimeRegistration] {
-        var regs = [TimeRegistration]()
-        for activity in boards[0].activities {
-            for registration in activity.timeRegistrations {
-                regs.append(registration)
-            }
-        }
-        return regs
-    }
-    
+    @State private var viewModel: ViewModel
     init(boards: [Board]) {
-        self.boards = boards
+        self.viewModel = ViewModel(boards: boards)
     }
     
     var body: some View {
-        
-        // Currently, the registrations-tab is not updated when an activity is deleted.
         TabView(selection: $selection) {
             
             ActivitiesTabView(
-                board: boards[0],
-                timeRegistrations: timeRegistrations
+                board: viewModel.boards[0],
+                timeRegistrations: viewModel.timeRegistrations
             )
             
             TimeRegistrationsTab(
-                timeRegistrations: timeRegistrations
+                timeRegistrations: viewModel.timeRegistrations
             )
             
         }
@@ -68,19 +51,19 @@ struct ContentView: View {
 
 extension ContentView {
     
-    // Currently not in use
+    @Observable
     class ViewModel {
         
         var boards: [Board]
         
-        var timeRegistrations: TimeRegistrationsList {
+        var timeRegistrations: [TimeRegistration] {
             var regs = [TimeRegistration]()
             for activity in boards[0].activities {
                 for registration in activity.timeRegistrations {
                     regs.append(registration)
                 }
             }
-            return TimeRegistrationsList(timeRegistrations: regs)
+            return regs
         }
         
         init(boards: [Board]) {

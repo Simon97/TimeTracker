@@ -25,6 +25,10 @@ struct ActivitiesTabView: View {
                     board: viewModel.board,
                     timeRegistrations: viewModel.timeRegistrations
                 )
+                
+                TrackingControllerView(
+                    timeRegistrations: viewModel.timeRegistrations
+                )
             }
             .navigationTitle("Activities")
         }
