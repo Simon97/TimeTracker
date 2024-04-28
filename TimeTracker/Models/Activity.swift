@@ -32,4 +32,10 @@ class Activity {
     func addTimeRegistration(timeRegistration: TimeRegistration) {
         timeRegistrations.append(timeRegistration)
     }
+    
+    static let sampleData = [
+        Activity("Activity with a name"),
+        Activity("Make release ready for App Store"),
+        Activity("Implement Apple Pay as a payment option to some app"),
+    ]
 }

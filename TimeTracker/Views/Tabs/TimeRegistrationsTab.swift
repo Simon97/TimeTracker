@@ -6,20 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TimeRegistrationsTab: View {
     
-    @State private var viewModel: ViewModel
-    init(timeRegistrations: [TimeRegistration]) {
-        self.viewModel = ViewModel(timeRegistrations: timeRegistrations)
-    }
+    @Query private var timeRegistrations: [TimeRegistration]
     
     var body: some View {
         NavigationStack {
             List {
-                Section("Registrations (\(viewModel.timeRegistrations.count))") {
+                Section("Registrations (\(timeRegistrations.count))") {
                     
-                    ForEach(viewModel.timeRegistrations) { registration in
+                    ForEach(timeRegistrations) { registration in
                         TimeRegistrationView(timeRegistration: registration)
                     }
                 }

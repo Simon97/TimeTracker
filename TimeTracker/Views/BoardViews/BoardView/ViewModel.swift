@@ -13,18 +13,11 @@ extension BoardView {
     @Observable
     class ViewModel {
         
-        var board: Board
-        var timeRegistrations: [TimeRegistration]
-        
         var showFavoritesOnly = false
         var showCreateEditView = false
         var newActivity: Activity = Activity("")
-        
-        init(board: Board, timeRegistrations: [TimeRegistration]) {
-            self.board = board
-            self.timeRegistrations = timeRegistrations
-        }
-        
+             
+        /*
         var filteredActivities: [Activity] {
             board.activities.filter { activity in
                 (!showFavoritesOnly || activity.isFavorite)
@@ -43,6 +36,6 @@ extension BoardView {
         func deleteActivity(_ activity: Activity) {
             board.removeActivity(activity)
         }
-        
+        */
     }
 }

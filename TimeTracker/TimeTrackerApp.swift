@@ -11,39 +11,26 @@ import SwiftUI
 @main
 struct TimeTrackerApp: App {
     
-    var container: ModelContainer
-    var descriptor: FetchDescriptor<Board>
-    
-    @AppStorage("hasBeenOpenedBefore") private var hasBeenOpenedBefore = false
-    
-    @Environment(\.modelContext) var modelContext
-    
-    var boards = [Board]()
-    var timeRegistrations = TimeRegistrationsList(timeRegistrations: [])
-    
-    init() {
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            Board.self,
+            Activity.self,
+            TimeRegistration.self
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
         do {
-            container = try ModelContainer(for: Board.self)
-            descriptor = FetchDescriptor<Board>()
-            
-            if !hasBeenOpenedBefore {
-                // Creates the default/general board
-                container.mainContext.insert(Board(activities: []))
-                try! container.mainContext.save()
-                print("Default board created ...")
-            }
-            
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
-            fatalError("Could not initialize ModelContainer")
+            fatalError("Could not create ModelContainer: \(error)")
         }
-        
-        self.boards = try! container.mainContext.fetch(descriptor)
-    }
+    }()
+    
     
     var body: some Scene {
         WindowGroup {
-            ContentView(boards: boards)
+            ContentView()
         }
-        .modelContainer(container)
+        .modelContainer(sharedModelContainer)
     }
 }

@@ -9,44 +9,25 @@ import SwiftUI
 
 struct ActivityView: View {
     
-    @State private var viewModel: ViewModel
-    init(
-        activity: Activity,
-        timeRegistrations: [TimeRegistration],
-        deleteActivity: @escaping () -> Void) {
-            self.viewModel = ViewModel(
-                activity: activity,
-                timeRegistrations: timeRegistrations,
-                deleteActivity: deleteActivity
-            )
-        }
-    // @Bindable var activity: Activity
+    @Bindable var activity: Activity
+    var deleteActivity: () -> Void
     
     var body: some View {
         VStack {
             HStack {
-                Text(viewModel.activity.name)
+                Text(activity.name)
                 Spacer()
-                FavoriteButton(isFavourite: $viewModel.activity.isFavorite)
-                DeleteButton(action: viewModel.deleteActivity)
+                FavoriteButton(isFavourite: $activity.isFavorite)
+                DeleteButton(action: deleteActivity)
             }
-            
-            /*
-             ForEach(viewModel.activity.timeRegistrations) { reg in
-             TimeRegistrationView(timeRegistration: reg)
-             }
-             */
         }
-        .onTapGesture(perform: {
-            viewModel.addTimeRegistration()
-        })
     }
 }
 
 #Preview {
     ActivityView(
-        activity: Activity("a1"),
-        timeRegistrations: [], deleteActivity: {}
+        activity: SampleData.shared.activity,
+        deleteActivity: {}
     )
 }
 

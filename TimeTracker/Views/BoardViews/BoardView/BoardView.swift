@@ -6,23 +6,42 @@
 //
 
 import SwiftUI
+import SwiftData
 import Observation
 
 struct BoardView: View {
-
-    @State private var viewModel: ViewModel
-    init(board: Board, timeRegistrations: [TimeRegistration]) {
-        self.viewModel = ViewModel(board: board, timeRegistrations: timeRegistrations)
-    }
     
+    @State private var viewModel = ViewModel()
     
-    // @Bindable var board: Board
+    @Query private var activities: [Activity]
+    @Query private var timeRegistrations: [TimeRegistration]
+    
+    @State private var newActivity: Activity = Activity("")
+    
+    @Environment(\.modelContext) private var modelContext
     
     @Environment(\.dismiss) var dismiss
     
+    var filteredActivities: [Activity] {
+        activities.filter { activity in
+            (!viewModel.showFavoritesOnly || activity.isFavorite)
+        }
+    }
+    
+    func addTimeRegistration(activity: Activity) {
+        let controller = TimeRegistrationController()
+        let now = Date.now
+        
+        // If a tracking is ongoing, we end it before adding the new one for the new activity
+        if let ongoingTracking: TimeRegistration = controller.newestTimeRegistrationInList(timeRegistrations) {
+            ongoingTracking.endTime = now
+        }
+        modelContext.insert(TimeRegistration(startTime: now, activity: activity))
+    }
+    
     var body: some View {
         VStack {
-            // This is temporarily made as a simple list ...
+            // This is temporarily made as a simple list, instead of the more ambitious drag and drop view
             List {
                 Button(action: {
                     viewModel.showCreateEditView = true
@@ -35,23 +54,33 @@ struct BoardView: View {
                     Text("Show only favorites")
                 }
                 
-                ForEach(viewModel.filteredActivities, id: \.uuid) { activity in
+                ForEach(filteredActivities, id: \.uuid) { activity in
                     ActivityView(
                         activity: activity,
-                        timeRegistrations: viewModel.timeRegistrations,
                         deleteActivity: {
-                            viewModel.deleteActivity(activity)
+                            modelContext.delete(activity)
                         }
                     )
+                    .onTapGesture(perform: {
+                        addTimeRegistration(activity: activity)
+                    })
                 }
+                .onDelete(perform: deleteItems)
                 .buttonStyle(PlainButtonStyle()) // disabling the action when pressing on each cell in the list
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                }
+            }
+            .navigationTitle("Activities")
             .alert("New activity", isPresented: $viewModel.showCreateEditView) {
-                TextField("Name", text: $viewModel.newActivity.name)
+                TextField("Name", text: $newActivity.name)
                 
                 Button(action: {
-                    viewModel.saveNewActivity()
+                    modelContext.insert(newActivity)
                     dismiss()
+                    newActivity = Activity("") // making ready for next activity
                 }) {Text("Save")}
                 
                 Button(action: {
@@ -63,13 +92,21 @@ struct BoardView: View {
         }
     }
     
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(activities[index])
+            }
+        }
+    }
+    
 }
 
+
 #Preview {
-    BoardView(board: Board(activities: [
-        Activity("Activity 1"),
-        Activity("Activity 2"),
-        Activity("Activity 3"),
-        Activity("Activity with a very long an interesting name"),
-    ]), timeRegistrations: [])
+    NavigationStack {
+        BoardView()
+            .modelContainer(SampleData.shared.modelContainer)
+    }
 }
+

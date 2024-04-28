@@ -15,33 +15,18 @@ enum Tab {
 }
 
 struct ContentView: View {
-    
-    // @Environment(\.modelContext) var modelContext
-    
     @State private var selection: Tab = .activities
-    
-    @State private var viewModel: ViewModel
-    init(boards: [Board]) {
-        self.viewModel = ViewModel(boards: boards)
-    }
     
     var body: some View {
         TabView(selection: $selection) {
-            
-            ActivitiesTabView(
-                board: viewModel.boards[0],
-                timeRegistrations: viewModel.timeRegistrations
-            )
-            
-            TimeRegistrationsTab(
-                timeRegistrations: viewModel.timeRegistrations
-            )
-            
+            ActivitiesTabView()
+            TimeRegistrationsTab()
         }
         .background(.black)
     }
 }
 
+// Add Sample data class for this ...
 /*
  #Preview {
  ContentView()

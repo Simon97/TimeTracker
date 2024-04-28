@@ -8,27 +8,17 @@
 import SwiftUI
 
 /**
- Grid to show all activities ...
+ Grid to show all activities ... Initially made as a list ...
  */
 
 struct ActivitiesTabView: View {
-        
-    @State private var viewModel: ViewModel
-    init(board: Board, timeRegistrations: [TimeRegistration]) {
-        self.viewModel = ViewModel(board: board, timeRegistrations: timeRegistrations)
-    }
     
     var body: some View {
         NavigationStack {
             VStack {
-                BoardView(
-                    board: viewModel.board,
-                    timeRegistrations: viewModel.timeRegistrations
-                )
+                BoardView()
                 
-                TrackingControllerView(
-                    timeRegistrations: viewModel.timeRegistrations
-                )
+                TrackingControllerView()
             }
             .navigationTitle("Activities")
         }
@@ -39,18 +29,11 @@ struct ActivitiesTabView: View {
     }
 }
 
-/*
+
 #Preview {
-    ActivitiesTabView(
-        board: Board(activities: [
-            Activity("Activity 1", isFavorite: false),
-            Activity("Activity 2", isFavorite: true),
-            Activity("Activity 3", isFavorite: false),
-            Activity("Activity with a very long an interesting name", isFavorite: false),
-        ])
-    )
+    ActivitiesTabView()
+        .modelContainer(SampleData.shared.modelContainer)
 }
-*/
 
 extension ActivitiesTabView {
     

@@ -6,27 +6,85 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TrackingControllerView: View {
     
-    @State private var viewModel: ViewModel
-    init(timeRegistrations: [TimeRegistration]) {
-        self.viewModel = ViewModel(timeRegistrations: timeRegistrations)
+    @Query var timeRegistrations: [TimeRegistration]
+    @Environment(\.modelContext) private var modelContext
+    
+    // TODO: All this logic should be moved
+    
+    private let controller = TimeRegistrationController()
+    
+    var currentActivityName: String? {
+        currentTimeRegistration?.activity?.name
+    }
+    
+    var isTracking: Bool {
+        if let currentTimeRegistration {
+            return currentTimeRegistration.endTime == nil
+        } else {
+            return false
+        }
+    }
+    
+    func playButtonAction() {
+        if isTracking {
+            pauseTracking()
+        } else {
+            resumeTracking()
+        }
+    }
+    
+    var currentTimeRegistration: TimeRegistration? {
+        let reg = controller.newestTimeRegistrationInList(timeRegistrations)
+        print(
+            "currentTimeRegistration is found",
+            reg?.uuid ?? "",
+            reg?.activity ?? ""
+        )
+        return reg
+    }
+    
+    var timeSpendOnCurrentTaskToday: TimeInterval {
+        return 0.0
+    }
+    
+    
+    private func pauseTracking() {
+        print("Pausing")
+        
+        currentTimeRegistration?.endTime = .now
+    }
+    
+    private func resumeTracking() {
+        print("Resuming")
+        
+        
+        if currentTimeRegistration!.activity != nil {
+            let newRegistration = TimeRegistration(
+                startTime: .now,
+                activity: currentTimeRegistration!.activity!
+            )
+            modelContext.insert(newRegistration)
+        }
+        
     }
     
     var body: some View {
         HStack {
             VStack {
-                Text(viewModel.currentActivityName ?? "Pick an activity to start tracking")
+                Text(currentActivityName ?? "Pick an activity to start tracking")
                 // Text("Time spend on task? Or time in total?")
             }
             
             Spacer()
             
-            PlayPauseButton(isPlaying: viewModel.isTracking,
-                            action: viewModel.playButtonAction
+            PlayPauseButton(isPlaying: isTracking,
+                            action: playButtonAction
             )
-            .disabled(viewModel.currentTimeRegistration == nil)
+            .disabled(currentTimeRegistration == nil)
             .frame(width: 42)
             
         }
@@ -48,24 +106,25 @@ struct TrackingControllerView: View {
     }
 }
 
-
+/*
 #Preview(traits: .sizeThatFitsLayout) {
     TrackingControllerView(timeRegistrations: [])
+        .modelContainer(SampleData.shared.modelContainer)
 }
-
+*/
 
 extension TrackingControllerView {
     
     @Observable
     class ViewModel {
         
-        private(set) var timeRegistrations: [TimeRegistration]
-        
-        private let controller = TimeRegistrationController()
+        private var timeRegistrations: [TimeRegistration]
         
         init(timeRegistrations: [TimeRegistration]) {
             self.timeRegistrations = timeRegistrations
         }
+        
+        private let controller = TimeRegistrationController()
         
         var currentActivityName: String? {
             currentTimeRegistration?.activity?.name
@@ -80,9 +139,6 @@ extension TrackingControllerView {
         }
         
         func playButtonAction() {
-            // This should end the ongoing registration or create a new one depending
-            // on if the tracking is ongoing or not ...
-            
             if isTracking {
                 pauseTracking()
             } else {
