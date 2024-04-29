@@ -23,9 +23,17 @@ struct ToggleView<FalseView: View, TrueView: View>: View {
     }
 }
 
-#Preview {
+#Preview("true") {
     ToggleView(
         binding: .constant(true),
+        falseContent: {Text("false")},
+        trueContent: {Text("true")}
+    )
+}
+
+#Preview("false") {
+    ToggleView(
+        binding: .constant(false),
         falseContent: {Text("false")},
         trueContent: {Text("true")}
     )

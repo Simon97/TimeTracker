@@ -43,13 +43,6 @@ struct BoardView: View {
         VStack {
             // This is temporarily made as a simple list, instead of the more ambitious drag and drop view
             List {
-                Button(action: {
-                    viewModel.showCreateEditView = true
-                }, label: {
-                    Text("Add activity")
-                })
-                .buttonStyle(BorderedButtonStyle())
-                
                 Toggle(isOn: $viewModel.showFavoritesOnly) {
                     Text("Show only favorites")
                 }
@@ -72,12 +65,26 @@ struct BoardView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
+                
+                ToolbarItem {
+                    Button(action: {
+                        viewModel.showCreateEditView = true
+                    }) {
+                        Label("Add Item", systemImage: "plus")
+                    }
+                }
             }
             .navigationTitle("Activities")
             .alert("New activity", isPresented: $viewModel.showCreateEditView) {
-                TextField("Name", text: $newActivity.name)
+                TextField("Name of activity", text: $newActivity.name)
                 
                 Button(action: {
+                    // TODO: Disable if the name is still empty
+                    
+                    
+                    // If "show only favorites is enabled, the newly added activity will be a favorite"
+                    newActivity.isFavorite = viewModel.showFavoritesOnly
+                    
                     modelContext.insert(newActivity)
                     dismiss()
                     newActivity = Activity("") // making ready for next activity
@@ -87,7 +94,7 @@ struct BoardView: View {
                     dismiss()
                 }) {Text("Cancel")}
             } message: {
-                Text("Please the name of the new activity")
+                Text("Please write the name of the new activity")
             }
         }
     }

@@ -15,6 +15,8 @@ struct TrackingControllerView: View {
     
     // TODO: All this logic should be moved
     
+    // It may make sense to make a "TrackingControllerViewLayout? Which is only the view dosen't use SwiftData? "
+    
     private let controller = TimeRegistrationController()
     
     var currentActivityName: String? {
@@ -106,12 +108,12 @@ struct TrackingControllerView: View {
     }
 }
 
-/*
+
 #Preview(traits: .sizeThatFitsLayout) {
-    TrackingControllerView(timeRegistrations: [])
+    TrackingControllerView()
         .modelContainer(SampleData.shared.modelContainer)
 }
-*/
+
 
 extension TrackingControllerView {
     

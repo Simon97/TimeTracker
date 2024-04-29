@@ -19,6 +19,19 @@ class SampleData {
         modelContainer.mainContext
     }
     
+    var timeRegistrations: [TimeRegistration] = [
+        TimeRegistration(startTime: .now, activity: Activity.sampleData[0]),
+        TimeRegistration(startTime: .now, activity: Activity.sampleData[1]),
+        TimeRegistration(startTime: .now, activity: Activity.sampleData[2])
+    ]
+    
+    // Construct a list of TimeRegistrations ... ?
+    
+    var timeRegistration: TimeRegistration {
+        let timeReg = TimeRegistration(startTime: .now, activity: activity)
+        return timeReg
+    }
+    
     private init() {
         let schema = Schema([
             Board.self,
@@ -53,5 +66,7 @@ class SampleData {
         Activity.sampleData[0]
     }
     
-    
+    var activityWithLongName: Activity {
+        Activity.sampleData[2]
+    }
 }

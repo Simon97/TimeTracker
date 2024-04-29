@@ -23,9 +23,10 @@ class Activity {
     
     var board: Board?
     
-    init(_ name: String) {
+    init(_ name: String, isFavorite: Bool = false) {
         self.uuid = UUID()
         self.name = name
+        self.isFavorite = isFavorite
         self.timeRegistrations = []
     }
     
@@ -35,7 +36,9 @@ class Activity {
     
     static let sampleData = [
         Activity("Activity with a name"),
-        Activity("Make release ready for App Store"),
+        Activity("Make release ready for App Store", isFavorite: true),
         Activity("Implement Apple Pay as a payment option to some app"),
+        Activity("Add LiveActivity for TimeTracker app"),
+        Activity("Add LiveWidget for TimeTracker, to show how many hours spend on top 3/5 tasks, and maybe the total time"),
     ]
 }

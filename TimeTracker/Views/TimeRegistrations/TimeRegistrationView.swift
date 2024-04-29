@@ -12,11 +12,13 @@ struct TimeRegistrationView: View {
     var timeRegistration: TimeRegistration
     
     var body: some View {
-        VStack {
-            HStack(alignment: .center) {
-                Text(timeRegistration.activity?.name ?? "")
+        VStack(alignment: .leading) {
+            Text(timeRegistration.activity?.name ?? "")
+                .bold()
+            HStack() {
                 Text(timeRegistration.startTime.formatted())
                 if timeRegistration.endTime != nil {
+                    Spacer()
                     Text((timeRegistration.endTime)?.formatted() ?? "")
                 }
             }
@@ -24,4 +26,16 @@ struct TimeRegistrationView: View {
                 .font(.system(size: 10))
         }
     }
+}
+
+#Preview {
+    TimeRegistrationView(
+        timeRegistration: TimeRegistration(startTime: .now, activity: SampleData.shared.activity)
+    )
+}
+
+#Preview("Long name activity") {
+    TimeRegistrationView(
+        timeRegistration: TimeRegistration(startTime: .now, activity: SampleData.shared.activityWithLongName)
+    )
 }

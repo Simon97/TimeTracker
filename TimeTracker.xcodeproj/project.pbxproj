@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6000404C2B6E25680080FD2F /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6000404B2B6E25680080FD2F /* DeleteButton.swift */; };
 		602A21AC2BBBB2D700994FAD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602A21AB2BBBB2D700994FAD /* ViewModel.swift */; };
-		602A21B02BC3C02F00994FAD /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602A21AF2BC3C02F00994FAD /* ModelData.swift */; };
 		602B6ED32B5710EE0006614A /* TrackingControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B6ED22B5710EE0006614A /* TrackingControllerView.swift */; };
 		6041D7BB2B57036200C9668D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6041D7BA2B57036200C9668D /* ContentView.swift */; };
 		605117812B7D1C880061A736 /* ActivitiesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605117802B7D1C880061A736 /* ActivitiesTabView.swift */; };
@@ -36,7 +35,6 @@
 /* Begin PBXFileReference section */
 		6000404B2B6E25680080FD2F /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		602A21AB2BBBB2D700994FAD /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		602A21AF2BC3C02F00994FAD /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		602B6ED22B5710EE0006614A /* TrackingControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingControllerView.swift; sourceTree = "<group>"; };
 		6041D7BA2B57036200C9668D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		605117802B7D1C880061A736 /* ActivitiesTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesTabView.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 				605222642B54769400F603B8 /* Activity.swift */,
 				6051178A2B8099DA0061A736 /* README.md */,
 				60C34D3D2BB732D600ADA95D /* Board.swift */,
-				602A21AF2BC3C02F00994FAD /* ModelData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -283,7 +280,6 @@
 				605222622B5474B500F603B8 /* TimeRegistration.swift in Sources */,
 				60D0C9362B61849C0091E6EC /* TTTextFieldStyle.swift in Sources */,
 				605117882B8098CB0061A736 /* TimeRegistrationController.swift in Sources */,
-				602A21B02BC3C02F00994FAD /* ModelData.swift in Sources */,
 				605117832B7D1D3C0061A736 /* TimeRegistrationsTab.swift in Sources */,
 				60AE7A162BDDA1B30051954C /* SampleData.swift in Sources */,
 				605222542B54737600F603B8 /* TimeTrackerApp.swift in Sources */,

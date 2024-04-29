@@ -23,7 +23,6 @@ struct FavoriteButton: View {
     return FavoriteButtonPreviewWrapper()
 }
 
-/* Making a wrapper around the view with state, to make it react in the preview */
 struct FavoriteButtonPreviewWrapper: View {
     @State private var isSetInitialTrue: Bool = true
     @State private var isSetInitialFalse: Bool = false

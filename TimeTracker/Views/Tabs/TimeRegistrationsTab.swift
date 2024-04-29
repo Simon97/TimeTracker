@@ -10,13 +10,13 @@ import SwiftData
 
 struct TimeRegistrationsTab: View {
     
-    @Query private var timeRegistrations: [TimeRegistration]
+    @Query(sort: \TimeRegistration.startTime)
+    private var timeRegistrations: [TimeRegistration]
     
     var body: some View {
         NavigationStack {
             List {
                 Section("Registrations (\(timeRegistrations.count))") {
-                    
                     ForEach(timeRegistrations) { registration in
                         TimeRegistrationView(timeRegistration: registration)
                     }
@@ -32,22 +32,7 @@ struct TimeRegistrationsTab: View {
     }
 }
 
-/*
 #Preview {
-    TimeRegistrationsTab(timeRegistrations: [])
-}
- */
-
-extension TimeRegistrationsTab {
-    
-    @Observable
-    class ViewModel {
-        
-        var timeRegistrations: [TimeRegistration]
-        
-        init(timeRegistrations: [TimeRegistration]) {
-            self.timeRegistrations = timeRegistrations
-        }
-    }
-    
+    TimeRegistrationsTab()
+        .modelContainer(SampleData.shared.modelContainer)
 }

@@ -22,6 +22,12 @@ struct PlayPauseButton: View {
     }
 }
 
-#Preview {
+#Preview("Playing") {
     PlayPauseButton(isPlaying: true, action: {})
+        .padding()
+}
+
+#Preview("Paused/Stopped") {
+    PlayPauseButton(isPlaying: false, action: {})
+        .padding()
 }

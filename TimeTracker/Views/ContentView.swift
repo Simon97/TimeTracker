@@ -26,12 +26,10 @@ struct ContentView: View {
     }
 }
 
-// Add Sample data class for this ...
-/*
- #Preview {
- ContentView()
- }
- */
+#Preview {
+    ContentView()
+        .modelContainer(SampleData.shared.modelContainer)
+}
 
 
 extension ContentView {

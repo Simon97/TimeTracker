@@ -10,16 +10,27 @@ import SwiftUI
 struct ActivityView: View {
     
     @Bindable var activity: Activity
+    let isSelected: Bool
     var deleteActivity: () -> Void
     
+    init(activity: Activity, isSelected: Bool = false, deleteActivity: @escaping () -> Void) {
+        self.activity = activity
+        self.isSelected = isSelected
+        self.deleteActivity = deleteActivity
+    }
+    
     var body: some View {
-        VStack {
+        HStack {
             HStack {
                 Text(activity.name)
                 Spacer()
-                FavoriteButton(isFavourite: $activity.isFavorite)
-                DeleteButton(action: deleteActivity)
             }
+            //.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+            .background(isSelected ? .orange : .clear)
+            .cornerRadius(15)
+            
+            FavoriteButton(isFavourite: $activity.isFavorite)
+            DeleteButton(action: deleteActivity)
         }
     }
 }
@@ -27,6 +38,14 @@ struct ActivityView: View {
 #Preview {
     ActivityView(
         activity: SampleData.shared.activity,
+        deleteActivity: {}
+    )
+}
+
+#Preview("Selected activity") {
+    ActivityView(
+        activity: SampleData.shared.activity,
+        isSelected: true,
         deleteActivity: {}
     )
 }
