@@ -13,7 +13,7 @@ struct BoardView: View {
     
     @State private var viewModel = ViewModel()
     
-    @Query private var activities: [Activity]
+    @Query(sort: \Activity.name) private var activities: [Activity]
     @Query private var timeRegistrations: [TimeRegistration]
     
     @State private var newActivity: Activity = Activity("")
@@ -41,7 +41,6 @@ struct BoardView: View {
     
     var body: some View {
         VStack {
-            // This is temporarily made as a simple list, instead of the more ambitious drag and drop view
             List {
                 Toggle(isOn: $viewModel.showFavoritesOnly) {
                     Text("Show only favorites")
@@ -64,14 +63,17 @@ struct BoardView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
+                        .foregroundStyle(.teal)
                 }
                 
                 ToolbarItem {
                     Button(action: {
                         viewModel.showCreateEditView = true
                     }) {
-                        Label("Add Item", systemImage: "plus")
+                        Image(systemName: "plus")
+                            .foregroundStyle(.teal)
                     }
+                    
                 }
             }
             .navigationTitle("Activities")
@@ -81,18 +83,24 @@ struct BoardView: View {
                 Button(action: {
                     // TODO: Disable if the name is still empty
                     
-                    
                     // If "show only favorites is enabled, the newly added activity will be a favorite"
                     newActivity.isFavorite = viewModel.showFavoritesOnly
+                    
+                    // Trimming, just in case the user added a space in the end
+                    newActivity.name = newActivity.name.trimmingCharacters(in: .whitespacesAndNewlines)
                     
                     modelContext.insert(newActivity)
                     dismiss()
                     newActivity = Activity("") // making ready for next activity
                 }) {Text("Save")}
+                    .disabled(newActivity.name.isEmpty)
                 
                 Button(action: {
                     dismiss()
-                }) {Text("Cancel")}
+                }) {
+                    Text("Cancel")
+                }
+                
             } message: {
                 Text("Please write the name of the new activity")
             }

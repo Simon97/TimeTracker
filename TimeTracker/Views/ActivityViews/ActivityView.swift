@@ -25,7 +25,9 @@ struct ActivityView: View {
                 Text(activity.name)
                 Spacer()
             }
-            //.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+            .padding(
+                EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+            )
             .background(isSelected ? .orange : .clear)
             .cornerRadius(15)
             

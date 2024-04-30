@@ -22,7 +22,7 @@ struct ContentView: View {
             ActivitiesTabView()
             TimeRegistrationsTab()
         }
-        .background(.black)
+        .tint(.teal)
     }
 }
 
@@ -30,28 +30,3 @@ struct ContentView: View {
     ContentView()
         .modelContainer(SampleData.shared.modelContainer)
 }
-
-
-extension ContentView {
-    
-    @Observable
-    class ViewModel {
-        
-        var boards: [Board]
-        
-        var timeRegistrations: [TimeRegistration] {
-            var regs = [TimeRegistration]()
-            for activity in boards[0].activities {
-                for registration in activity.timeRegistrations {
-                    regs.append(registration)
-                }
-            }
-            return regs
-        }
-        
-        init(boards: [Board]) {
-            self.boards = boards
-        }
-    }
-}
-

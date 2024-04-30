@@ -63,7 +63,6 @@ struct TrackingControllerView: View {
     private func resumeTracking() {
         print("Resuming")
         
-        
         if currentTimeRegistration!.activity != nil {
             let newRegistration = TimeRegistration(
                 startTime: .now,
@@ -71,26 +70,52 @@ struct TrackingControllerView: View {
             )
             modelContext.insert(newRegistration)
         }
-        
+    }
+    
+    var isPlaying: Bool {
+        controller.newestTimeRegistrationInList(timeRegistrations)?.endTime == nil
     }
     
     var body: some View {
-        HStack {
-            VStack {
+        HStack(alignment: .center) {
+            VStack(alignment: .leading) {
                 Text(currentActivityName ?? "Pick an activity to start tracking")
-                // Text("Time spend on task? Or time in total?")
+                
+                Divider()
+                
+                if isPlaying {
+                    Text(
+                        getStartDateForTimer(
+                            amountOfSeconds:
+                                controller.timeSpendOnTaskonDate(
+                                    timeRegistrations,
+                                    activity: controller.currentActivity(timeRegistrations)!, date: .now
+                                )
+                        ),
+                        style: .timer
+                    )
+                } else {
+                    Text(" ")
+                }
             }
             
             Spacer()
             
-            PlayPauseButton(isPlaying: isTracking,
-                            action: playButtonAction
+            PlayPauseButton(
+                isPlaying: isTracking,
+                action: playButtonAction
             )
             .disabled(currentTimeRegistration == nil)
             .frame(width: 42)
+            .padding()
             
         }
-        .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
+        .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
+        .frame(maxWidth: .infinity)
+        .background {
+            Color.teal
+        }
+        .cornerRadius(15)
     }
     
     

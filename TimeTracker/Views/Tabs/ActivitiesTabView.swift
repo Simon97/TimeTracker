@@ -19,11 +19,18 @@ struct ActivitiesTabView: View {
                 BoardView()
                 
                 TrackingControllerView()
+                    .padding(
+                        EdgeInsets(
+                            top: 0,
+                            leading: 4,
+                            bottom: 0,
+                            trailing: 4)
+                    )
             }
             .navigationTitle("Activities")
         }
         .tabItem {
-            Label("Activities", systemImage: "list.bullet")
+            Label("Activities", systemImage: "list.bullet").foregroundStyle(Color.teal)
         }
         .tag(Tab.activities)
     }

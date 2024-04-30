@@ -17,35 +17,29 @@ class TimeRegistrationController {
     
     /**
      Returns nil, if the given TimeRegistration array is empty
-     Has the side-effect that the array will become sorted (intended)
      */
     func newestTimeRegistrationInList(_ timeRegistrations: [TimeRegistration]) -> TimeRegistration? {
         var copy = timeRegistrations
         sortByDate(&copy)
         return copy.first
-        // return timeRegistrations.first // This will of course not work ...
     }
     
-    
-    /*
-    
-    func currentTask(_ timeRegistrations: inout [TimeRegistration]) -> Task? {
-        currentTimeRegistration(&timeRegistrations)?.task
+    func currentActivity(_ timeRegistrations: [TimeRegistration]) -> Activity? {
+        newestTimeRegistrationInList(timeRegistrations)?.activity
     }
     
     /**
      Returns number of seconds spend on the task the given date
      */
-    func timeSpendOnTaskonDate(_ timeRegistrations: [TimeRegistration], task: Task, date: Date) -> TimeInterval {
-        let registrationsForTaskOnDate = timeRegistrationsForDay(timeRegistrations: task.timeRegistrations, date: date)
-    
+    func timeSpendOnTaskonDate(_ timeRegistrations: [TimeRegistration], activity: Activity, date: Date) -> TimeInterval {
+        let registrationsForTaskOnDate = timeRegistrationsForDay(timeRegistrations: activity.timeRegistrations, date: date)
+        
         var amountOfSecondsSpend = 0.0
         for registration in registrationsForTaskOnDate {
             let timeSpend = secondsBetweenDates(
                 date1: registration.startTime,
                 date2: registration.endTime ?? .now // if the endTime is still nil, it is the ongoing registration
             )
-            
             amountOfSecondsSpend += timeSpend
         }
         return amountOfSecondsSpend
@@ -67,12 +61,10 @@ class TimeRegistrationController {
         Calendar.current.isDate(first, equalTo: second, toGranularity: .day)
     }
     
-    private func timeRegistrationsForTask(timeRegistrations: [TimeRegistration], task: Task) -> [TimeRegistration] {
+    private func timeRegistrationsForTask(timeRegistrations: [TimeRegistration], activity: Activity) -> [TimeRegistration] {
         let timeRegistrationsForGivenTask = timeRegistrations.filter({ r in
-            r.task === task
+            r.activity === activity
         })
         return timeRegistrationsForGivenTask
     }
-    */
-    
 }
