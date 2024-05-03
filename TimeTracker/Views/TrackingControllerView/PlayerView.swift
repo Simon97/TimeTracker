@@ -15,6 +15,12 @@ struct PlayerView: View {
     var disabled: Bool
     var amountOfSecondsPlayed: TimeInterval
     
+    var formattedTime: String {
+        let controller = TimeRegistrationController()
+        let interval = amountOfSecondsPlayed
+        return controller.formatToTime(amountOfSeconds: interval)
+    }
+    
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
@@ -26,7 +32,7 @@ struct PlayerView: View {
                 if isPlaying {
                     Text(getStartDateForTimer(amountOfSeconds: amountOfSecondsPlayed), style: .timer)
                 } else {
-                    Text(amountOfSecondsPlayed.formatted()) // TODO: Format better
+                    Text(formattedTime)
                 }
             }
             
@@ -56,14 +62,6 @@ struct PlayerView: View {
         )
         return timerStartTime ?? .now
     }
-    
-    /* This might be needed somewhere
-    var formattedTime: String {
-        let interval = controller.timeSpendOnActivityonDate(timeRegistrations, activity: controller.currentActivity(timeRegistrations) ?? Activity("Something"), date: .now)
-        
-        return controller.formatToTime(amountOfSeconds: interval)
-    }
-    */
 }
 
 #Preview("Playing") {

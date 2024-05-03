@@ -28,6 +28,15 @@ struct TrackingControllerView: View {
         currentTimeRegistration?.activity
     }
     
+    var secondsSpendOnCurrentActivity: TimeInterval {
+        let controller = TimeRegistrationController()
+        return controller.timeSpendOnActivityonDate(
+            timeRegistrations,
+            activity: currentActivity ?? Activity("Dumb"),
+            date: .now
+        )
+    }
+    
     var isPlaying: Bool {
         // This is a bit cryptic, but we need to consider that tracking can
         // be started by clicking on an activity on the list, which changes
@@ -73,7 +82,7 @@ struct TrackingControllerView: View {
             nameOfPlayableItem:
                 currentActivity?.name ?? "Pick an activity to start tracking",
             disabled: currentTimeRegistration == nil,
-            amountOfSecondsPlayed: 22
+            amountOfSecondsPlayed: secondsSpendOnCurrentActivity
         )
     }
 }
