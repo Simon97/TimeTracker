@@ -9,11 +9,12 @@ import SwiftUI
 
 struct PlayPauseButton: View {
     
-    var isPlaying: Bool
-    let action: () -> Void
+    @Binding var isPlaying: Bool
     
     var body: some View {
-        Button(action: action, label: {
+        Button(action: {
+            isPlaying.toggle()
+        }, label: {
             Image(systemName: isPlaying ? "pause.circle" : "play.circle")
                 .resizable()
                 .scaledToFit()
@@ -23,11 +24,11 @@ struct PlayPauseButton: View {
 }
 
 #Preview("Playing") {
-    PlayPauseButton(isPlaying: true, action: {})
+    PlayPauseButton(isPlaying: .constant(true))
         .padding()
 }
 
 #Preview("Paused/Stopped") {
-    PlayPauseButton(isPlaying: false, action: {})
+    PlayPauseButton(isPlaying: .constant(false))
         .padding()
 }

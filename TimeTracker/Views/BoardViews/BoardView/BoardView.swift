@@ -40,6 +40,9 @@ struct BoardView: View {
     }
     
     var body: some View {
+        
+        // TODO: Add a no activities view to show if there are no activities yet, or if  all are deleted
+        
         VStack {
             List {
                 Toggle(isOn: $viewModel.showFavoritesOnly) {
@@ -49,6 +52,7 @@ struct BoardView: View {
                 ForEach(filteredActivities, id: \.uuid) { activity in
                     ActivityView(
                         activity: activity,
+                        isSelected: TimeRegistrationController().currentActivity(timeRegistrations)?.uuid == activity.uuid,
                         deleteActivity: {
                             modelContext.delete(activity)
                         }

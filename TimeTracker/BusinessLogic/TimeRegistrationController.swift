@@ -9,6 +9,14 @@ import Foundation
 
 class TimeRegistrationController {
     
+    func formatToTime(amountOfSeconds: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        
+        formatter.unitsStyle = .positional
+        return formatter.string(from: amountOfSeconds)!
+    }
+    
     func sortByDate(_ timeRegistrations: inout [TimeRegistration]) {
         timeRegistrations.sort(by: { r1, r2 in
             r1.startTime.compare(r2.startTime) == .orderedDescending
@@ -31,7 +39,7 @@ class TimeRegistrationController {
     /**
      Returns number of seconds spend on the task the given date
      */
-    func timeSpendOnTaskonDate(_ timeRegistrations: [TimeRegistration], activity: Activity, date: Date) -> TimeInterval {
+    func timeSpendOnActivityonDate(_ timeRegistrations: [TimeRegistration], activity: Activity, date: Date) -> TimeInterval {
         let registrationsForTaskOnDate = timeRegistrationsForDay(timeRegistrations: activity.timeRegistrations, date: date)
         
         var amountOfSecondsSpend = 0.0

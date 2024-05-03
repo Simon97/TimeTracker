@@ -13,7 +13,9 @@ struct ActivityView: View {
     let isSelected: Bool
     var deleteActivity: () -> Void
     
-    init(activity: Activity, isSelected: Bool = false, deleteActivity: @escaping () -> Void) {
+    init(activity: Activity,
+         isSelected: Bool = false,
+         deleteActivity: @escaping () -> Void) {
         self.activity = activity
         self.isSelected = isSelected
         self.deleteActivity = deleteActivity
@@ -32,7 +34,9 @@ struct ActivityView: View {
             .cornerRadius(15)
             
             FavoriteButton(isFavourite: $activity.isFavorite)
-            DeleteButton(action: deleteActivity)
+            
+            // This is removed for now, since it can be deleted from the list
+            // DeleteButton(action: deleteActivity)
         }
     }
 }
