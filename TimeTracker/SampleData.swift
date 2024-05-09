@@ -63,7 +63,7 @@ class SampleData {
     }
     
     var activity: Activity {
-        Activity.sampleData[0]
+        Activity.sampleData[3]
     }
     
     var activityWithLongName: Activity {

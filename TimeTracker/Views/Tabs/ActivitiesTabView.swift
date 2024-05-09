@@ -30,7 +30,7 @@ struct ActivitiesTabView: View {
             .navigationTitle("Activities")
         }
         .tabItem {
-            Label("Activities", systemImage: "list.bullet").foregroundStyle(Color.teal)
+            Label(Tab.activities.rawValue, systemImage: "list.bullet").foregroundStyle(Color.teal)
         }
         .tag(Tab.activities)
     }
@@ -40,20 +40,4 @@ struct ActivitiesTabView: View {
 #Preview {
     ActivitiesTabView()
         .modelContainer(SampleData.shared.modelContainer)
-}
-
-extension ActivitiesTabView {
-    
-    @Observable
-    class ViewModel {
-        
-        var board: Board
-        var timeRegistrations: [TimeRegistration]
-        
-        init(board: Board, timeRegistrations: [TimeRegistration]) {
-            self.board = board
-            self.timeRegistrations = timeRegistrations
-        }
-    }
-    
 }

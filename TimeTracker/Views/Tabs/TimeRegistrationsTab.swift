@@ -17,6 +17,7 @@ struct TimeRegistrationsTab: View {
     
     var controller = TimeRegistrationController()
     
+    @State private var presentEditView = false
     
     var body: some View {
         NavigationStack {
@@ -28,14 +29,33 @@ struct TimeRegistrationsTab: View {
                         
                         let interval = controller.timeSpendOnActivityonDate(timeRegistrations, activity: activity, date: .now)
                         
-                        
                         Text("\(activity.name): \(controller.formatToTime(amountOfSeconds: interval))")
                     }
                 }
                 
                 Section("Registrations (\(timeRegistrations.count))") {
                     ForEach(timeRegistrations) { registration in
-                        TimeRegistrationView(timeRegistration: registration)
+                        
+                        // TODO: Consider to put the VStack inside the TimeRegistrationView instead
+                        HStack {
+                            TimeRegistrationView(timeRegistration: registration)
+                            
+                            Spacer()
+                            
+                            Button {
+                                presentEditView = true
+                                
+                            } label: {
+                                Image(systemName: "pencil")
+                            }
+                        }
+                        .sheet(isPresented: $presentEditView) {
+                            NavigationStack {
+                                TimeRegistrationEditView(
+                                    timeRegistration: registration
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -43,7 +63,7 @@ struct TimeRegistrationsTab: View {
             .navigationTitle("Time Registrations")
         }
         .tabItem {
-            Label("Time Registrations", systemImage: "stopwatch")
+            Label(Tab.timeRegistrations.rawValue, systemImage: "stopwatch")
         }
         .tag(Tab.timeRegistrations)
     }

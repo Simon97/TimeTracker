@@ -33,7 +33,7 @@ struct ExpandSwitchPreview: View {
     var body: some View {
         VStack {
             CollapseSwitch(isCollapsed: $isCollapsed)
-            Text("Value: " + (isCollapsed ? "Open" : "Closed"))
+            Text("Value: " + (isCollapsed ? "Collapsed" : "Expanded"))
         }
     }
 }

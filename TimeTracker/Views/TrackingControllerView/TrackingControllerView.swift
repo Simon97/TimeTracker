@@ -39,7 +39,7 @@ struct TrackingControllerView: View {
     
     var isPlaying: Bool {
         // This is a bit cryptic, but we need to consider that tracking can
-        // be started by clicking on an activity on the list, which changes
+        // be started by clicking on an activity from the list, which changes
         // the state without using the isTrackingBinding
         (currentTimeRegistration != nil &&
          currentTimeRegistration?.endTime == nil) || isTracking
@@ -70,7 +70,7 @@ struct TrackingControllerView: View {
     var body: some View {
         
         let isTrackingBinding = Binding(
-            get: { self.isTracking || isPlaying },
+            get: { isPlaying },
             set: { val in
                 playButtonAction()
                 self.isTracking = val

@@ -38,6 +38,7 @@ class TimeRegistrationController {
     
     /**
      Returns number of seconds spend on the task the given date
+     Note: This does *currently* not support if a registration starts and stops at different days.
      */
     func timeSpendOnActivityonDate(_ timeRegistrations: [TimeRegistration], activity: Activity, date: Date) -> TimeInterval {
         let registrationsForTaskOnDate = timeRegistrationsForDay(timeRegistrations: activity.timeRegistrations, date: date)

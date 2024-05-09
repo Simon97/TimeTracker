@@ -8,10 +8,9 @@
 import SwiftData
 import SwiftUI
 
-enum Tab {
-    case favorites
-    case activities
-    case timeRegistrations
+enum Tab: String {
+    case activities = "Activities"
+    case timeRegistrations = "Time Registrations"
 }
 
 struct ContentView: View {
