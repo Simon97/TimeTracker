@@ -28,6 +28,12 @@ struct TimeRegistrationEditView: View {
     let helpTextNew = "Here, you can add missing registrations, if you forgot to track some time"
     let helpTextEdit = "Here, you can adjust the start and end time for a given Time Registration, in case you forgot to start or stop the tracking"
     
+    var timeRegistrationCheckerResponse: TimeRegistrationCheckerResponse {
+        let result = TimeRegistrationChecker
+            .checkStartBeforeEnd(timeRegistration: timeRegistration)
+        return result
+    }
+    
     var body: some View {
         
         VStack(alignment: .leading) {
@@ -43,8 +49,29 @@ struct TimeRegistrationEditView: View {
                 displayedComponents: [.hourAndMinute]
             )
             
+            if !timeRegistrationCheckerResponse.isGood {
+                Text(timeRegistrationCheckerResponse.errorMessage ?? "")
+                    .foregroundStyle(Color.red)
+                    .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                    .frame(maxWidth: .infinity)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(.red, lineWidth: 1)
+                    )
+            }
+            
             Text(isNew ? helpTextNew : helpTextEdit)
-                .padding(EdgeInsets(top: 16, leading: 0, bottom: 64, trailing: 0))
+                .padding()
+                .overlay(
+                    
+                    // TODO: Add some kind of lightbulb to indicate a hint
+                    
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.primary, lineWidth: 1)
+                )
+                .frame(maxWidth: .infinity)
+                .padding(EdgeInsets(top: 16, leading: 0, bottom: 32, trailing: 0))
+            
             
             HStack {
                 Button {
@@ -58,14 +85,14 @@ struct TimeRegistrationEditView: View {
             Spacer()
         }
         .padding()
-        .navigationTitle(isNew ? "Add registration" : "Edit registration")
+        .navigationTitle(isNew ? "Add Registration" : "Edit Registration")
     }
 }
 
 #Preview("New") {
     NavigationStack {
         TimeRegistrationEditView(
-            timeRegistration: SampleData.shared.timeRegistration,
+            timeRegistration: SampleData.shared.timeRegistrationCompleted,
             isNew: true
         )
     }
@@ -74,8 +101,9 @@ struct TimeRegistrationEditView: View {
 #Preview("Edit") {
     NavigationStack {
         TimeRegistrationEditView(
-            timeRegistration: SampleData.shared.timeRegistration,
+            timeRegistration: SampleData.shared.timeRegistrationCompleted,
             isNew: false
         )
     }
 }
+

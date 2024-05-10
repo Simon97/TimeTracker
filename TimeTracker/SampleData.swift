@@ -27,8 +27,14 @@ class SampleData {
     
     // Construct a list of TimeRegistrations ... ?
     
-    var timeRegistration: TimeRegistration {
+    var timeRegistrationOngoing: TimeRegistration {
         let timeReg = TimeRegistration(startTime: .now, activity: activity)
+        return timeReg
+    }
+    
+    var timeRegistrationCompleted: TimeRegistration {
+        let timeReg = TimeRegistration(startTime: .now, activity: activity)
+        timeReg.endTime = .now.addingTimeInterval(4235)
         return timeReg
     }
     
