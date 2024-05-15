@@ -7,21 +7,23 @@
 
 import SwiftUI
 
-/**
- The idea is a "standard" edit view which can also be used to create new entities.
- But I am not sure if the user needs more in order to fix mistakes with registrations they forgot to start
- or stop. And after "fixing" them, some registrations might be overlapping
- */
-
 struct TimeRegistrationEditView: View {
     
     var isNew = false
+    
     @Bindable var timeRegistration: TimeRegistration
+    
+    @State var startTime: Date
+    @State var endTime: Date
     
     @Environment(\.dismiss) private var dismiss
     
     init(timeRegistration: TimeRegistration, isNew: Bool = false) {
         self.timeRegistration = timeRegistration
+        
+        self.startTime = timeRegistration.startTime
+        self.endTime = timeRegistration.endTime ?? .now
+        
         self.isNew = isNew
     }
     
@@ -39,13 +41,13 @@ struct TimeRegistrationEditView: View {
         VStack(alignment: .leading) {
             DatePicker(
                 "Start time",
-                selection: $timeRegistration.startTime,
+                selection: $startTime,
                 displayedComponents: [.hourAndMinute]
             )
             
             DatePicker(
                 "End time",
-                selection: $timeRegistration.endTime.withDefault(value: .now),
+                selection: $endTime, //.withDefault(value: .now),
                 displayedComponents: [.hourAndMinute]
             )
             
@@ -73,12 +75,23 @@ struct TimeRegistrationEditView: View {
                 .padding(EdgeInsets(top: 16, leading: 0, bottom: 32, trailing: 0))
             
             
-            HStack {
+            HStack(spacing: 32) {
                 Button {
                     dismiss()
                 } label: {
-                    Text("Done")
+                    Text("Reset")
                 }
+                .disabled(!timeRegistrationCheckerResponse.isGood)
+                
+                Button {
+                    // We only need to "copy" the parts we can actually change
+                    timeRegistration.startTime = startTime
+                    timeRegistration.endTime = endTime
+                    dismiss()
+                } label: {
+                    Text("Save")
+                }
+                .disabled(!timeRegistrationCheckerResponse.isGood)
             }
             .frame(maxWidth: .infinity)
             

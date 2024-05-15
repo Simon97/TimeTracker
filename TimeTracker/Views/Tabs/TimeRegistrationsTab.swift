@@ -36,31 +36,20 @@ struct TimeRegistrationsTab: View {
                 Section("Registrations (\(timeRegistrations.count))") {
                     ForEach(timeRegistrations) { registration in
                         
-                        // TODO: Consider to put the VStack inside the TimeRegistrationView instead
-                        HStack {
+                        NavigationLink {
+                            TimeRegistrationEditView(
+                                timeRegistration: registration
+                            )
+                        } label: {
+                            // TODO: Consider to put the VStack inside the TimeRegistrationView instead
+                            
                             TimeRegistrationView(timeRegistration: registration)
-                            
-                            Spacer()
-                            
-                            Button {
-                                presentEditView = true
-                                
-                            } label: {
-                                Image(systemName: "pencil")
-                            }
-                        }
-                        .sheet(isPresented: $presentEditView) {
-                            NavigationStack {
-                                TimeRegistrationEditView(
-                                    timeRegistration: registration
-                                )
-                            }
                         }
                     }
                 }
             }
-            .listStyle(.plain)
             .navigationTitle("Time Registrations")
+            .listStyle(.plain)
         }
         .tabItem {
             Label(Tab.timeRegistrations.rawValue, systemImage: "stopwatch")

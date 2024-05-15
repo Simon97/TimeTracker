@@ -34,7 +34,7 @@ class SampleData {
     
     var timeRegistrationCompleted: TimeRegistration {
         let timeReg = TimeRegistration(startTime: .now, activity: activity)
-        timeReg.endTime = .now.addingTimeInterval(4235)
+        timeReg.endTime = .now.addingTimeInterval(1234)
         return timeReg
     }
     

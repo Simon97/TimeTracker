@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData // This is needed to operate on ModelContext (to automatically fix some of the issues for the user)
 
 struct TimeRegistrationCheckerResponse {
     var isGood: Bool
@@ -55,3 +56,51 @@ class TimeRegistrationChecker {
     
 }
 
+struct SuggestedAction {
+    var description: String
+    var action: (ModelContext) -> Void
+}
+
+struct TimeRegistrationSetCheckerResponse {
+    var isGood: Bool
+    var errorMessage: String?
+    
+    // For now, I think we should just tell the user about the issues since a lot of things can go wrong
+    // if we try to fix some of it...
+    var suggestedAction: SuggestedAction?
+    
+    init(isGood: Bool, errorMessage: String? = nil, suggestedAction: SuggestedAction? = nil) {
+        self.isGood = isGood
+        self.errorMessage = errorMessage
+        self.suggestedAction = suggestedAction
+    }
+    
+    static var good = TimeRegistrationCheckerResponse(isGood: true)
+}
+
+class TimeRegistrationSetChecker {
+    
+    /**
+     This checks a that a collection of time registrations is in the right shape and form
+     */
+    static func check(timeRegistrations: [TimeRegistration]) -> [TimeRegistrationSetCheckerResponse] {
+        var results = [TimeRegistrationSetCheckerResponse]()
+        
+        // results.append(checkStartBeforeEnd(timeRegistration: timeRegistration))
+        // Add more checks ...
+        
+        return results
+    }
+    
+    static func checkIfRegistrationOverlapsWithTheRegistrationBefore(
+        timeRegistration: TimeRegistration,
+        timeRegistrations: [TimeRegistration]) -> TimeRegistrationSetCheckerResponse {
+            
+          return TimeRegistrationSetCheckerResponse(isGood: false, errorMessage: "You have a problem!", suggestedAction: SuggestedAction(description: "Wanna fix it?", action: { modelContext in
+          }))
+            
+        }
+    
+    // static func checkIfRegistrationOverlapsWithTheRegistrationAfter(timeRegistration: TimeRegistration, timeRegistrations: [TimeRegistration]) -> TimeRegistrationSetCheckerResponse {}
+    
+}
