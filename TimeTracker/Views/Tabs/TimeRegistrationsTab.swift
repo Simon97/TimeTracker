@@ -10,14 +10,14 @@ import SwiftData
 
 struct TimeRegistrationsTab: View {
     
-    @Query(sort: \TimeRegistration.startTime)
+    @Query(sort: \TimeRegistration.startTime, order: .reverse)
     private var timeRegistrations: [TimeRegistration]
     
     @Query var activities: [Activity]
     
     var controller = TimeRegistrationController()
     
-    @State private var presentEditView = false
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         NavigationStack {
@@ -41,20 +41,29 @@ struct TimeRegistrationsTab: View {
                                 timeRegistration: registration
                             )
                         } label: {
-                            // TODO: Consider to put the VStack inside the TimeRegistrationView instead
-                            
-                            TimeRegistrationView(timeRegistration: registration)
+                            TimeRegistrationView(
+                                timeRegistration: registration
+                            )
                         }
                     }
+                    .onDelete(perform: deleteItems)
                 }
             }
             .navigationTitle("Time Registrations")
-            .listStyle(.plain)
+            // .listStyle(.plain)
         }
         .tabItem {
             Label(Tab.timeRegistrations.rawValue, systemImage: "stopwatch")
         }
         .tag(Tab.timeRegistrations)
+    }
+    
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(timeRegistrations[index])
+            }
+        }
     }
 }
 

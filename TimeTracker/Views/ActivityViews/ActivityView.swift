@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActivityView: View {
-    
+        
     @Bindable var activity: Activity
     let isSelected: Bool
     var deleteActivity: () -> Void
@@ -54,40 +54,4 @@ struct ActivityView: View {
         isSelected: true,
         deleteActivity: {}
     )
-}
-
-extension ActivityView {
-    
-    @Observable
-    class ViewModel {
-        var activity: Activity
-        var timeRegistrations: [TimeRegistration]
-        var deleteActivity: () -> Void
-        
-        var controller = TimeRegistrationController()
-        
-        init(
-            activity: Activity,
-            timeRegistrations: [TimeRegistration],
-            deleteActivity: @escaping () -> Void) {
-                self.activity = activity
-                self.timeRegistrations = timeRegistrations
-                self.deleteActivity = deleteActivity
-            }
-        
-        func addTimeRegistration() {
-            let now = Date.now
-            
-            // If a tracking is ongoing, we end it before adding the new one for the new activity
-            if let ongoingTracking: TimeRegistration = controller.newestTimeRegistrationInList(timeRegistrations) {
-                ongoingTracking.endTime = now
-            }
-            
-            timeRegistrations.append(
-                TimeRegistration(startTime: now, activity: activity)
-            )
-        }
-        
-    }
-    
 }

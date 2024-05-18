@@ -31,8 +31,13 @@ struct TimeRegistrationEditView: View {
     let helpTextEdit = "Here, you can adjust the start and end time for a given Time Registration, in case you forgot to start or stop the tracking"
     
     var timeRegistrationCheckerResponse: TimeRegistrationCheckerResponse {
+        
+        // Constructing a TimeRegistration obj just for this
+        let localReg = TimeRegistration(startTime: startTime, activity: Activity("Dummy"))
+        localReg.endTime = endTime
+        
         let result = TimeRegistrationChecker
-            .checkStartBeforeEnd(timeRegistration: timeRegistration)
+            .checkStartBeforeEnd(timeRegistration: localReg)
         return result
     }
     
@@ -77,14 +82,14 @@ struct TimeRegistrationEditView: View {
             
             HStack(spacing: 32) {
                 Button {
-                    dismiss()
+                    startTime = timeRegistration.startTime
+                    endTime = timeRegistration.endTime ?? .now
                 } label: {
                     Text("Reset")
                 }
-                .disabled(!timeRegistrationCheckerResponse.isGood)
+                .disabled(startTime == timeRegistration.startTime && endTime == timeRegistration.endTime)
                 
                 Button {
-                    // We only need to "copy" the parts we can actually change
                     timeRegistration.startTime = startTime
                     timeRegistration.endTime = endTime
                     dismiss()
