@@ -16,7 +16,7 @@ struct TimeRegistrationEditView: View {
     
     @Bindable var timeRegistration: TimeRegistration
     
-    @State private var activityName: String?
+    @State private var activityId: UUID?
     @State private var startTime: Date
     @State private var endTime: Date
     
@@ -26,7 +26,7 @@ struct TimeRegistrationEditView: View {
         timeRegistration: TimeRegistration, isNew: Bool = false) {
             self.startTime = timeRegistration.startTime
             self.endTime = timeRegistration.endTime ?? .now
-            self.activityName = timeRegistration.activity?.name
+            self.activityId = timeRegistration.activity?.uuid
             self.isNew = isNew
             self.timeRegistration = timeRegistration
         }
@@ -53,14 +53,14 @@ struct TimeRegistrationEditView: View {
             HStack() {
                 Text("Activity:")
                 Spacer()
-                Picker("Activity", selection: $activityName) {
+                Picker("Activity", selection: $activityId) {
                     Text("None")
-                        .tag(nil as String?)
+                        .tag(nil as UUID?)
                     
                     
                     ForEach(activities) { activity in
                         Text(activity.name)
-                            .tag(activity.name as String?)
+                            .tag(activity.uuid as UUID?)
                     }
                 }
                 
@@ -111,14 +111,14 @@ struct TimeRegistrationEditView: View {
                     Button {
                         startTime = timeRegistration.startTime
                         endTime = timeRegistration.endTime ?? .now
-                        activityName = timeRegistration.activity?.name
+                        activityId = timeRegistration.activity?.uuid
                     } label: {
                         Text("Reset")
                     }
                     .disabled(
                         startTime == timeRegistration.startTime &&
                         endTime == timeRegistration.endTime
-                        && activityName == timeRegistration.activity?.name
+                        && activityId == timeRegistration.activity?.uuid
                     )
                 }
                 
@@ -126,10 +126,8 @@ struct TimeRegistrationEditView: View {
                     timeRegistration.startTime = startTime
                     timeRegistration.endTime = endTime
                     
-                    // To reset to the original activity, we need to find the one with the right name
-                    // Because of this, the activities should have different names
                     timeRegistration.activity = activities.first { a in
-                        a.name == activityName
+                        a.uuid == activityId
                     }
                     
                     dismiss()
