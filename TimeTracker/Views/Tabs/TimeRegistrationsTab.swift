@@ -49,6 +49,19 @@ struct TimeRegistrationsTab: View {
                     .onDelete(perform: deleteItems)
                 }
             }
+            .toolbar {
+                if activities.first != nil {
+                    ToolbarItem {
+                        NavigationLink {
+                            NewTimeRegistrationView()
+                            
+                        } label: {
+                            Image(systemName: "plus")
+                                .foregroundStyle(.teal)
+                        }
+                    }
+                }
+            }
             .navigationTitle("Time Registrations")
             // .listStyle(.plain)
         }

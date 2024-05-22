@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import Observation
+import Combine
 
 struct BoardView: View {
     
@@ -32,7 +33,7 @@ struct BoardView: View {
         let controller = TimeRegistrationController()
         let now = Date.now
         
-        // If a tracking is ongoing, we end it before adding the new one for the new activity
+        // If a tracking is ongoing, we end it by adding the end time, before adding the new registration
         if let ongoingTracking: TimeRegistration = controller.newestTimeRegistrationInList(timeRegistrations) {
             ongoingTracking.endTime = now
         }
@@ -83,6 +84,13 @@ struct BoardView: View {
             .navigationTitle("Activities")
             .alert("New activity", isPresented: $viewModel.showCreateEditView) {
                 TextField("Name of activity", text: $newActivity.name)
+                    .onReceive(Just(newActivity.name), perform: { _ in
+                        let limit = 50
+                        if newActivity.name.count > limit {
+                            newActivity.name = String(newActivity.name.prefix(limit))
+                        }
+                    })
+                
                 
                 Button(action: {
                     // TODO: Disable if the name is still empty
@@ -106,6 +114,7 @@ struct BoardView: View {
                 }
                 
             } message: {
+                // TODO: Change this, if the input limit is reached
                 Text("Please write the name of the new activity")
             }
         }

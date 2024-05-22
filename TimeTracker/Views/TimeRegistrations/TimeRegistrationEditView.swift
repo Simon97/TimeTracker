@@ -6,28 +6,35 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TimeRegistrationEditView: View {
     
     var isNew = false
     
+    @Query(sort:\Activity.name) private var activities: [Activity]
+    
     @Bindable var timeRegistration: TimeRegistration
     
-    @State var startTime: Date
-    @State var endTime: Date
+    @State private var activity: Activity?
+    @State private var startTime: Date
+    @State private var endTime: Date
     
     @Environment(\.dismiss) private var dismiss
     
-    init(timeRegistration: TimeRegistration, isNew: Bool = false) {
-        self.timeRegistration = timeRegistration
-        
-        self.startTime = timeRegistration.startTime
-        self.endTime = timeRegistration.endTime ?? .now
-        
-        self.isNew = isNew
-    }
+    init(
+        timeRegistration: TimeRegistration,
+        isNew: Bool = false) {
+            self.timeRegistration = timeRegistration
+            
+            
+            self.startTime = timeRegistration.startTime
+            self.endTime = timeRegistration.endTime ?? .now
+            self.activity = timeRegistration.activity
+            self.isNew = isNew
+        }
     
-    let helpTextNew = "Here, you can add missing registrations, if you forgot to track some time"
+    let helpTextNew = "Here, you can add a missing registration, if you forgot to track some time"
     let helpTextEdit = "Here, you can adjust the start and end time for a given Time Registration, in case you forgot to start or stop the tracking"
     
     var timeRegistrationCheckerResponse: TimeRegistrationCheckerResponse {
@@ -43,7 +50,30 @@ struct TimeRegistrationEditView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        return VStack(alignment: .leading) {
+            
+            HStack() {
+                Text("Activity:")
+                if isNew { // TODO: Make it possilbe to show the right activity to begin with. And remove this if...
+                    
+                    Spacer()
+                    Picker("Activity", selection: $activity) {
+                        Text("None")
+                            .tag(nil as Activity?)
+                        
+                        ForEach(activities) { activity in
+                            Text(activity.name)
+                                .tag(activity as Activity?)
+                        }
+                    }
+                    
+                } else {
+                    Text(timeRegistration.activity?.name ?? "It does not work")
+                }
+            }
+            
+            Divider()
+            
             DatePicker(
                 "Start time",
                 selection: $startTime,
@@ -81,17 +111,26 @@ struct TimeRegistrationEditView: View {
             
             
             HStack(spacing: 32) {
-                Button {
-                    startTime = timeRegistration.startTime
-                    endTime = timeRegistration.endTime ?? .now
-                } label: {
-                    Text("Reset")
+                
+                if !isNew {
+                    Button {
+                        startTime = timeRegistration.startTime
+                        endTime = timeRegistration.endTime ?? .now
+                        activity = timeRegistration.activity
+                    } label: {
+                        Text("Reset")
+                    }
+                    .disabled(
+                        startTime == timeRegistration.startTime &&
+                        endTime == timeRegistration.endTime
+                        && activity == timeRegistration.activity
+                    )
                 }
-                .disabled(startTime == timeRegistration.startTime && endTime == timeRegistration.endTime)
                 
                 Button {
                     timeRegistration.startTime = startTime
                     timeRegistration.endTime = endTime
+                    timeRegistration.activity = activity
                     dismiss()
                 } label: {
                     Text("Save")
@@ -113,6 +152,7 @@ struct TimeRegistrationEditView: View {
             timeRegistration: SampleData.shared.timeRegistrationCompleted,
             isNew: true
         )
+        .modelContainer(SampleData.shared.modelContainer)
     }
 }
 
@@ -122,6 +162,7 @@ struct TimeRegistrationEditView: View {
             timeRegistration: SampleData.shared.timeRegistrationCompleted,
             isNew: false
         )
+        .modelContainer(SampleData.shared.modelContainer)
     }
 }
 
