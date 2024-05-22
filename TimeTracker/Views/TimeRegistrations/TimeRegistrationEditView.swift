@@ -16,22 +16,19 @@ struct TimeRegistrationEditView: View {
     
     @Bindable var timeRegistration: TimeRegistration
     
-    @State private var activity: Activity?
+    @State private var activityName: String?
     @State private var startTime: Date
     @State private var endTime: Date
     
     @Environment(\.dismiss) private var dismiss
     
     init(
-        timeRegistration: TimeRegistration,
-        isNew: Bool = false) {
-            self.timeRegistration = timeRegistration
-            
-            
+        timeRegistration: TimeRegistration, isNew: Bool = false) {
             self.startTime = timeRegistration.startTime
             self.endTime = timeRegistration.endTime ?? .now
-            self.activity = timeRegistration.activity
+            self.activityName = timeRegistration.activity?.name
             self.isNew = isNew
+            self.timeRegistration = timeRegistration
         }
     
     let helpTextNew = "Here, you can add a missing registration, if you forgot to track some time"
@@ -44,6 +41,7 @@ struct TimeRegistrationEditView: View {
         localReg.endTime = endTime
         
         let result = TimeRegistrationChecker
+        // .check(timeRegistration: localReg) TODO: At some point, this should be used to potientially find multiple differnet errors
             .checkStartBeforeEnd(timeRegistration: localReg)
         return result
     }
@@ -54,22 +52,19 @@ struct TimeRegistrationEditView: View {
             
             HStack() {
                 Text("Activity:")
-                if isNew { // TODO: Make it possilbe to show the right activity to begin with. And remove this if...
+                Spacer()
+                Picker("Activity", selection: $activityName) {
+                    Text("None")
+                        .tag(nil as String?)
                     
-                    Spacer()
-                    Picker("Activity", selection: $activity) {
-                        Text("None")
-                            .tag(nil as Activity?)
-                        
-                        ForEach(activities) { activity in
-                            Text(activity.name)
-                                .tag(activity as Activity?)
-                        }
+                    
+                    ForEach(activities) { activity in
+                        Text(activity.name)
+                            .tag(activity.name as String?)
                     }
-                    
-                } else {
-                    Text(timeRegistration.activity?.name ?? "It does not work")
                 }
+                
+                
             }
             
             Divider()
@@ -116,21 +111,27 @@ struct TimeRegistrationEditView: View {
                     Button {
                         startTime = timeRegistration.startTime
                         endTime = timeRegistration.endTime ?? .now
-                        activity = timeRegistration.activity
+                        activityName = timeRegistration.activity?.name
                     } label: {
                         Text("Reset")
                     }
                     .disabled(
                         startTime == timeRegistration.startTime &&
                         endTime == timeRegistration.endTime
-                        && activity == timeRegistration.activity
+                        && activityName == timeRegistration.activity?.name
                     )
                 }
                 
                 Button {
                     timeRegistration.startTime = startTime
                     timeRegistration.endTime = endTime
-                    timeRegistration.activity = activity
+                    
+                    // To reset to the original activity, we need to find the one with the right name
+                    // Because of this, the activities should have different names
+                    timeRegistration.activity = activities.first { a in
+                        a.name == activityName
+                    }
+                    
                     dismiss()
                 } label: {
                     Text("Save")

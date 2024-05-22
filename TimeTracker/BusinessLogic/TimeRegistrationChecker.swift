@@ -9,7 +9,7 @@ import Foundation
 import SwiftData // This is needed to operate on ModelContext (to automatically fix some of the issues for the user)
 
 struct TimeRegistrationCheckerResponse {
-    var isGood: Bool
+    var isGood: Bool // TODO: This should be changed to hasError or something like that
     var errorMessage: String?
     
     init(isGood: Bool, errorMessage: String? = nil) {
