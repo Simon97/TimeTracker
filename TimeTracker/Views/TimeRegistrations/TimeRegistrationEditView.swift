@@ -34,16 +34,23 @@ struct TimeRegistrationEditView: View {
     let helpTextNew = "Here, you can add a missing registration, if you forgot to track some time"
     let helpTextEdit = "Here, you can adjust the start and end time for a given Time Registration, in case you forgot to start or stop the tracking"
     
-    var timeRegistrationCheckerResponse: TimeRegistrationCheckerResponse {
-        
-        // Constructing a TimeRegistration obj just for this
-        let localReg = TimeRegistration(startTime: startTime, activity: Activity("Dummy"))
-        localReg.endTime = endTime
-        
-        let result = TimeRegistrationChecker
-        // .check(timeRegistration: localReg) TODO: At some point, this should be used to potientially find multiple differnet errors
-            .checkStartBeforeEnd(timeRegistration: localReg)
-        return result
+    
+    var timeRegistrationCheckerResponses: [TimeRegistrationCheckerResponse] {
+        let checkerRegistration = TimeRegistrationCheckerInput(
+            startTime: startTime,
+            endTime: endTime,
+            activity: activities.first{ a in
+            a.uuid == activityId
+        })
+        let checker = TimeRegistrationChecker()
+        return checker.check(timeRegistration: checkerRegistration)
+    }
+    
+    var anyErrors: Bool {
+        let oneWithError = timeRegistrationCheckerResponses.firstIndex(where: { response in
+            response.hasError
+        })
+        return oneWithError != nil
     }
     
     var body: some View {
@@ -56,7 +63,6 @@ struct TimeRegistrationEditView: View {
                 Picker("Activity", selection: $activityId) {
                     Text("None")
                         .tag(nil as UUID?)
-                    
                     
                     ForEach(activities) { activity in
                         Text(activity.name)
@@ -81,15 +87,17 @@ struct TimeRegistrationEditView: View {
                 displayedComponents: [.hourAndMinute]
             )
             
-            if !timeRegistrationCheckerResponse.isGood {
-                Text(timeRegistrationCheckerResponse.errorMessage ?? "")
-                    .foregroundStyle(Color.red)
-                    .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-                    .frame(maxWidth: .infinity)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(.red, lineWidth: 1)
-                    )
+            ForEach(timeRegistrationCheckerResponses, id: \.errorMessage) { response in
+                if response.hasError {
+                    Text(response.errorMessage ?? "")
+                        .foregroundStyle(Color.red)
+                        .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                        .frame(maxWidth: .infinity)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(.red, lineWidth: 1)
+                        )
+                }
             }
             
             Text(isNew ? helpTextNew : helpTextEdit)
@@ -134,14 +142,14 @@ struct TimeRegistrationEditView: View {
                 } label: {
                     Text("Save")
                 }
-                .disabled(!timeRegistrationCheckerResponse.isGood)
+                .disabled(anyErrors)
             }
             .frame(maxWidth: .infinity)
             
             Spacer()
         }
         .padding()
-        .navigationTitle(isNew ? "Add Registration" : "Edit Registration")
+        .navigationTitle(isNew ? "New Registration" : "Edit Registration")
     }
 }
 

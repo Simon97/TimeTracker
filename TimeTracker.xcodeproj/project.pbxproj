@@ -99,6 +99,14 @@
 			path = BoardView;
 			sourceTree = "<group>";
 		};
+		603141502C01180E00E017EF /* TimeRegistrationChecker */ = {
+			isa = PBXGroup;
+			children = (
+				60FDAA8E2BED470C00A42416 /* TimeRegistrationChecker.swift */,
+			);
+			path = TimeRegistrationChecker;
+			sourceTree = "<group>";
+		};
 		6051177D2B7D1B410061A736 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				605117872B8098CB0061A736 /* TimeRegistrationController.swift */,
-				60FDAA8E2BED470C00A42416 /* TimeRegistrationChecker.swift */,
 			);
 			path = BusinessLogic;
 			sourceTree = "<group>";
@@ -146,6 +153,7 @@
 		605222522B54737600F603B8 /* TimeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				603141502C01180E00E017EF /* TimeRegistrationChecker */,
 				605117862B80974E0061A736 /* BusinessLogic */,
 				60D0C9342B6184410091E6EC /* ViewModifiers */,
 				605222682B5481E300F603B8 /* Views */,
