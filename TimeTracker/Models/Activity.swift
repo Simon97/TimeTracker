@@ -39,6 +39,6 @@ class Activity {
         Activity("Make release ready for App Store", isFavorite: true),
         Activity("Implement Apple Pay as a payment option to some app"),
         Activity("Add LiveActivity for TimeTracker app"),
-        Activity("Add LiveWidget for TimeTracker, to show how many hours spend on top 3/5 tasks, and maybe the total time"),
+        Activity("Add LiveWidget for TimeTracker to show timespend on top activities"),
     ]
 }
