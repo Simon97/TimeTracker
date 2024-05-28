@@ -32,7 +32,7 @@ struct PlayerView: View {
                 if isPlaying {
                     Text(getStartDateForTimer(amountOfSeconds: amountOfSecondsPlayed), style: .timer)
                 } else {
-                    Text(formattedTime)
+                    Text(TimeIntervalFormatter().format(timeInterval: amountOfSecondsPlayed))
                 }
             }
             
@@ -52,6 +52,7 @@ struct PlayerView: View {
         .cornerRadius(15)
     }
     
+    // TODO: This logic should be moved, since we need it for the registration tab as well, to show the time going ...
     func getStartDateForTimer(amountOfSeconds: Double) -> Date {
         /**
          The start date is the current time minus the amount of seconds spend on the item already.
@@ -78,6 +79,6 @@ struct PlayerView: View {
         isPlaying: .constant(false),
         nameOfPlayableItem: "Like a Rolling Stone",
         disabled: false,
-        amountOfSecondsPlayed: 22
+        amountOfSecondsPlayed: 3120
     )
 }

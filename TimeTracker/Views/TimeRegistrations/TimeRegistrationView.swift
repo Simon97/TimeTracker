@@ -32,10 +32,14 @@ struct TimeRegistrationView: View {
     TimeRegistrationView(
         timeRegistration: TimeRegistration(startTime: .now, activity: SampleData.shared.activity)
     )
+    .padding()
+    .border(.black)
 }
 
 #Preview("Long name activity") {
     TimeRegistrationView(
         timeRegistration: TimeRegistration(startTime: .now, activity: SampleData.shared.activityWithLongName)
     )
+    .padding()
+    .border(.black)
 }

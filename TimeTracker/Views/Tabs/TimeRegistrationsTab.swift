@@ -13,7 +13,7 @@ struct TimeRegistrationsTab: View {
     @Query(sort: \TimeRegistration.startTime, order: .reverse)
     private var timeRegistrations: [TimeRegistration]
     
-    @Query var activities: [Activity]
+    @Query(sort:\Activity.name) var activities: [Activity]
     
     var controller = TimeRegistrationController()
     
@@ -29,7 +29,11 @@ struct TimeRegistrationsTab: View {
                         
                         let interval = controller.timeSpendOnActivityonDate(timeRegistrations, activity: activity, date: .now)
                         
-                        Text("\(activity.name): \(controller.formatToTime(amountOfSeconds: interval))")
+                        HStack {
+                            Text("\(activity.name):")
+                            Spacer()
+                            Text(TimeIntervalFormatter().format(timeInterval: interval))
+                        }
                     }
                 }
                 
