@@ -19,13 +19,18 @@ struct TimeRegistrationsTab: View {
     
     @Environment(\.modelContext) private var modelContext
     
+    
     var body: some View {
         NavigationStack {
+            
+            // TODO: This view needs some kind of DatePicker, making it possible to show how much time spend on different days
+            
+            
+            
             List {
                 Section("Total time on activities") {
                     ForEach(activities) { activity in
                         // TODO: Make a new View for this.
-                        // ... If we are currently doing (tracking) on the given activity, the timer should work as in the TrackingControllerView
                         
                         let interval = controller.timeSpendOnActivityonDate(timeRegistrations, activity: activity, date: .now)
                         
@@ -39,6 +44,7 @@ struct TimeRegistrationsTab: View {
                                 Spacer()
                                 Text(timerStartTime ?? .now, style: .timer)
                             }
+                            .bold()
                             
                         } else {
                             HStack {

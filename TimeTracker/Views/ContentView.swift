@@ -5,7 +5,6 @@
 //  Created by Simon Svendsgaard Nielsen on 16/01/2024.
 //
 
-import SwiftData
 import SwiftUI
 
 enum Tab: String {

@@ -5,10 +5,14 @@
 //  Created by Simon Svendsgaard Nielsen on 29/03/2024.
 //
 
+import Combine
 import SwiftUI
 import SwiftData
 import Observation
-import Combine
+
+/**
+ Grid to show all activities ... Initially made as a list ...
+ */
 
 struct BoardView: View {
     

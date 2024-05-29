@@ -14,7 +14,7 @@ struct TimeRegistrationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(timeRegistration.activity?.name ?? "")
-                .bold()
+                //.bold()
             HStack() {
                 Text(timeRegistration.startTime.formatted())
                 if timeRegistration.endTime != nil {

@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-/**
- Grid to show all activities ... Initially made as a list ...
- */
-
 struct ActivitiesTabView: View {
     
     var body: some View {
