@@ -29,10 +29,23 @@ struct TimeRegistrationsTab: View {
                         
                         let interval = controller.timeSpendOnActivityonDate(timeRegistrations, activity: activity, date: .now)
                         
-                        HStack {
-                            Text("\(activity.name):")
-                            Spacer()
-                            Text(TimeIntervalFormatter().format(timeInterval: interval))
+                        if controller.newestTimeRegistrationInList(timeRegistrations)?.activity == activity &&
+                            controller.newestTimeRegistrationInList(timeRegistrations)?.endTime == nil {
+                            let timerStartTime = Calendar.current.date(
+                                byAdding: .second, value: Int(-interval), to: .now
+                            )
+                            HStack {
+                                Text("\(activity.name):")
+                                Spacer()
+                                Text(timerStartTime ?? .now, style: .timer)
+                            }
+                            
+                        } else {
+                            HStack {
+                                Text("\(activity.name):")
+                                Spacer()
+                                Text(TimeIntervalFormatter().format(timeInterval: interval))
+                            }
                         }
                     }
                 }

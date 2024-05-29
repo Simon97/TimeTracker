@@ -25,7 +25,7 @@ class TimeIntervalFormatter {
         
         let hoursString = String(values.hours)
         let minutesString = formatAmount(amount: values.minutes, hasParent: values.hours > 0)
-        let secondsString = formatAmount(amount: values.seconds, hasParent: values.minutes > 0)
+        let secondsString = formatAmount(amount: values.seconds, hasParent: true)
         
         if values.hours > 0 {
             return "\(hoursString).\(minutesString).\(secondsString)"
