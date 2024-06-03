@@ -16,15 +16,15 @@ import Observation
 
 struct BoardView: View {
     
-    @State private var viewModel = ViewModel()
     
     @Query(sort: \Activity.name) private var activities: [Activity]
     @Query private var timeRegistrations: [TimeRegistration]
     
+    @State private var viewModel = ViewModel()
     @State private var newActivity: Activity = Activity("")
     
     @Environment(\.modelContext) private var modelContext
-    
+    //@Environment(\.editMode) private var editMode
     @Environment(\.dismiss) var dismiss
     
     var filteredActivities: [Activity] {
@@ -46,47 +46,74 @@ struct BoardView: View {
     
     var body: some View {
         
-        // TODO: Add a no activities view to show if there are no activities yet, or if  all are deleted
+        // TODO: Add a no activities view to show if there are no activities
         
         VStack {
             List {
                 Toggle(isOn: $viewModel.showFavoritesOnly) {
                     Text("Show only favorites")
                 }
+                .tint(.teal)
                 
                 ForEach(filteredActivities, id: \.uuid) { activity in
                     ActivityView(
                         activity: activity,
                         isSelected: TimeRegistrationController().currentActivity(timeRegistrations)?.uuid == activity.uuid,
+                        editModeEnabled: viewModel.editMode,
                         deleteActivity: {
                             modelContext.delete(activity)
                         }
                     )
+                    .swipeActions() {
+                        Button {
+                            viewModel.showNewActivityView = true
+                        } label: {
+                            Label("Edit", systemImage: "pencil")
+                        }
+                        
+                        
+                        Button(role: .destructive) {
+                            print("Delete...")
+                        } label: {
+                            Label("Delete", systemImage: "trash.fill")
+                        }
+                    }
                     .onTapGesture(perform: {
                         addTimeRegistration(activity: activity)
                     })
                 }
-                .onDelete(perform: deleteItems)
+                
+                
+                // .onDelete(perform: deleteItems)
                 .buttonStyle(PlainButtonStyle()) // disabling the action when pressing on each cell in the list
             }
             .toolbar {
+                /*
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                         .foregroundStyle(.teal)
                 }
+                */
                 
                 ToolbarItem {
                     Button(action: {
-                        viewModel.showCreateEditView = true
+                        viewModel.editMode.toggle()
+                    }) {
+                        Text(viewModel.editMode ? "Done" : "Edit")
+                    }
+                }
+                
+                ToolbarItem {
+                    Button(action: {
+                        viewModel.showNewActivityView = true
                     }) {
                         Image(systemName: "plus")
-                            .foregroundStyle(.teal)
                     }
-                    
                 }
             }
+            .tint(.teal)
             .navigationTitle("Activities")
-            .alert("New activity", isPresented: $viewModel.showCreateEditView) {
+            .alert("New activity", isPresented: $viewModel.showNewActivityView) {
                 TextField("Name of activity", text: $newActivity.name)
                     .onReceive(Just(newActivity.name), perform: { _ in
                         let limit = 50
@@ -94,7 +121,6 @@ struct BoardView: View {
                             newActivity.name = String(newActivity.name.prefix(limit))
                         }
                     })
-                
                 
                 Button(action: {
                     // TODO: Disable if the name is still empty
@@ -121,6 +147,8 @@ struct BoardView: View {
                 // TODO: Change this, if the input limit is reached
                 Text("Please write the name of the new activity")
             }
+            
+            
         }
     }
     
@@ -129,6 +157,12 @@ struct BoardView: View {
             for index in offsets {
                 modelContext.delete(activities[index])
             }
+        }
+    }
+    
+    private func deleteActivity(_ activity: Activity) {
+        withAnimation {
+            modelContext.delete(activity)
         }
     }
     
@@ -142,3 +176,14 @@ struct BoardView: View {
     }
 }
 
+extension BoardView {
+    
+    @Observable
+    class ViewModel {
+        var showFavoritesOnly = false
+        var showNewActivityView = false
+        var newActivity: Activity = Activity("")
+        
+        var editMode = false
+    }
+}

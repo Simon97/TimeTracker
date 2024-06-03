@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6000404C2B6E25680080FD2F /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6000404B2B6E25680080FD2F /* DeleteButton.swift */; };
 		60264C4C2BE528B1006ED5BF /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60264C4B2BE528B1006ED5BF /* PlayerView.swift */; };
-		602A21AC2BBBB2D700994FAD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602A21AB2BBBB2D700994FAD /* ViewModel.swift */; };
 		602B6ED32B5710EE0006614A /* TrackingControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602B6ED22B5710EE0006614A /* TrackingControllerView.swift */; };
 		603141522C05A94E00E017EF /* TimeIntervalFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603141512C05A94E00E017EF /* TimeIntervalFormatter.swift */; };
 		6041D7BB2B57036200C9668D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6041D7BA2B57036200C9668D /* ContentView.swift */; };
@@ -27,8 +26,8 @@
 		6061896E2BFA837400113E60 /* NewTimeRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6061896D2BFA837400113E60 /* NewTimeRegistrationView.swift */; };
 		607842E62B5B1F8700A78E8C /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E52B5B1F8700A78E8C /* FavoriteButton.swift */; };
 		607842E92B5B204100A78E8C /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607842E82B5B204100A78E8C /* ToggleView.swift */; };
-		60941D792BB8B605001E1B6E /* CreateEditActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60941D782BB8B605001E1B6E /* CreateEditActivityView.swift */; };
 		60AE7A162BDDA1B30051954C /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60AE7A152BDDA1B30051954C /* SampleData.swift */; };
+		60BC2BC82C0BC69A0004E0B1 /* SaveTextDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BC2BC72C0BC69A0004E0B1 /* SaveTextDialog.swift */; };
 		60C34D3E2BB732D600ADA95D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D3D2BB732D600ADA95D /* Board.swift */; };
 		60C34D422BB7382400ADA95D /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D412BB7382400ADA95D /* BoardView.swift */; };
 		60C34D442BB7386200ADA95D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C34D432BB7386200ADA95D /* ActivityView.swift */; };
@@ -41,7 +40,6 @@
 /* Begin PBXFileReference section */
 		6000404B2B6E25680080FD2F /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		60264C4B2BE528B1006ED5BF /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		602A21AB2BBBB2D700994FAD /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		602B6ED22B5710EE0006614A /* TrackingControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingControllerView.swift; sourceTree = "<group>"; };
 		603141512C05A94E00E017EF /* TimeIntervalFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalFormatter.swift; sourceTree = "<group>"; };
 		6041D7BA2B57036200C9668D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,8 +59,8 @@
 		6061896D2BFA837400113E60 /* NewTimeRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimeRegistrationView.swift; sourceTree = "<group>"; };
 		607842E52B5B1F8700A78E8C /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		607842E82B5B204100A78E8C /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
-		60941D782BB8B605001E1B6E /* CreateEditActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditActivityView.swift; sourceTree = "<group>"; };
 		60AE7A152BDDA1B30051954C /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		60BC2BC72C0BC69A0004E0B1 /* SaveTextDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTextDialog.swift; sourceTree = "<group>"; };
 		60C34D3D2BB732D600ADA95D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		60C34D412BB7382400ADA95D /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		60C34D432BB7386200ADA95D /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				60C34D412BB7382400ADA95D /* BoardView.swift */,
-				602A21AB2BBBB2D700994FAD /* ViewModel.swift */,
 			);
 			path = BoardView;
 			sourceTree = "<group>";
@@ -199,6 +196,7 @@
 				6051177D2B7D1B410061A736 /* Tabs */,
 				607842E72B5B201F00A78E8C /* Buttons */,
 				6041D7BA2B57036200C9668D /* ContentView.swift */,
+				60BC2BC72C0BC69A0004E0B1 /* SaveTextDialog.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				60C34D432BB7386200ADA95D /* ActivityView.swift */,
-				60941D782BB8B605001E1B6E /* CreateEditActivityView.swift */,
 			);
 			path = ActivityViews;
 			sourceTree = "<group>";
@@ -322,13 +319,12 @@
 				607842E92B5B204100A78E8C /* ToggleView.swift in Sources */,
 				60FDAA8D2BED267900A42416 /* BindingExtension.swift in Sources */,
 				60264C4C2BE528B1006ED5BF /* PlayerView.swift in Sources */,
-				60941D792BB8B605001E1B6E /* CreateEditActivityView.swift in Sources */,
 				6061896E2BFA837400113E60 /* NewTimeRegistrationView.swift in Sources */,
 				60C34D3E2BB732D600ADA95D /* Board.swift in Sources */,
 				6041D7BB2B57036200C9668D /* ContentView.swift in Sources */,
 				602B6ED32B5710EE0006614A /* TrackingControllerView.swift in Sources */,
-				602A21AC2BBBB2D700994FAD /* ViewModel.swift in Sources */,
 				605222652B54769400F603B8 /* Activity.swift in Sources */,
+				60BC2BC82C0BC69A0004E0B1 /* SaveTextDialog.swift in Sources */,
 				6000404C2B6E25680080FD2F /* DeleteButton.swift in Sources */,
 				6052226C2B54845800F603B8 /* CollapseSwitch.swift in Sources */,
 				60C34D442BB7386200ADA95D /* ActivityView.swift in Sources */,

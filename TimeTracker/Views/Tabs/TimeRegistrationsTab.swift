@@ -19,23 +19,30 @@ struct TimeRegistrationsTab: View {
     
     @Environment(\.modelContext) private var modelContext
     
+    @State private var date = Date.now
+    
+    private var filteredRegistrations: [TimeRegistration] {
+        return timeRegistrations.filter { registration in
+            let sameDay = Calendar.current.isDate(registration.startTime, equalTo: date, toGranularity: .day)
+            
+            return sameDay
+        }
+    }
     
     var body: some View {
         NavigationStack {
-            
-            // TODO: This view needs some kind of DatePicker, making it possible to show how much time spend on different days
-            
-            
-            
             List {
+                DatePicker("Date", selection: $date, displayedComponents: [.date])
+                
                 Section("Total time on activities") {
                     ForEach(activities) { activity in
                         // TODO: Make a new View for this.
                         
-                        let interval = controller.timeSpendOnActivityonDate(timeRegistrations, activity: activity, date: .now)
+                        let interval = controller.timeSpendOnActivityonDate(filteredRegistrations, activity: activity,date: date
+                        )
                         
-                        if controller.newestTimeRegistrationInList(timeRegistrations)?.activity == activity &&
-                            controller.newestTimeRegistrationInList(timeRegistrations)?.endTime == nil {
+                        if controller.newestTimeRegistrationInList(filteredRegistrations)?.activity == activity &&
+                            controller.newestTimeRegistrationInList(filteredRegistrations)?.endTime == nil {
                             let timerStartTime = Calendar.current.date(
                                 byAdding: .second, value: Int(-interval), to: .now
                             )
@@ -56,20 +63,25 @@ struct TimeRegistrationsTab: View {
                     }
                 }
                 
-                Section("Registrations (\(timeRegistrations.count))") {
-                    ForEach(timeRegistrations) { registration in
-                        
-                        NavigationLink {
-                            TimeRegistrationEditView(
-                                timeRegistration: registration
-                            )
-                        } label: {
-                            TimeRegistrationView(
-                                timeRegistration: registration
-                            )
+                if filteredRegistrations.isEmpty {
+                    Text("No registrations made at the selected date")
+                        .listRowBackground(Color.clear)
+                    
+                } else {
+                    Section("Registrations (\(filteredRegistrations.count))") {
+                        ForEach(filteredRegistrations) { registration in
+                            NavigationLink {
+                                TimeRegistrationEditView(
+                                    timeRegistration: registration
+                                )
+                            } label: {
+                                TimeRegistrationView(
+                                    timeRegistration: registration
+                                )
+                            }
                         }
+                        .onDelete(perform: deleteItems)
                     }
-                    .onDelete(perform: deleteItems)
                 }
             }
             .toolbar {

@@ -20,9 +20,9 @@ class SampleData {
     }
     
     var timeRegistrations: [TimeRegistration] = [
-        TimeRegistration(startTime: .now, activity: Activity.sampleData[0]),
-        TimeRegistration(startTime: .now, activity: Activity.sampleData[1]),
-        TimeRegistration(startTime: .now, activity: Activity.sampleData[2])
+        TimeRegistration(startTime: .now, endTime: .now.addingTimeInterval(21500), activity: Activity.sampleData[1]),
+        TimeRegistration(startTime: .now, endTime: .now.addingTimeInterval(7500), activity: Activity.sampleData[2]),
+        TimeRegistration(startTime: .now, activity: Activity.sampleData[0])
     ]
     
     // Construct a list of TimeRegistrations ... ?

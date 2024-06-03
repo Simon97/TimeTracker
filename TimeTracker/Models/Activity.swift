@@ -37,7 +37,6 @@ class Activity {
     static let sampleData = [
         Activity("Activity with a name"),
         Activity("Make release ready for App Store", isFavorite: true),
-        Activity("Implement Apple Pay as a payment option to some app"),
         Activity("Add LiveActivity for TimeTracker app"),
         Activity("Add LiveWidget for TimeTracker to show timespend on top activities"),
     ]
