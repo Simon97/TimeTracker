@@ -11,7 +11,7 @@ import SwiftData // This is needed to operate on ModelContext (to automatically 
 /**
  * For some reason, there are problems when the @Model SwifData attribute is used for temporary objects.
  * It crashes when some of the properties are called. Therefore, we have this struct which is the same as TimeRegistraion, except
- * that it is not a SwiftData @Model
+ * that it is not a SwiftData @Model (and it is a value type as well).
  */
 struct TimeRegistrationCheckerInput {
     var uuid: UUID
@@ -115,8 +115,6 @@ struct TimeRegistrationSetCheckerResponse {
     var isGood: Bool
     var errorMessage: String?
     
-    // For now, I think we should just tell the user about the issues since a lot of things can go wrong
-    // if we try to fix some of it...
     var suggestedAction: SuggestedAction?
     
     init(isGood: Bool, errorMessage: String? = nil, suggestedAction: SuggestedAction? = nil) {

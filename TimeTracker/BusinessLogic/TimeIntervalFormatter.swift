@@ -12,7 +12,7 @@ import Foundation
  * This is used to format a TimeInterval to look like the SwiftUI timer-style.
  * It is needed since we want to show the time as the timer style, but paused.
  
- * It should be possible to do it with SDK functions (I think), but now when the function
+ * It should be possible to do it with SDK functions (I believe), but now when the function
  * is encapsulated here, it can always be changed.
  
  * Note that a TimeInterval is just a typealias for Double (in Swift).

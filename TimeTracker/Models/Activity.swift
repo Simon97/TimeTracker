@@ -34,10 +34,11 @@ class Activity {
         timeRegistrations.append(timeRegistration)
     }
     
+    // Keep in mind that the lenght of the names are blocked to 50 characters
     static let sampleData = [
         Activity("Activity with a name"),
         Activity("Make release ready for App Store", isFavorite: true),
-        Activity("Add LiveActivity for TimeTracker app"),
-        Activity("Add LiveWidget for TimeTracker to show timespend on top activities"),
+        Activity("LiveActivity to play and pause from homescreen"),
+        Activity("LiveWidget to show time spend on top activities"),
     ]
 }

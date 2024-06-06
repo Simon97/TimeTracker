@@ -20,6 +20,7 @@ struct ContentView: View {
             ActivitiesTabView()
             TimeRegistrationsTab()
         }
+        .tint(Color.teal)
     }
 }
 

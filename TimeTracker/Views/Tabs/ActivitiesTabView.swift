@@ -12,7 +12,7 @@ struct ActivitiesTabView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                BoardView()
+                ActivityList()
                 
                 TrackingControllerView()
                     .padding(

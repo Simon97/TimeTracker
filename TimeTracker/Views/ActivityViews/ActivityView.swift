@@ -5,7 +5,6 @@
 //  Created by Simon Svendsgaard Nielsen on 29/03/2024.
 //
 
-import Combine
 import SwiftUI
 
 struct ActivityView: View {
@@ -55,12 +54,14 @@ struct ActivityView: View {
                 }
             }
             .frame(maxWidth: 25)
-                        
-            .alert("Rename activity", isPresented: $showEditView) {
-                SaveTextDialog(input: $activity.name, title: "Name of activity")
-            } message: {
-                Text("Update the name of the activity")
-            }
+                  
+            EditTextDialog(
+                showDialog: $showEditView,
+                input: $activity.name,
+                title: "Name of activity",
+                message: "Edit activity name",
+                inputLengthLimit: 50
+            )
         }
     }
 }
