@@ -13,40 +13,49 @@ struct TrackingControllerView: View {
     @Query var timeRegistrations: [TimeRegistration]
     @Environment(\.modelContext) private var modelContext
     
-    @State private var isTracking = false
+    let controller = TimeRegistrationController()
     
-    init() {
-        self.isTracking = self.currentTimeRegistration?.endTime == nil
+    var isTrackingOnGoing: Bool {
+        controller.isRegistrationOnGoing(timeRegistrations: timeRegistrations)
     }
     
-    var currentTimeRegistration: TimeRegistration? {
-        let controller = TimeRegistrationController()
-        return controller.newestTimeRegistrationInList(timeRegistrations)
-    }
-    
-    var currentActivity: Activity? {
-        currentTimeRegistration?.activity
+    var latestActivity: Activity? {
+        controller.findLastAddedRegistration(timeRegistrations)?.activity
     }
     
     var secondsSpendOnCurrentActivity: TimeInterval {
+        if latestActivity == nil {
+            return 0
+        }
+        
         let controller = TimeRegistrationController()
         return controller.timeSpendOnActivityonDate(
             timeRegistrations,
-            activity: currentActivity ?? Activity("Dumb"),
+            activity: latestActivity!,
             date: .now
         )
     }
     
-    var isPlaying: Bool {
-        // This is a bit cryptic, but we need to consider that tracking can
-        // be started by clicking on an activity from the list, which changes
-        // the state without using the isTrackingBinding
-        (currentTimeRegistration != nil &&
-         currentTimeRegistration?.endTime == nil) || isTracking
+    var body: some View {
+        
+        let isTrackingBinding = Binding(
+            get: { isTrackingOnGoing },
+            set: { _ in
+                playButtonAction()
+            }
+        )
+        
+        PlayerView(
+            isPlaying: isTrackingBinding,
+            nameOfPlayableItem:
+                latestActivity?.name ?? "Pick an activity to start tracking",
+            disabled: latestActivity == nil,
+            amountOfSecondsPlayed: secondsSpendOnCurrentActivity
+        )
     }
     
     func playButtonAction() {
-        if isPlaying {
+        if isTrackingOnGoing {
             pauseTracking()
         } else {
             resumeTracking()
@@ -54,41 +63,19 @@ struct TrackingControllerView: View {
     }
     
     private func pauseTracking() {
-        currentTimeRegistration?.endTime = .now
+        controller.pauseTracking(timeRegistrations: timeRegistrations)
     }
     
     private func resumeTracking() {
-        if currentTimeRegistration!.activity != nil {
-            let newRegistration = TimeRegistration(
-                startTime: .now,
-                activity: currentTimeRegistration!.activity!
-            )
-            modelContext.insert(newRegistration)
-        }
-    }
-    
-    var body: some View {
-        
-        let isTrackingBinding = Binding(
-            get: { isPlaying },
-            set: { val in
-                playButtonAction()
-                self.isTracking = val
-            }
-        )
-        
-        PlayerView(
-            isPlaying: isTrackingBinding,
-            nameOfPlayableItem:
-                currentActivity?.name ?? "Pick an activity to start tracking",
-            disabled: currentTimeRegistration == nil,
-            amountOfSecondsPlayed: secondsSpendOnCurrentActivity
+        controller.resumeTracking(
+            timeRegistrations: timeRegistrations,
+            modelContext: modelContext
         )
     }
 }
 
-
 #Preview(traits: .sizeThatFitsLayout) {
     TrackingControllerView()
         .modelContainer(SampleData.shared.modelContainer)
+        .padding()
 }

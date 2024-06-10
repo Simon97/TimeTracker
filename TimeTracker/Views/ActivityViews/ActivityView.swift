@@ -12,39 +12,39 @@ struct ActivityView: View {
     let editModeEnabled: Bool
     
     @Bindable var activity: Activity
-    let isSelected: Bool
+    let highlight: Bool
     var deleteActivity: () -> Void
     
     @Environment(\.dismiss) var dismiss
     
-    @State private var showEditView = false
+    @State private var showEditNameAlert = false
     
     init(activity: Activity,
-         isSelected: Bool = false,
+         highlight: Bool = false,
          editModeEnabled: Bool,
          deleteActivity: @escaping () -> Void) {
         self.activity = activity
-        self.isSelected = isSelected
+        self.highlight = highlight
         self.editModeEnabled = editModeEnabled
         self.deleteActivity = deleteActivity
     }
     
     var body: some View {
         HStack {
-            HStack {
+            HStack() {
                 Text(activity.name)
                 Spacer()
             }
             .padding(
                 EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
             )
-            .background(isSelected ? .orange : .clear)
-            .cornerRadius(15)
+            .background(highlight ? .orange : .clear)
+            .cornerRadius(12)
             
-            HStack {
+            Group {
                 if editModeEnabled {
                     Button(action: {
-                        showEditView = true
+                        showEditNameAlert = true
                     }) {
                         Image(systemName: "pencil")
                             .foregroundStyle(.teal)
@@ -53,10 +53,10 @@ struct ActivityView: View {
                     FavoriteButton(isFavourite: $activity.isFavorite)
                 }
             }
-            .frame(maxWidth: 25)
+            .frame(maxWidth: 20)
                   
             EditTextDialog(
-                showDialog: $showEditView,
+                showDialog: $showEditNameAlert,
                 input: $activity.name,
                 title: "Name of activity",
                 message: "Edit activity name",
@@ -74,10 +74,10 @@ struct ActivityView: View {
     )
 }
 
-#Preview("Selected activity") {
+#Preview("Highlighted activity") {
     ActivityView(
         activity: SampleData.shared.activity,
-        isSelected: true,
+        highlight: true,
         editModeEnabled: false,
         deleteActivity: {}
     )

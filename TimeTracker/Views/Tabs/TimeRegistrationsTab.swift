@@ -34,15 +34,39 @@ struct TimeRegistrationsTab: View {
             List {
                 DatePicker("Date", selection: $date, displayedComponents: [.date])
                 
+                // TODO: Clean this up. Make some better functions and use them..
+                if controller.isRegistrationOnGoing(
+                    timeRegistrations: filteredRegistrations
+                ) {
+                    let timerStartTime = Calendar.current.date(
+                        byAdding: .second, value: Int(-controller.totalTimeForRegistrations(timeRegistrations: filteredRegistrations)), to: .now
+                    )
+                    HStack {
+                        Text("Total time on selected day:")
+                        Spacer()
+                        Text(timerStartTime ?? .now, style: .timer)
+                    }
+                } else {
+                    HStack {
+                        Text("Total time on selected day:")
+                        Spacer()
+                        Text(TimeIntervalFormatter().format(timeInterval:  controller.totalTimeForRegistrations(timeRegistrations: filteredRegistrations)))
+                    }
+                }
+                    
+                
+                
+                
                 Section("Total time on activities") {
+                    
                     ForEach(activities) { activity in
                         // TODO: Make a new View for this.
                         
                         let interval = controller.timeSpendOnActivityonDate(filteredRegistrations, activity: activity,date: date
                         )
                         
-                        if controller.newestTimeRegistrationInList(filteredRegistrations)?.activity == activity &&
-                            controller.newestTimeRegistrationInList(filteredRegistrations)?.endTime == nil {
+                        if controller.findLastAddedRegistration(filteredRegistrations)?.activity == activity &&
+                            controller.findLastAddedRegistration(filteredRegistrations)?.endTime == nil {
                             let timerStartTime = Calendar.current.date(
                                 byAdding: .second, value: Int(-interval), to: .now
                             )

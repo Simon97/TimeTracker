@@ -8,24 +8,27 @@
 import Foundation
 import SwiftData
 
+/**
+ * The idea is to make it possible to group activities on different boards. One for each customer/project for example.
+ * Then we can show time tracked for all activities on the same board.
+ *
+ * It is called a Board since I imagine some kind of drag and drop of activities to different boards
+ */
+
 @Model
 class Board {
     
     @Attribute(.unique)
     var uuid: UUID
     
-    // TODO: It might make sense to add a name
+    var name: String
     
     @Relationship(deleteRule: .cascade, inverse: \Activity.board)
     private(set) var activities: [Activity]
-    
-    var sortedActivities: [Activity] {
-        sortActivities()
-        return activities
-    }
-    
-    init(activities: [Activity]) {
+        
+    init(name: String, activities: [Activity]) {
         self.uuid = UUID()
+        self.name = name
         self.activities = activities
     }
     
@@ -38,11 +41,5 @@ class Board {
             a.uuid == activity.uuid
         })
     }
-        
-    func sortActivities() {
-        activities.sort(by: {
-            a1, a2 in
-            a1.name > a2.name
-        })
-    }
+    
 }

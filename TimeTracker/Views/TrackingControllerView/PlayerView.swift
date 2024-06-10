@@ -15,12 +15,6 @@ struct PlayerView: View {
     var disabled: Bool
     var amountOfSecondsPlayed: TimeInterval
     
-    var formattedTime: String {
-        let controller = TimeRegistrationController()
-        let interval = amountOfSecondsPlayed
-        return controller.formatToTime(amountOfSeconds: interval)
-    }
-    
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
@@ -30,7 +24,11 @@ struct PlayerView: View {
                 Divider()
                 
                 if isPlaying {
-                    Text(getStartDateForTimer(amountOfSeconds: amountOfSecondsPlayed), style: .timer)
+                    Text(
+                        getStartDateForTimer(
+                            amountOfSeconds: amountOfSecondsPlayed),
+                        style: .timer
+                    )
                 } else {
                     Text(TimeIntervalFormatter().format(timeInterval: amountOfSecondsPlayed))
                 }
@@ -52,7 +50,6 @@ struct PlayerView: View {
         .cornerRadius(15)
     }
     
-    // TODO: This logic should be moved, since we need it for the registration tab as well, to show the time going ...
     func getStartDateForTimer(amountOfSeconds: Double) -> Date {
         /**
          The start date is the current time minus the amount of seconds spend on the item already.

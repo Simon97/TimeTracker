@@ -19,7 +19,7 @@ struct EditTextDialog: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @State private var viewState: ViewState
+    @State private var internalCopy: String
     
     init(
         showDialog: Binding<Bool>,
@@ -30,8 +30,7 @@ struct EditTextDialog: View {
             self.title = title
             self.inputLengthLimit = inputLengthLimit
             self.message = message
-            
-            self.viewState = ViewState(inputCopy: input.wrappedValue)
+            self.internalCopy = input.wrappedValue
             
             self._input = input
             self._showDialog = showDialog
@@ -41,31 +40,41 @@ struct EditTextDialog: View {
         Color.clear
             .frame(width: 0, height: 0)
             .alert(title, isPresented: $showDialog) {
-                TextField(title, text: $viewState.inputCopy)
+                TextField(title, text: $internalCopy)
                     .onReceive(
-                        Just(viewState.inputCopy), perform: { _ in
-                        let limit = inputLengthLimit
-                        if viewState.inputCopy.count > limit {
-                            viewState.inputCopy = String(viewState.inputCopy.prefix(limit))
-                        }
-                    })
+                        Just(internalCopy), perform: { _ in
+                            let limit = inputLengthLimit
+                            if internalCopy.count > limit {
+                                internalCopy = String(internalCopy.prefix(limit))
+                            }
+                        })
                 
-                Button(action: {
-                    // Trimming, just in case the user added a space in the end
-                    viewState.inputCopy = viewState.inputCopy.trimmingCharacters(
-                        in: .whitespacesAndNewlines
-                    )
-                    input = viewState.inputCopy
-                    dismiss()
-                }) {Text("Save")}
-                    .disabled(viewState.inputCopy.isEmpty)
+                Button(action: saveAction) {Text("Save")}
+                .disabled(internalCopy.isEmpty)
                 
-                Button(action: {dismiss()}) {
-                    Text("Cancel")
-                }
+                Button(action: cancelAction) {Text("Cancel")}
+                
             } message: {
                 Text(message)
             }
+            .onChange(of: self.showDialog) {
+                internalCopy = input
+            }
+    }
+    
+    func saveAction() {
+        // Trimming, just in case the user added a space in the end
+        internalCopy = internalCopy.trimmingCharacters(
+            in: .whitespacesAndNewlines
+        )
+        input = internalCopy
+        internalCopy = ""
+        dismiss()
+    }
+    
+    func cancelAction() {
+        internalCopy = ""
+        dismiss()
     }
 }
 
@@ -78,29 +87,20 @@ struct EditTextDialogPreviewWrapper: View {
     @State private var isOpen = true
     
     var body: some View {
-        Text(text)
-            .onTapGesture {
-                isOpen.toggle()
-            }
+        VStack {
+            Text("Tap text below to edit:")
+            Text(text)
+                .padding()
+                .onTapGesture {
+                    isOpen.toggle()
+                }
+        }
         
         EditTextDialog(
             showDialog: $isOpen,
             input: $text,
             title: "Title",
-            message: "Message", inputLengthLimit: 7
+            message: "Message", inputLengthLimit: 25
         )
-    }
-}
-
-extension EditTextDialog {
-    
-    @Observable
-    class ViewState {
-        var inputCopy: String
-        
-        init(inputCopy: String) {
-            self.inputCopy = inputCopy
-        }
-        
     }
 }

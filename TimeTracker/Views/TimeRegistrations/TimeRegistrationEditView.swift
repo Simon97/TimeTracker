@@ -40,8 +40,8 @@ struct TimeRegistrationEditView: View {
             startTime: startTime,
             endTime: endTime,
             activity: activities.first{ a in
-            a.uuid == activityId
-        })
+                a.uuid == activityId
+            })
         let checker = TimeRegistrationChecker()
         return checker.check(timeRegistration: checkerRegistration)
     }
@@ -57,113 +57,101 @@ struct TimeRegistrationEditView: View {
         
         return VStack(alignment: .leading) {
             
-            HStack() {
-                Text("Activity:")
-                Spacer()
-                Picker("Activity", selection: $activityId) {
-                    Text("None")
-                        .tag(nil as UUID?)
-                    
-                    ForEach(activities) { activity in
-                        Text(activity.name)
-                            .tag(activity.uuid as UUID?)
+            ScrollView {
+                HStack() {
+                    Text("Activity:")
+                    Spacer()
+                    Picker("Activity", selection: $activityId) {
+                        Text("None")
+                            .tag(nil as UUID?)
+                        
+                        ForEach(activities) { activity in
+                            Text(activity.name)
+                                .tag(activity.uuid as UUID?)
+                        }
                     }
                 }
                 
+                Divider()
                 
-            }
-            
-            Divider()
-            
-            DatePicker(
-                "Start time",
-                selection: $startTime,
-                displayedComponents: [.hourAndMinute]
-            )
-            
-            DatePicker(
-                "End time",
-                selection: $endTime, //.withDefault(value: .now),
-                displayedComponents: [.hourAndMinute]
-            )
-            
-            ForEach(timeRegistrationCheckerResponses, id: \.errorMessage) { response in
-                if response.hasError {
-                    Text(response.errorMessage ?? "")
-                        .foregroundStyle(Color.red)
-                        .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-                        .frame(maxWidth: .infinity)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(.red, lineWidth: 1)
-                        )
-                }
-            }
-            
-            Text(isNew ? helpTextNew : helpTextEdit)
-                .padding()
-                .overlay(
-                    
-                    // TODO: Add some kind of lightbulb to indicate a hint
-                    
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(.primary, lineWidth: 1)
+                DatePicker(
+                    "Start time",
+                    selection: $startTime,
+                    displayedComponents: [.hourAndMinute]
                 )
-                .frame(maxWidth: .infinity)
-                .padding(EdgeInsets(top: 16, leading: 0, bottom: 32, trailing: 0))
-            
-            
-            HStack(spacing: 32) {
                 
-                if !isNew {
-                    Button {
-                        startTime = timeRegistration.startTime
-                        endTime = timeRegistration.endTime ?? .now
-                        activityId = timeRegistration.activity?.uuid
-                    } label: {
-                        Text("Reset")
+                DatePicker(
+                    "End time",
+                    selection: $endTime, //.withDefault(value: .now),
+                    displayedComponents: [.hourAndMinute]
+                )
+                
+                ForEach(timeRegistrationCheckerResponses, id: \.errorMessage) { response in
+                    if response.hasError {
+                        Text(response.errorMessage ?? "")
+                            .foregroundStyle(Color.red)
+                            .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                            .frame(maxWidth: .infinity)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(.red, lineWidth: 1)
+                            )
                     }
-                    .disabled(
-                        startTime == timeRegistration.startTime &&
-                        endTime == timeRegistration.endTime
-                        && activityId == timeRegistration.activity?.uuid
+                }
+                
+                Text(isNew ? helpTextNew : helpTextEdit)
+                    .padding()
+                    .overlay(
+                        // TODO: Add some kind of lightbulb to indicate a hint
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(.primary, lineWidth: 1)
                     )
-                }
+                    .frame(maxWidth: .infinity)
+                    .padding(EdgeInsets(top: 16, leading: 0, bottom: 32, trailing: 0))
                 
-                Button {
-                    timeRegistration.startTime = startTime
-                    timeRegistration.endTime = endTime
+                
+                HStack(spacing: 32) {
                     
-                    timeRegistration.activity = activities.first { a in
-                        a.uuid == activityId
+                    if !isNew {
+                        Button {
+                            startTime = timeRegistration.startTime
+                            endTime = timeRegistration.endTime ?? .now
+                            activityId = timeRegistration.activity?.uuid
+                        } label: {
+                            Text("Reset")
+                        }
+                        .disabled(
+                            startTime == timeRegistration.startTime &&
+                            endTime == timeRegistration.endTime
+                            && activityId == timeRegistration.activity?.uuid
+                        )
                     }
                     
-                    dismiss()
-                } label: {
-                    Text("Save")
+                    Button {
+                        timeRegistration.startTime = startTime
+                        timeRegistration.endTime = endTime
+                        
+                        timeRegistration.activity = activities.first { a in
+                            a.uuid == activityId
+                        }
+                        
+                        dismiss()
+                    } label: {
+                        Text("Save")
+                    }
+                    .disabled(anyErrors)
                 }
-                .disabled(anyErrors)
+                .frame(maxWidth: .infinity)
+                
+                Spacer()
             }
-            .frame(maxWidth: .infinity)
-            
-            Spacer()
+            .padding()
+            .navigationTitle(isNew ? "New Registration" : "Edit Registration")
         }
-        .padding()
-        .navigationTitle(isNew ? "New Registration" : "Edit Registration")
     }
 }
 
-#Preview("New") {
-    NavigationStack {
-        TimeRegistrationEditView(
-            timeRegistration: SampleData.shared.timeRegistrationCompleted,
-            isNew: true
-        )
-        .modelContainer(SampleData.shared.modelContainer)
-    }
-}
-
-#Preview("Edit") {
+#Preview() {
     NavigationStack {
         TimeRegistrationEditView(
             timeRegistration: SampleData.shared.timeRegistrationCompleted,
