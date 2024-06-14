@@ -18,14 +18,15 @@ struct TimeRegistrationEditView: View {
     
     @State private var activityId: UUID?
     @State private var startTime: Date
-    @State private var endTime: Date
+    @State private var endTime: Date?
     
     @Environment(\.dismiss) private var dismiss
     
     init(
         timeRegistration: TimeRegistration, isNew: Bool = false) {
             self.startTime = timeRegistration.startTime
-            self.endTime = timeRegistration.endTime ?? .now
+            self.endTime = timeRegistration.endTime
+            
             self.activityId = timeRegistration.activity?.uuid
             self.isNew = isNew
             self.timeRegistration = timeRegistration
@@ -34,12 +35,11 @@ struct TimeRegistrationEditView: View {
     let helpTextNew = "Here, you can add a missing registration, if you forgot to track some time"
     let helpTextEdit = "Here, you can adjust the start and end time for a given Time Registration, in case you forgot to start or stop the tracking"
     
-    
     var timeRegistrationCheckerResponses: [TimeRegistrationCheckerResponse] {
         let checkerRegistration = TimeRegistrationCheckerInput(
             startTime: startTime,
             endTime: endTime,
-            activity: activities.first{ a in
+            activity: activities.first { a in
                 a.uuid == activityId
             })
         let checker = TimeRegistrationChecker()
@@ -80,11 +80,20 @@ struct TimeRegistrationEditView: View {
                     displayedComponents: [.hourAndMinute]
                 )
                 
-                DatePicker(
-                    "End time",
-                    selection: $endTime, //.withDefault(value: .now),
-                    displayedComponents: [.hourAndMinute]
-                )
+                if endTime == nil {
+                    Button {
+                        endTime = .now
+                    } label: {
+                        Text("Add endtime")
+                    }
+                    
+                } else {
+                    DatePicker(
+                        "End time",
+                        selection: $endTime.withDefault(value: .now),
+                        displayedComponents: [.hourAndMinute]
+                    )
+                }
                 
                 ForEach(timeRegistrationCheckerResponses, id: \.errorMessage) { response in
                     if response.hasError {
@@ -115,7 +124,7 @@ struct TimeRegistrationEditView: View {
                     if !isNew {
                         Button {
                             startTime = timeRegistration.startTime
-                            endTime = timeRegistration.endTime ?? .now
+                            endTime = timeRegistration.endTime
                             activityId = timeRegistration.activity?.uuid
                         } label: {
                             Text("Reset")
@@ -151,7 +160,7 @@ struct TimeRegistrationEditView: View {
     }
 }
 
-#Preview() {
+#Preview {
     NavigationStack {
         TimeRegistrationEditView(
             timeRegistration: SampleData.shared.timeRegistrationCompleted,
@@ -161,3 +170,12 @@ struct TimeRegistrationEditView: View {
     }
 }
 
+#Preview("Ongoing") {
+    NavigationStack {
+        TimeRegistrationEditView(
+            timeRegistration: SampleData.shared.timeRegistrationOngoing,
+            isNew: false
+        )
+        .modelContainer(SampleData.shared.modelContainer)
+    }
+}

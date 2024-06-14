@@ -25,4 +25,5 @@ extension View {
 
 #Preview {
     TextField("Hint", text: .constant("Input"))
+        .ttTextStyle()
 }

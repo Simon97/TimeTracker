@@ -25,7 +25,7 @@ struct TimeRegistrationCheckerInput {
         self.endTime = timeRegistration.endTime
     }
     
-    init(startTime: Date, endTime: Date, activity: Activity?) {
+    init(startTime: Date, endTime: Date?, activity: Activity?) {
         self.startTime = startTime
         self.endTime = endTime
         self.activity = activity

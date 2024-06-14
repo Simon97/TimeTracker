@@ -11,7 +11,7 @@ import SwiftData
 struct NewTimeRegistrationView: View {
     
     @State private var newTimeRegistration = TimeRegistration(
-        startTime: .now,
+        startTime: .now, // TODO: This becomes the time when the app is opened and not the current time, since the state is made at that point in time.
         activity: nil
     )
     
