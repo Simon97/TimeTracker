@@ -11,18 +11,32 @@ import SwiftData
 struct NewTimeRegistrationView: View {
     
     @State private var newTimeRegistration = TimeRegistration(
-        startTime: .now, // TODO: This becomes the time when the app is opened and not the current time, since the state is made at that point in time.
+        startTime: .now,
         activity: nil
     )
     
+    @Query var timeRegistrations: [TimeRegistration]
     @Environment(\.modelContext) private var modelContext
     
     var body: some View {
+        
         let binding = Binding(
             get: { self.newTimeRegistration },
             set: {
-                self.newTimeRegistration = $0
-                modelContext.insert(newTimeRegistration) // We know that the TimeRegistrationEditView will only set the Binding once, which is why this works
+                print("Started saving")
+                
+                self.newTimeRegistration = $0 // TODO: I do not think this is needed
+                print("(0)", "\($0)")
+                
+                // We know that the TimeRegistrationEditView will only set the Binding once, which is why this works
+                
+                TimeRegistrationController()
+                    .addTimeRegistration(
+                        self.newTimeRegistration,
+                        timeRegistrations: timeRegistrations,
+                        modelContext: modelContext
+                    )
+                print("Did save")
             }
         )
         

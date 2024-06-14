@@ -72,7 +72,7 @@ class TimeRegistrationChecker {
             return .good
         } else {
             return TimeRegistrationCheckerResponse(
-                errorMessage: "The start time must be before the end time!"
+                errorMessage: "The start time must be before the end time"
             )
         }
     }

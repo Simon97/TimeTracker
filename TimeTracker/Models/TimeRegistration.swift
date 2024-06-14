@@ -21,7 +21,7 @@ class TimeRegistration {
         self.activity = activity
     }
     
-    init(startTime: Date, endTime: Date, activity: Activity?) {
+    init(startTime: Date, endTime: Date?, activity: Activity?) {
         self.uuid = UUID()
         self.startTime = startTime
         self.endTime = endTime

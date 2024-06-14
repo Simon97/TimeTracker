@@ -95,7 +95,9 @@ struct TimeRegistrationEditView: View {
                     )
                 }
                 
-                ForEach(timeRegistrationCheckerResponses, id: \.errorMessage) { response in
+                ForEach(timeRegistrationCheckerResponses.filter { response in
+                    response.hasError == true // TODO: Maybe only return responses wih error ?
+                }, id: \.errorMessage) { response in
                     if response.hasError {
                         Text(response.errorMessage ?? "")
                             .foregroundStyle(Color.red)
@@ -137,14 +139,16 @@ struct TimeRegistrationEditView: View {
                     }
                     
                     Button {
-                        timeRegistration.startTime = startTime
+                        print("Binding should updated")
                         timeRegistration.endTime = endTime
-                        
+                        timeRegistration.startTime = startTime
                         timeRegistration.activity = activities.first { a in
                             a.uuid == activityId
                         }
+                        print("Binding was updated")
                         
                         dismiss()
+                        
                     } label: {
                         Text("Save")
                     }

@@ -10,6 +10,26 @@ import SwiftData
 
 class TimeRegistrationController {
     
+    func addTimeRegistration(
+        _ registration: TimeRegistration,
+        timeRegistrations: [TimeRegistration],
+        modelContext: ModelContext) {
+        let now = Date.now
+        // Before adding a registration, we must make sure to end the ongoing one, if it isen't already
+        endCurrentRegistrationIfNotEnded(
+            endTime: now,
+            timeRegistrations: timeRegistrations
+        )
+        modelContext.insert(registration)
+    }
+    
+    func endCurrentRegistrationIfNotEnded(
+        endTime: Date,
+        timeRegistrations: [TimeRegistration]) {
+            let newestReg = findLastAddedRegistration(timeRegistrations)
+            newestReg?.endTime = .now
+        }
+    
     // TODO: Make sure registrations made across different days are added as multiple registrations such that no registration starts and ends at different days.
     func pauseTracking(timeRegistrations: [TimeRegistration]) {
         let newestReg = findLastAddedRegistration(timeRegistrations)
