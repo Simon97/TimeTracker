@@ -60,11 +60,12 @@ class TimeRegistrationChecker {
         
         results.append(checkStartBeforeEnd(timeRegistration: timeRegistration))
         results.append(checkThatAnActivityIsSelected(timeRegistration: timeRegistration))
+        results.append(checkThatStartTimeIsNowOrPast(timeRegistration: timeRegistration))
         
         return results
     }
     
-    func checkStartBeforeEnd(timeRegistration: TimeRegistrationCheckerInput) -> TimeRegistrationCheckerResponse {
+    private func checkStartBeforeEnd(timeRegistration: TimeRegistrationCheckerInput) -> TimeRegistrationCheckerResponse {
         guard let endTime = timeRegistration.endTime else {
             return .good
         }
@@ -77,13 +78,21 @@ class TimeRegistrationChecker {
         }
     }
     
-    func checkThatAnActivityIsSelected(timeRegistration: TimeRegistrationCheckerInput) -> TimeRegistrationCheckerResponse {
+    private func checkThatAnActivityIsSelected(timeRegistration: TimeRegistrationCheckerInput) -> TimeRegistrationCheckerResponse {
         if timeRegistration.activity != nil {
             return .good
         } else {
             return TimeRegistrationCheckerResponse(
                 errorMessage: "Please select an activity. If none exists, they can be created at the Activity tab"
             )
+        }
+    }
+    
+    private func checkThatStartTimeIsNowOrPast(timeRegistration: TimeRegistrationCheckerInput) -> TimeRegistrationCheckerResponse {
+        if isStartBeforeEnd(startDate: timeRegistration.startTime, endDate: .now) {
+            return .good
+        } else {
+            return TimeRegistrationCheckerResponse(errorMessage: "The start time cannot be in the future")
         }
     }
     

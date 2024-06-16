@@ -14,12 +14,25 @@ struct TimeRegistrationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(timeRegistration.activity?.name ?? "")
-                //.bold()
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0))
+            
             HStack() {
-                Text(timeRegistration.startTime.formatted())
+                VStack(alignment: .leading) {
+                    Text("Start time:")
+                        .font(.footnote)
+                        .bold()
+                    Text(timeRegistration.startTime.formatted())
+                }
+                
                 if timeRegistration.endTime != nil {
                     Spacer()
-                    Text((timeRegistration.endTime)?.formatted() ?? "")
+                    
+                    VStack(alignment: .leading) {
+                        Text("End time:")
+                            .font(.footnote)
+                            .bold()
+                        Text((timeRegistration.endTime)!.formatted())
+                    }
                 }
             }
             Text(timeRegistration.uuid.uuidString)
@@ -30,7 +43,11 @@ struct TimeRegistrationView: View {
 
 #Preview {
     TimeRegistrationView(
-        timeRegistration: TimeRegistration(startTime: .now, activity: SampleData.shared.activity)
+        timeRegistration: TimeRegistration(
+            startTime: .now,
+            endTime: .now,
+            activity: SampleData.shared.activity
+        )
     )
     .padding()
     .border(.black)
