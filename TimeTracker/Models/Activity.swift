@@ -30,10 +30,6 @@ class Activity {
         self.timeRegistrations = []
     }
     
-    func addTimeRegistration(timeRegistration: TimeRegistration) {
-        timeRegistrations.append(timeRegistration)
-    }
-    
     // Keep in mind that the lenght of the names are blocked to 50 characters
     static let sampleData = [
         Activity("Activity with a name"),

@@ -53,7 +53,7 @@ struct TimeRegistrationsTab: View {
                         Text(TimeIntervalFormatter().format(timeInterval:  controller.totalTimeForRegistrations(timeRegistrations: filteredRegistrations)))
                     }
                 }
-                    
+                
                 
                 
                 
@@ -112,7 +112,7 @@ struct TimeRegistrationsTab: View {
                 if activities.first != nil {
                     ToolbarItem {
                         NavigationLink {
-                            NewTimeRegistrationView()
+                            NewTimeRegistrationView(timeRegistrations: timeRegistrations)
                             
                         } label: {
                             Image(systemName: "plus")

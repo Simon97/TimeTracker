@@ -14,7 +14,10 @@ struct TimeRegistrationEditView: View {
     
     @Query(sort:\Activity.name) private var activities: [Activity]
     
+    // TimeRegistraion to be updated when save is pressed
     @Bindable var timeRegistration: TimeRegistration
+    
+    let onSave: () -> Void
     
     @State private var activityId: UUID?
     @State private var startTime: Date
@@ -23,13 +26,18 @@ struct TimeRegistrationEditView: View {
     @Environment(\.dismiss) private var dismiss
     
     init(
-        timeRegistration: TimeRegistration, isNew: Bool = false) {
+        timeRegistration: TimeRegistration,
+        isNew: Bool = false,
+        onSave: @escaping () -> Void = {}) {
             self.startTime = timeRegistration.startTime
             self.endTime = timeRegistration.endTime
-            
+
             self.activityId = timeRegistration.activity?.uuid
+                        
             self.isNew = isNew
             self.timeRegistration = timeRegistration
+            
+            self.onSave = onSave
         }
     
     let helpTextNew = "Here, you can add a missing registration, if you forgot to track some time"
@@ -139,16 +147,13 @@ struct TimeRegistrationEditView: View {
                     }
                     
                     Button {
-                        print("Binding should updated")
                         timeRegistration.endTime = endTime
                         timeRegistration.startTime = startTime
                         timeRegistration.activity = activities.first { a in
                             a.uuid == activityId
                         }
-                        print("Binding was updated")
-                        
+                        onSave()
                         dismiss()
-                        
                     } label: {
                         Text("Save")
                     }
