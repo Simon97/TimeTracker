@@ -55,6 +55,10 @@ class TimeRegistrationController {
         return findLastAddedRegistration(timeRegistrations)?.endTime == nil
     }
     
+    func isRegistrationOnGoing(_ registration: TimeRegistration) -> Bool {
+        return registration.endTime == nil
+    }
+    
     /**
      * Finds the last added registration, which can either be a:
      * Completed registration with an endTime, meaning that there are no ongoing tracking.

@@ -31,15 +31,12 @@ struct ActivityView: View {
     
     var body: some View {
         HStack {
-            HStack() {
-                Text(activity.name)
-                Spacer()
-            }
-            .padding(
-                EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-            )
-            .background(highlight ? .orange : .clear)
-            .cornerRadius(12)
+            Text(activity.name)
+                .padding(8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(highlight ? .orange : .clear)
+                .cornerRadius(12)
+                .contentShape(Rectangle())
             
             Group {
                 if editModeEnabled {
@@ -49,12 +46,18 @@ struct ActivityView: View {
                         Image(systemName: "pencil")
                             .foregroundStyle(.teal)
                     }
+                    Button(action: {
+                        deleteActivity()
+                    }) {
+                        Image(systemName: "trash")
+                            .foregroundStyle(.teal)
+                    }
                 } else {
                     FavoriteButton(isFavourite: $activity.isFavorite)
                 }
             }
             .frame(maxWidth: 20)
-                  
+            
             EditTextDialog(
                 showDialog: $showEditNameAlert,
                 input: $activity.name,

@@ -31,12 +31,10 @@ struct TimeRegistrationEditView: View {
         onSave: @escaping () -> Void = {}) {
             self.startTime = timeRegistration.startTime
             self.endTime = timeRegistration.endTime
-
             self.activityId = timeRegistration.activity?.uuid
-                        
+            
             self.isNew = isNew
             self.timeRegistration = timeRegistration
-            
             self.onSave = onSave
         }
     
@@ -107,6 +105,7 @@ struct TimeRegistrationEditView: View {
                     response.hasError == true // TODO: Maybe only return responses wih error ?
                 }, id: \.errorMessage) { response in
                     if response.hasError {
+                        // TODO: Make View for this
                         Text(response.errorMessage ?? "")
                             .foregroundStyle(Color.red)
                             .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))

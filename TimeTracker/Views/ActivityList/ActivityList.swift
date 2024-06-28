@@ -93,12 +93,14 @@ struct ActivityList: View {
         let controller = TimeRegistrationController()
         let now = Date.now
         
-        // If a tracking is ongoing, we end it by adding the end time, before creating the new registration
-        if let latestTracking = controller.findLastAddedRegistration(timeRegistrations),
-           latestTracking.endTime == nil {
-            latestTracking.endTime = now
+        // We end the current registrations by adding the end time, before creating the new registration, unless the new one is the same as the old one
+        if let onGoingTracking = controller.findLastAddedRegistration(timeRegistrations), controller.isRegistrationOnGoing(onGoingTracking) {
+            
+            if onGoingTracking.activity == activity {
+                return
+            }
+            onGoingTracking.endTime = now
         }
-        
         modelContext.insert(
             TimeRegistration(
                 startTime: now,
@@ -110,7 +112,7 @@ struct ActivityList: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(activities[index])
+                modelContext.delete(filteredActivities[index])
             }
         }
     }
