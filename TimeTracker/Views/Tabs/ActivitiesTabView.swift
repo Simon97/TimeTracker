@@ -11,17 +11,18 @@ struct ActivitiesTabView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            ZStack(alignment: .bottom) {
                 ActivityList()
                 
                 TrackingControllerView()
                     .padding(
                         EdgeInsets(
                             top: 0,
-                            leading: 4,
+                            leading: 6,
                             bottom: 0,
-                            trailing: 4)
+                            trailing: 6)
                     )
+                    .offset(y: -16)
             }
             .navigationTitle("Activities")
         }
