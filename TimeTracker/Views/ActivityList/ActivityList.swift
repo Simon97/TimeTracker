@@ -60,6 +60,7 @@ struct ActivityList: View {
                     .onDelete(perform: deleteItems)
                     .buttonStyle(PlainButtonStyle()) // disabling the default action when pressing on each cell in the list
                 }
+                .safeAreaPadding(EdgeInsets(top: 0, leading: 0, bottom: 100, trailing: 0))
             }
         }
         .toolbar {

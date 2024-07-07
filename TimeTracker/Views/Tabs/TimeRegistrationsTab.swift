@@ -56,33 +56,25 @@ struct TimeRegistrationsTab: View {
                 
                 
                 
-                
+                // TODO: Remove 0:00 registrations ?
                 Section("Total time on activities") {
-                    
-                    ForEach(activities) { activity in
+                    ForEach(activities.filter { activity in
+                        !activity.timeRegistrations.isEmpty
+                    }) { activity in
                         // TODO: Make a new View for this.
                         
-                        let interval = controller.timeSpendOnActivityonDate(filteredRegistrations, activity: activity,date: date
+                        let interval = controller.timeSpendOnActivityonDate(
+                            filteredRegistrations,
+                            activity: activity,date: date
                         )
+                        let isRegistrationOnGoingForActivity = controller.findLastAddedRegistration(
+                            filteredRegistrations)?.activity == activity &&
+                        controller.findLastAddedRegistration(filteredRegistrations)?.endTime == nil
                         
-                        if controller.findLastAddedRegistration(filteredRegistrations)?.activity == activity &&
-                            controller.findLastAddedRegistration(filteredRegistrations)?.endTime == nil {
-                            let timerStartTime = Calendar.current.date(
-                                byAdding: .second, value: Int(-interval), to: .now
-                            )
-                            HStack {
-                                Text("\(activity.name):")
-                                Spacer()
-                                Text(timerStartTime ?? .now, style: .timer)
-                            }
-                            .bold()
-                            
-                        } else {
-                            HStack {
-                                Text("\(activity.name):")
-                                Spacer()
-                                Text(TimeIntervalFormatter().format(timeInterval: interval))
-                            }
+                        HStack {
+                            Text("\(activity.name):")
+                            Spacer()
+                            PausableTimerView(interval: interval, isPaused: !isRegistrationOnGoingForActivity)
                         }
                     }
                 }

@@ -23,15 +23,7 @@ struct PlayerView: View {
                 
                 Divider()
                 
-                if isPlaying {
-                    Text(
-                        getStartDateForTimer(
-                            amountOfSeconds: amountOfSecondsPlayed),
-                        style: .timer
-                    )
-                } else {
-                    Text(TimeIntervalFormatter().format(timeInterval: amountOfSecondsPlayed))
-                }
+                PausableTimerView(interval: amountOfSecondsPlayed, isPaused: !isPlaying)
             }
             
             Spacer()

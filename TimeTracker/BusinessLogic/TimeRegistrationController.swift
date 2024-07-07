@@ -45,6 +45,7 @@ class TimeRegistrationController {
                 activity: latestTrackedActivity
             )
             modelContext.insert(newRegistration)
+            try! modelContext.save()
         }
     }
     

@@ -41,6 +41,7 @@ struct TrackingControllerView: View {
         let isTrackingBinding = Binding(
             get: { isTrackingOnGoing },
             set: { _ in
+                print("seconds:", secondsSpendOnCurrentActivity)
                 playButtonAction()
             }
         )

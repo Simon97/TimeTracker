@@ -105,17 +105,13 @@ struct TimeRegistrationEditView: View {
                     response.hasError == true // TODO: Maybe only return responses wih error ?
                 }, id: \.errorMessage) { response in
                     if response.hasError {
-                        // TODO: Make View for this
-                        Text(response.errorMessage ?? "")
-                            .foregroundStyle(Color.red)
-                            .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-                            .frame(maxWidth: .infinity)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(.red, lineWidth: 1)
-                            )
+                        ErrorMessageBox(
+                            errorMessage: response.errorMessage ?? ""
+                        )
+                        .padding(.bottom, 2)
                     }
                 }
+                .padding(.top, 8)
                 
                 Text(isNew ? helpTextNew : helpTextEdit)
                     .padding()
